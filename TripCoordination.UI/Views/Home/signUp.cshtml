@@ -1,0 +1,34 @@
+﻿@model TripCoordination.Data.Models.Domain.User
+@{
+    ViewData["Title"] = "Add User";
+}
+
+
+<div class="container-lg py-5">
+    <div class="row justify-content-center align-items-center">
+        <!--Column1 -->
+        <div class="col-md-6  d-none d-md-block">
+            <img class="img-fluid" src="~/images/Toyata-quantum-face-rigt.png" alt="Toyota Taxi">
+        </div>
+
+        <!--Column 2-->
+
+        <form asp-action="SignUp" method="post" class="col-md-4 row g-3 mt-4 p-2   justify-content-center">
+            <h2>Please Sign Up to Proceed</h2>
+
+            <div class="col-md-8">
+                <input type="email" class="form-control" asp-for="Email" placeholder="Email" aria-label="Email">
+            </div>
+            <div class="col-md-8 mt-3">
+                <input type="password" class="form-control" asp-for="PasswordHash" placeholder="Password" aria-label="Password">
+            </div>
+            
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

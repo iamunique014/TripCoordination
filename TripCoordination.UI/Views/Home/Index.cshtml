@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!--Main image and Intro-->
+<section id="intro" class="py-5">
+        <div class="container pb-5 ">
+            <div class="row justify-content-center align-items-center">
+                <!--Column1 -->
+                <div class="col-md-5 text-center d-none d-md-block">
+                    <img class="img-fluid" src="~/images/Toyata-quantum-face-rigt.png" alt="Toyota Taxi">
+                </div>
+                
+                <!--Column2 Yesbini -->
+                <div class="col-md-5 text-center text-md-start">
+                    
+                        <div class="display-2">Student Trips</div>
+                        <div class="display-5 text-muted">All The way to Bizana</div>
+                    
+                    <p class="lead my-4 text-muted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa
+                        atque quia laboriosam assumenda debitis ullam in! Harum amet blanditiis dicta odio nobis aliquid
+                        enim
+                    </p>
+                    <a href="#Login" class="btn btn-secondary btn-lg ">Login</a>
+
+                    <div class="mt-5">
+                        <h1>Welcome to Trip Coordination</h1>
+                        <p>Plan and coordinate your trips effortlessly.</p>
+                        <div class="mt-4">
+                            <a asp-action="ViewTrip" asp-controller="Home" class="btn btn-primary">View Trips</a>
+                            <a asp-action="CreateTrip" asp-controller="Home" class="btn btn-secondary">Create a Trip</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</section>
+    

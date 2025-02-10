@@ -1,0 +1,36 @@
+﻿<div class="container-lg py-5 ">
+    <div class="row justify-content-center align-items-center">
+        <!--Column1 -->
+        <div class="col-md-5  d-none d-md-block">
+            <img class="img-fluid" src="~/images/Toyata-quantum-face-foward-rigt.png" alt="Toyota Taxi">
+        </div>
+
+        <!--Column 2-->
+
+        <form class="col-md-4 row g-4 mt-4 p-2   justify-content-center">
+            <h2 class="text-center">Please Login to Proceed</h2>
+
+            <div class="col-md-8">
+                <input type="email" class="form-control border-0 border-bottom" id="inputEmail4" placeholder="Email" aria-label="Email">
+            </div>
+            <div class="col-md-8 mt-4">
+                <input type="password" class="form-control border-0 border-bottom" id="inputPassword4" placeholder="Password" aria-label="Password">
+            </div>
+
+            <div class="col-md-8 text-center">
+                <button asp-action="AdminDashboard" asp-controller="Admin" type="submit" class="btn  btn-primary">Login</button>
+            </div>
+
+            <div class="col-md-8 text-center">
+                <a asp-action="SignUp" asp-controller="Home">Don't Have an account?</a>
+            </div>
+
+            <div class="col-md-8 text-center">
+                <button class="btn btn-secondary" asp-action="SignUp" asp-controller="Home">Sign Up</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

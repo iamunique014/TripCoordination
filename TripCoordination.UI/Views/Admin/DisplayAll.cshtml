@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TripCoordination.Data.Models.Domain.Residence>
+@{
+    ViewData["Title"] = "DisplayAll";
+}
+
+<div class="container">
+    <h1>List of Residences</h1>
+
+
+    <div class="my-2">
+        @* <a href="/Person/Add" class="btn btn-info my-2">Add more</a> *@
+
+        <a asp-action="Add" class="btn btn-info my-2">Add more</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var residence in Model)
+                {
+                    <tr>
+                        <td>@residence.Name</td>
+                        <td>@residence.Address</td>
+                        <td>
+                            <a href="/Person/Edit?id=@residence.ResidenceID" class="btn btn-success">Edit</a>
+                            <a href="/Person/Delete?id=@residence.ResidenceID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+

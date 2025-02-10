@@ -1,0 +1,50 @@
+﻿@* _Sidebar.cshtml *@
+
+
+<div class="menu me-5 rounded">
+   
+        <a href="@Url.Action("AdminDashboard", "Admin")">  Dashboard
+        </a>
+        <a href="@Url.Action("ManageResidences", "Admin")"> Residences
+        </a>
+        <a href="@Url.Action("ManageTowns", "Admin")"> Towns
+        </a>
+        <a href="@Url.Action("ManageTrips", "Admin")"> Trips
+        </a>
+        <a href="@Url.Action("ManageUsers", "Admin")"> Users
+        </a>
+        <a href="@Url.Action("Profile", "Admin")"> Profile
+        </a>
+   
+</div>
+
+<style>
+    .menu {
+        width: 250px;
+        background-color: #f4f4f4;
+        padding: 15px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .menu h3 {
+        margin-bottom: 20px;
+    }
+
+    .menu a {
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-decoration: none;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .menu a:hover {
+        background-color: cadetblue;
+        color: black;
+    }
+
+
+</style>

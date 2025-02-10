@@ -1,0 +1,39 @@
+﻿@model TripCoordination.Data.Models.Domain.Residence
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h3>Add Residence</h3>
+
+<a href="/Admin/DisplayAll" class="my-2 btn btn-primary">Display All</a>
+
+<form asp-action="Add" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control">
+
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label">
+            Address
+        </label>
+        <input asp-for="Address" type="text" class="form-control">
+        <span class="text-danger" asp-validation-for="Address"></span>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="mb-3">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+</form>
+
