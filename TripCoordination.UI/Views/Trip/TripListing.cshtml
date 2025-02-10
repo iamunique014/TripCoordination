@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TripCoordination.ViewModel.TripListingViewModelUI>
+@{
+    ViewData["Title"] = "Available Trips";
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No trips available at the moment. Please check back later.
+    </div>
+}
+else
+{
+    <h2 class="mb-4">Available Trips</h2>
+
+    <div class="row">
+        @foreach (var tripListing in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Organizer: @tripListing.Name </h5>
+                        <p class="card-text">
+                            <strong>Date: </strong>@tripListing.DepartureDate.ToLongDateString()<br />
+                            <strong>Destination: </strong>@tripListing.DestinationName <br />
+                            <strong>Seats Available: @tripListing.Seats</strong>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Trip" asp-action="TripDetails"  class="btn btn-primary">Join Trip</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

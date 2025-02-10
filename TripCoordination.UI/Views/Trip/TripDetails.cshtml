@@ -1,0 +1,20 @@
+﻿@model TripCoordination.Data.Models.Domain.Trip
+@{
+    ViewData["Title"] = "Trip Details";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Destination</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Date:</strong> Date.ToString("MMMM dd, yyyy")</p>
+        <p><strong>Time:</strong> Time.ToString("hh\:mm")</p>
+        <p><strong>Pickup Location:</strong> Pickup</p>
+        <p><strong>Available Seats:</strong> AvailableSeats</p>
+        <p><strong>Description:</strong> Description</p>
+    </div>
+    <div class="card-footer text-center">
+        <a href="/Trips/Join/@Model" class="btn btn-success">Join Trip</a>
+    </div>
+</div>
