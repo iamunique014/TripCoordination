@@ -29,11 +29,6 @@ namespace TripCoordination.Controllers
             _tripRepository = tripRepository;
             _townRepository = townRepository;
             _tripDestinationTownRepository = tripDestinationTownRepository;
-            //_residenceRepository = residenceRepository;
-            //_userRepository = userRepository;
-            //_profileRepository = profileRepository;
-            //_UserRoleRepository = userRoleRepository;
-            //_roleRepository = roleRepository;
 
         }
 
