@@ -41,7 +41,7 @@ builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 
-
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -62,6 +62,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=IndexHome}/{id?}");
