@@ -10,7 +10,7 @@ namespace TripCoordination.Data.Models.Domain
     public class UserRole
     {
         [Key] 
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         [Key]
         public int RoleID { get; set; }
     }

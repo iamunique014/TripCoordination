@@ -12,7 +12,7 @@ namespace TripCoordination.Data.Models.Domain
         [Key]
         public int TripParticipantID { get; set; }
         public int TripID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public int DestinationTownID { get; set; }
         public int SeatNumber { get; set; }
         public string PickUpPoint { get; set; }
