@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Repository;
 using TripCoordination.Data.Models.Data;
+using TripCoordination.Areas.Identity.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,8 +64,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=IndexHome}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    await DBseeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
+
 
 app.Run();

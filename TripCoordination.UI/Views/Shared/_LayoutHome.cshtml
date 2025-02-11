@@ -25,10 +25,13 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Trip" asp-action="TripListing">Trips</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
-                    </li>
-                    
+
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
+                        </li>
+                    }
                    @*  <li class="nav-item">
                         <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Login</a>
                     </li>

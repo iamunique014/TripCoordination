@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripCoordination.Common.ViewModel;
@@ -9,6 +10,7 @@ using TripCoordination.ViewModel;
 
 namespace TripCoordination.Controllers
 {
+    [Authorize]
     public class TripController : Controller
     {
         private readonly ILogger<TripController> _logger;
@@ -37,7 +39,7 @@ namespace TripCoordination.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> TripListing(TripListingViewModelUI model)
         {
@@ -109,6 +111,7 @@ namespace TripCoordination.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin,Organizer")]
         public async Task<IActionResult> CreateTrip()
         {
             var towns = await _townRepository.GetAllAsync();
