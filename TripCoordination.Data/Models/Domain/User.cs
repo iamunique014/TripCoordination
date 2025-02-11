@@ -9,8 +9,8 @@ namespace TripCoordination.Data.Models.Domain
 {
     public class User
     {
-        [Key]
-        public int UserID { get; set; }
+        
+        public string UserID { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

@@ -14,7 +14,7 @@ namespace TripCoordination.Data.Models.Domain
         public int TownID { get; set; }
 
         [Required]
-        public int CreatorUserId { get; set; }
+        public string CreatorUserId { get; set; }
         [Required]
         public DateTime DepartureDate { get; set; }
         [Required]

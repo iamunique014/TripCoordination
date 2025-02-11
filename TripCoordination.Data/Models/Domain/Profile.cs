@@ -11,7 +11,7 @@ namespace TripCoordination.Data.Models.Domain
     {
         [Key]
         public int ProfileID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

@@ -147,7 +147,7 @@ namespace TripCoordination.Controllers
                     // Create a new Trip record
                     var trip = new Trip
                     {
-                        CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
+                        CreatorUserId = User.Identity.ID, //use when authentication is setup
                         DepartureDate = model.DepartureDate,
                         Seats = model.Seats,
                         IsFull = 0,
