@@ -32,7 +32,7 @@ namespace TripCoordination.UI.Controllers
         }
 
 
-        public async Task<IActionResult> IndexHome()
+        public async Task<IActionResult> Index()
         {
             var towns = await _townRepository.GetAllAsync();
 
@@ -112,11 +112,6 @@ namespace TripCoordination.UI.Controllers
         //    return RedirectToAction("IndexHome");
 
         //}
-
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Login()
         {

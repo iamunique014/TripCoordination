@@ -44,6 +44,11 @@ namespace TripCoordination.Controllers
             return View();
         }
 
+        public async Task<IActionResult> JoinTrip()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> TripListing(TripListingViewModelUI model)
@@ -59,7 +64,6 @@ namespace TripCoordination.Controllers
                         //CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
                         DepartureDate = model.DepartureDate,
                         TownID = model.DestinationID
-
                     };
 
 
@@ -119,6 +123,8 @@ namespace TripCoordination.Controllers
         [Authorize(Roles = "Admin,Organizer")]
         public async Task<IActionResult> CreateTrip()
         {
+            ViewData["ShowSidebar"] = true;
+
             var towns = await _townRepository.GetAllAsync();
 
             ViewBag.Destination = towns;
