@@ -120,7 +120,7 @@ namespace TripCoordination.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin,Organizer")]
+        [Authorize(Roles = "Admin, Organizer")]
         public async Task<IActionResult> CreateTrip()
         {
             ViewData["ShowSidebar"] = true;
