@@ -21,3 +21,4 @@ namespace TripCoordination.Common.ViewModel
         public List<int> SelectedTownIds { get; set; } = new List<int>();
     }
 }
+

@@ -3,92 +3,92 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TripCoordination</title>
+    <title>@ViewData["Title"] - Trip Coordination</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TripCoordination.styles.css" asp-append-version="true" />
-    <style>
-        /* section {
-            padding: 60px 0;
-        } */
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="min-vh-100">
-    <header>
-        <!--NavBar-->
-        <nav class="navbar  navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a asp-action="Index" asp-controller="Home" class="navbar-brand">
-                    <span class="fw-bold text-secondary">
-                        UniTrips
-                    </span>
-                </a>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #76aec3;">
+        <div class="container">
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand">
+                <span class="fw-bold text-secondary">
+                    UniTrips
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Trip" asp-action="TripListing">Trips</a>
+                    </li>
 
-                <!--Tottle button for mobile nav-->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#main-nav"
-                        aria-controls="main-nav" aria-expanded="false" aria-label="toggle-navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!--Nav links-->
-                <div class="collapse navbar-collapse justify-content-end align-items-center" id="main-nav">
-                    <ul class="navbar-nav">
+                    @if(User.IsInRole("Admin"))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link" href="#topics">About</a>
+                            <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#reviews">Towns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="DisplayAll" asp-controller="Admin">Residence</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
-                        </li>
-                        <li class="nav-item ms-2 d-none d-md-inline">
-                            <a class="btn btn-secondary" asp-action="SignUp" asp-controller="Home">Sign Up</a>
-                        </li>
-                        <li class="nav-item ms-2 d-none d-md-inline">
-                            <a class="btn btn-secondary" asp-action="Login" asp-controller="Home">Login</a>
-                        </li>
-                    </ul>
-
-                </div>
+                    }
+                   @*  <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Account/Register">Register</a>
+                    </li> *@
+                    
+                </ul>
+                <partial name="_LoginPartial" /> 
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-
-    <div class="container-fluid min-vh-100">
+    <!-- Main Content -->
+    @if (ViewData["ShowSidebar"] != null && (bool)ViewData["ShowSidebar"])
+    {
         <div class="row">
-            @if (ViewData["ShowSidebar"] != null && (bool)ViewData["ShowSidebar"])
-            {
-                <div class="col-md-2">
-                    @await Html.PartialAsync("_Sidebar")
-                </div>
-                <div class="col-md-10">
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-                </div>
-            }
-            else
-            {
-                <main role="main">
+            <div class="col-md-2">
+                @await Html.PartialAsync("_Sidebar")
+            </div>
+            <div class="col-md-10">
+                <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
-            }
+            </div>
         </div>
-       
-    </div>
+        
+    }
+    else
+    {
+        <main class="flex-grow-1 container my-4">
+            @RenderBody()
+        </main>
+    }
+    @* <main class="flex-grow-1 container my-4">
+        @RenderBody()
+    </main> *@
 
-    <footer class="border-top footer  text-muted">
-        <div class="container">
-            &copy; 2024 - TripCoordination - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Footer -->
+    <footer class="bg-light py-3 mt-auto">
+        <div class="container text-center">
+            <span class="text-muted">&copy; @DateTime.Now.Year - Trip Coordination</span>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery (Select2 dependency) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

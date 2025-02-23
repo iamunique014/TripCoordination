@@ -6,6 +6,8 @@ namespace TripCoordination.Common.ViewModel
     {
         [Required(ErrorMessage = "Please select a destination")]
         public int DestinationID { get; set; }
+        [Required(ErrorMessage = "Please Enter a pickUpPoint eg. Res Address")]
+        public string PickUpLocation { get; set; }
         public DateTime DepartureDate { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
