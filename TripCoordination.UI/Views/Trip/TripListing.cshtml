@@ -11,12 +11,11 @@
 }
 else
 {
-    <h2 class="mb-4">Available Trips</h2>
 
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach (var tripListing in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-10 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Organizer: @tripListing.Name </h5>

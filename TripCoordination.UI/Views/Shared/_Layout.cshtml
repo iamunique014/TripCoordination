@@ -30,7 +30,7 @@
                         <a class="nav-link" asp-controller="Trip" asp-action="TripListing">Trips</a>
                     </li>
 
-                    @if(User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Organizer"))
                     {
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
