@@ -20,11 +20,13 @@ namespace TripCoordination.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -114,8 +116,24 @@ namespace TripCoordination.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var userID = _userManager.GetUserId(User);
+                    var userRoles = await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(userID));
+
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    if (userRoles.Contains("Admin"))
+                    {
+                        return RedirectToAction("AdminDashboard", "Admin");
+                    }
+                    else if (userRoles.Contains("Organizer"))
+                    {
+                        return RedirectToAction("OrganizerDashboard", "TripCreator");
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {

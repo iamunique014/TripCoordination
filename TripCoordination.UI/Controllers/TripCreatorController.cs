@@ -35,7 +35,11 @@ namespace TripCoordination.Controllers
             return View();
         }
 
+        public IActionResult OrganizerDashboard()
+        {
+            ViewData["ShowSidebar"] = true;
+            return View();
+        }
 
-       
     }
 }
