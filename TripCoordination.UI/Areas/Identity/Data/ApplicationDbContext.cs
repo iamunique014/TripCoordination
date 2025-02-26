@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TripCoordination.Areas.Identity.Data;
 
 namespace TripCoordination.Data.Models.Data;
 

@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using TripCoordination.Constants
 @{
     ViewData["Title"] = "Register";
 }
@@ -17,6 +18,18 @@
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Role" class="form-control">
+                    @foreach (var role in Enum.GetValues(typeof(Roles)).Cast<Roles>().Where(r => r != Roles.Admin))
+                    {                                              
+                            <option value="@role">@role</option>             
+                    }
+                </select>
+                <label asp-for="Input.Role">Role</label>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.Password">Password</label>
