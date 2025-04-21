@@ -13,7 +13,7 @@ namespace TripCoordination.Data.Repository
         Task<bool> UpdateAsync(Town town);
         Task<bool> DeleteAsync(int id);
 
-        Task<Town> GetByIdAsync(int id);
+        Task<Town> GetByIdAsync(int townID);
 
         Task<IEnumerable<Town>> GetAllAsync();
     }

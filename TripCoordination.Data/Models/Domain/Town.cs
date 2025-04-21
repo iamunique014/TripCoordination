@@ -14,5 +14,6 @@ namespace TripCoordination.Data.Models.Domain
         [Required]
         public string Name { get; set; }
         public string Region { get; set; }
+        public int Price { get; set; }
     }
 }
