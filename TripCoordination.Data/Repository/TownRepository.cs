@@ -22,7 +22,7 @@ namespace TripCoordination.Data.Repository
             try
             {
 
-                await _db.SaveData("sp_Create_Town", new { town.Region, town.Name });
+                await _db.SaveData("sp_Create_Town", new { town.Region, town.Name, town.Price });
                 return true;
             }
 
@@ -49,9 +49,9 @@ namespace TripCoordination.Data.Repository
             return await _db.GetData<Town, dynamic>(query, new { });
         }
 
-        public async Task<Town> GetByIdAsync(int id)
+        public async Task<Town> GetByIdAsync(int townID)
         {
-            IEnumerable<Town> result = await _db.GetData<Town, dynamic>("sp_Get_Town", new { ID = id });
+            IEnumerable<Town> result = await _db.GetData<Town, dynamic>("sp_Get_Town", new { TownID = townID });
             return result.FirstOrDefault();
         }
 
