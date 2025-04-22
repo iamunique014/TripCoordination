@@ -153,6 +153,11 @@ namespace TripCoordination.Controllers
             return RedirectToAction(nameof(ManageTowns));
         }
 
+        public async Task<IActionResult> DeleteTown(int townID)
+        {
+            var deleteResult = await _townRepository.DeleteAsync(townID);
+            return RedirectToAction(nameof(ManageTowns));
+        }
 
         //=================================================//
         //                TRIP MANAGEMENT                  //
