@@ -86,6 +86,39 @@ namespace TripCoordination.Controllers
             ViewData["ShowSidebar"] = true;
             var towns = await _townRepository.GetAllAsync();
             return View(towns);
+
+        }
+
+        public async Task<IActionResult> CreateTown()
+        {
+            ViewData["ShowSidebar"] = true;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTown(Town town)
+        {
+            ViewData["ShowSidebar"] = true;
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View(town);
+
+                bool addTown = await _townRepository.AddAsync(town);
+                if (addTown)
+                {
+                    TempData["msg"] = "Sucessfully Added";
+                }
+                else
+                {
+                    TempData["msg"] = "Could not add";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = "Hebana!! Something went wrong!!!";
+            }
+            return RedirectToAction(nameof(ManageTowns));
         }
 
         public async Task<IActionResult> EditTown(int townID)
