@@ -1,0 +1,45 @@
+﻿@model TripCoordination.Data.Models.Domain.Town
+@{
+    ViewData["Title"] = "Create Town";
+}
+
+<h3>Add Town</h3>
+
+<a href="/Admin/ManageTowns" class="my-2 btn btn-primary">Display All</a>
+
+<form asp-action="CreateTown" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control">
+
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Region" class="form-label">
+            Region
+        </label>
+        <input asp-for="Region" type="text" class="form-control">
+        <span class="text-danger" asp-validation-for="Region"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Price</label>
+        <input asp-for="Price" type="text" class="form-control">
+
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="mb-3">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+</form>
