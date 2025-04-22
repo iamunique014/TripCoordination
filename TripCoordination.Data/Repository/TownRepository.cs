@@ -31,11 +31,11 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int townID)
         {
             try
             {
-                await _db.SaveData("sp_Delete_Town", new { ID = id });
+                await _db.SaveData("sp_Delete_Town", new { TownID = townID });
                 return true;
             }
             catch (Exception ex)
