@@ -40,15 +40,24 @@ namespace TripCoordination.Controllers
             ViewData["ShowSidebar"] = true;
             return View();
         }
-        
-        public async Task<IActionResult> Add()
+
+        //---------------RESIDENCE MANAGEMENT-------------------//
+
+        public async Task<IActionResult> ManageResidences()
+        {
+            ViewData["ShowSidebar"] = true;
+            var residences = await _residenceRepository.GetAllAsync();
+            return View(residences);
+        }
+
+        public async Task<IActionResult> CreateResidence()
         {
             ViewData["ShowSidebar"] = true;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Residence residence)
+        public async Task<IActionResult> CreateResidence(Residence residence)
         {
             try
             {
@@ -70,15 +79,48 @@ namespace TripCoordination.Controllers
             }
             return RedirectToAction(nameof(ManageResidences));
         }
-        public async Task<IActionResult> ManageResidences()
+
+        public async Task<IActionResult> EditResidence(int residenceID)
+        {
+            //Need to get the exact town to edit
+            ViewData["ShowSidebar"] = true;
+            var residence = await _residenceRepository.GetByIdAsync(residenceID);
+            return View(residence);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditResidence(Residence residence)
         {
             ViewData["ShowSidebar"] = true;
-            var residences = await _residenceRepository.GetAllAsync();
-            return View(residences);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View(residence);
+
+                bool updateRecord = await _residenceRepository.UpdateAsync(residence);
+
+                if (updateRecord)
+                    TempData["msg"] = "Successfully Added";
+                else
+                    TempData["msg"] = "Oh Hell Nah";
+            }
+
+            catch (Exception ex)
+            {
+                TempData["msg"] = "Seriously!!!!!";
+            }
+            return RedirectToAction(nameof(ManageResidences));
+        }
+
+
+        public async Task<IActionResult> DeleteResidence(int residenceID)
+        {
+            var deleteResult = await _residenceRepository.DeleteAsync(residenceID);
+            return RedirectToAction(nameof(ManageResidences));
         }
 
         //=================================================//
-        //                TOWN MANAGEMENT                  //
+        //---------------TOWN MANAGEMENT-------------------//
         //=================================================//
 
         public async Task<IActionResult> ManageTowns()
