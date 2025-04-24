@@ -33,11 +33,11 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int residenceID)
         {
             try
             {
-                await _db.SaveData("sp_Delete_Residence", new { ID = id });
+                await _db.SaveData("sp_Delete_Residence", new { ResidenceID = residenceID });
                 return true;
             }
             catch (Exception ex)
@@ -51,9 +51,9 @@ namespace TripCoordination.Data.Repository
             return await _db.GetData<Residence, dynamic>(query, new { });
         }
 
-        public async Task<Residence> GetByIdAsync(int id)
+        public async Task<Residence> GetByIdAsync(int residenceID)
         {
-            IEnumerable<Residence> result = await _db.GetData<Residence, dynamic>("sp_Get_Residence", new { ID = id });
+            IEnumerable<Residence> result = await _db.GetData<Residence, dynamic>("sp_Get_Residence", new { ResidenceID = residenceID });
             return result.FirstOrDefault();
         }
 
@@ -70,4 +70,5 @@ namespace TripCoordination.Data.Repository
             }
         }
     }
+
 }

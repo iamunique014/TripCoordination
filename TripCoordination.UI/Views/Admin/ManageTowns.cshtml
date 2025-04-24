@@ -19,6 +19,7 @@
                     <th>Title</th>
                     <th>Name</th>
                     <th>Region</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                         <td>@town.TownID</td>
                         <td>@town.Name</td>
                         <td>@town.Region</td>
+                        <td>@town.Price</td>
                         <td>
                             <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a>
                             <a href="/Admin/DeleteTown?townID=@town.TownID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
