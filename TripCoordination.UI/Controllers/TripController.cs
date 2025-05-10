@@ -44,11 +44,6 @@ namespace TripCoordination.Controllers
             return View();
         }
 
-        public async Task<IActionResult> JoinTrip()
-        {
-            return View();
-        }
-
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> TripListing(TripListingViewModelUI model)
@@ -155,6 +150,21 @@ namespace TripCoordination.Controllers
 
             //return RedirectToAction("TripListing");
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> JoinTrip(TripDetailsViewModelUI model)
+        {
+            ViewData["ShowSidebar"] = true;
+
+            var userData = new User
+            {
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            var joinTrip = _tripRepository.JoinTrip(model, userData);
+
+            return View();
         }
 
         //public async Task<IActionResult> EditTown(int townID)
