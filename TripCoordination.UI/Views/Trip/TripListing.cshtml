@@ -5,28 +5,30 @@
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info">
+    <div class="alert alert-info mt-5">
         No trips available at the moment. Please check back later.
     </div>
 }
 else
 {
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
         @foreach (var tripListing in Model)
-        {
+        {           
             <div class="col-md-10 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Organizer: @tripListing.Name </h5>
                         <p class="card-text">
                             <strong>Date: </strong>@tripListing.DepartureDate.ToLongDateString()<br />
-                            <strong>Destination: </strong>@tripListing.DestinationName <br />
+                            <strong>Destination: </strong>@tripListing.DestinationName : @tripListing.DestinationID<br />
                             <strong>Seats Available: @tripListing.Seats</strong>
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <a asp-controller="Trip" asp-action="TripDetails"  class="btn btn-primary">Join Trip</a>
+                        @* <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a> *@
+                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary">Join Trip @tripListing.TripID </a>
+                       @*  <a asp-controller="Trip" asp-action="TripDetails"  class="btn btn-primary">Join Trip</a> *@
                     </div>
                 </div>
             </div>
