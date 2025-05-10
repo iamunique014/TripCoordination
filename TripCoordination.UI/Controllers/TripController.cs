@@ -72,6 +72,7 @@ namespace TripCoordination.Controllers
 
                     var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
                     {
+                        TripID = tripListing.TripID,
                         DestinationID = tripListing.DestinationID,
                         Name = tripListing.Surname + " " + tripListing.Name,
                         Surname = tripListing.Surname,
@@ -114,11 +115,55 @@ namespace TripCoordination.Controllers
 
             return View(new List<TripListingViewModelUI>());
         }
-
-        public IActionResult TripDetails()
+        [HttpGet]
+        public async Task<IActionResult> TripDetails(int tripID, int townID)
         {
-            return View();
+            ViewData["ShowSidebar"] = true;
+
+
+
+            var tripData = new Trip
+            {
+                TripID = tripID,
+                TownID = townID,
+            };
+
+            var userData = new User
+            {
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            // Find the Trip using repository pattern
+            var tripDetails = await _tripRepository.FindTripDetails(tripData, userData);
+
+
+            var viewModel = tripDetails.Select(tripDetailsViewModel => new TripDetailsViewModelUI
+            {
+                TripID = tripDetailsViewModel.TripID,
+                TownID = tripDetailsViewModel.TownID,
+                CreatorFirstName = tripDetailsViewModel.CreatorFirstName,
+                CreatorLastName = tripDetailsViewModel.CreatorLastName,
+                JoiningFirstName = tripDetailsViewModel.JoiningFirstName,
+                JoiningLastName = tripDetailsViewModel.JoiningLastName,
+                PickUpPoint = tripDetailsViewModel.PickUpPoint,
+                DestinationName = tripDetailsViewModel.DestinationName,
+                DepartureDate = tripDetailsViewModel.DepartureDate,
+                Seats = tripDetailsViewModel.Seats,
+                UserID = tripDetailsViewModel.UserID
+                // Map additional properties here
+            }).ToList();
+
+            //return RedirectToAction("TripListing");
+            return View(viewModel);
         }
+
+        //public async Task<IActionResult> EditTown(int townID)
+        //{
+        //    //Need to get the exact town to edit
+        //    ViewData["ShowSidebar"] = true;
+        //    var town = await _townRepository.GetByIdAsync(townID);
+        //    return View(town);
+        //}
 
         [Authorize(Roles = "Admin, Organizer")]
         public async Task<IActionResult> CreateTrip()
