@@ -1,20 +1,77 @@
-﻿@model TripCoordination.Data.Models.Domain.Trip
+﻿@model IEnumerable<TripCoordination.ViewModel.TripDetailsViewModelUI>
 @{
     ViewData["Title"] = "Trip Details";
 }
 
-<div class="card">
+@* @foreach( var item in Model)
+{
+    <div class="col-md-4 mt-5">
+        
+        <p><strong>Time:</strong> Time.ToString("hh\:mm")</p>
+        <p><strong>Pickup Location:</strong> @item.PickUpPoint</p>
+        
+        <p><strong>Destination:</strong> @item.DestinationName: @item.TownID</p>
+        <p><strong>PassengerName:</strong> @item.JoiningFirstName @item.JoiningLastName</p>
+        
+
+
+        <a href="/Trip/JoinTrip?tripID=@item.TripID&townID=@item.TownID" class=" btn btn-primary">Join Trip @item.TripID </a>
+
+    </div>
+}
+ *@
+
+
+
+<div class="card mt-5">
     <div class="card-header">
-        <h2>Destination</h2>
+        <h2>Trip Details</h2>
     </div>
     <div class="card-body">
-        <p><strong>Date:</strong> Date.ToString("MMMM dd, yyyy")</p>
-        <p><strong>Time:</strong> Time.ToString("hh\:mm")</p>
-        <p><strong>Pickup Location:</strong> Pickup</p>
-        <p><strong>Available Seats:</strong> AvailableSeats</p>
-        <p><strong>Description:</strong> Description</p>
+        @foreach (var item in Model)
+        {
+            <div class="conatiner">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p><strong>Date:</strong> @item.DepartureDate</p>
+                        <p><strong>Destination:</strong> @item.DestinationName: @item.TownID</p>
+                        <p><strong>Available Seats:</strong> @item.Seats</p>
+                        <p><strong>Organizer:</strong> @item.CreatorFirstName @item.CreatorLastName</p>
+                    </div>
+                    <div class="col-md-6">
+
+                        <form asp-action="JoinTrip" method="post">
+
+                            <input type="hidden" asp-for="@item.TripID" class="form-control" />
+
+                            <div class="mb-3 form-group col-md-2">
+                                <label asp-for="@item.JoiningFirstName" class="form-label">First Name</label>
+                                <input asp-for="@item.JoiningFirstName" class="form-control" />
+                                <span asp-validation-for="@item.JoiningFirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 form-group col-md-2">
+                                <label asp-for="@item.JoiningLastName" class="form-label">Last Name</label>
+                                <input asp-for="@item.JoiningLastName" class="form-control" />
+                                <span asp-validation-for="@item.JoiningLastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 form-group col-md-2">
+                                <label asp-for="@item.PickUpPoint" class="form-label">PickUp Location</label>
+                                <input asp-for="@item.PickUpPoint" class="form-control" />
+                                <span asp-validation-for="@item.PickUpPoint" class="text-danger"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Join Trip</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        }
+       
     </div>
-    <div class="card-footer text-center">
-        <a href="/Trips/Join/@Model" class="btn btn-success">Join Trip</a>
-    </div>
+    @* <div class="card-footer text-center">
+        <a href="/Trips/Join/@Model" class="btn btn-success">Confirm and Join</a>
+    </div> *@
 </div>

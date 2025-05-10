@@ -37,6 +37,7 @@ namespace TripCoordination.Data.Repository
 
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
                 Console.WriteLine(ex.ToString());
                 return false;
             }
@@ -50,12 +51,14 @@ namespace TripCoordination.Data.Repository
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
         public async Task<IEnumerable<Trip>> GetAllAsync()
         {
-            string query = "sp_Get_Trips";
+            string query = "sp_Find_Trips";
             return await _db.GetData<Trip, dynamic>(query, new { });
         }
 
@@ -74,14 +77,15 @@ namespace TripCoordination.Data.Repository
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
                 Console.WriteLine(ex.ToString());
                 return Enumerable.Empty<TripListingViewModel>();
             }
         }
 
-        public async Task<Trip> GetByIdAsync(int id)
+        public async Task<Trip> GetByIdAsync(int tripID)
         {
-            IEnumerable<Trip> result = await _db.GetData<Trip, dynamic>("sp_Get_Trip", new { ID = id });
+            IEnumerable<Trip> result = await _db.GetData<Trip, dynamic>("sp_Get_Trip", new { TripID = tripID });
             return result.FirstOrDefault();
         }
 
@@ -94,8 +98,32 @@ namespace TripCoordination.Data.Repository
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
                 return false;
             }
+        }
+
+        async Task<IEnumerable<TripDetailsViewModel>> ITripRepository.FindTripDetails(Trip trip, User user)
+        {
+            try
+            {
+                string query = "sp_Find_TripDetails";
+
+                return await _db.GetData<TripDetailsViewModel, dynamic>(query, new
+                {
+                    trip.TripID,
+                    trip.TownID,
+                    user.UserID
+
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<TripDetailsViewModel>();
+            }   
         }
     }
 }

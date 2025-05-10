@@ -15,11 +15,13 @@ namespace TripCoordination.Data.Repository
         Task<bool> UpdateAsync(Trip trip);
         Task<bool> DeleteAsync(int id);
 
-        Task<Trip> GetByIdAsync(int id);
+        Task<Trip> GetByIdAsync(int tripID);
 
         Task<IEnumerable<Trip>> GetAllAsync();
 
         Task<IEnumerable<TripListingViewModel>> FindTripsAsync(TripListingViewModel tripListing, Trip trip);
+
+        Task<IEnumerable<TripDetailsViewModel>> FindTripDetails(Trip trip, User user);
 
     }
 }
