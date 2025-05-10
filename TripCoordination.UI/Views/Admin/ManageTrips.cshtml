@@ -1,4 +1,6 @@
-﻿@model IEnumerable<TripCoordination.Data.Models.Domain.Trip>
+﻿@* @model IEnumerable<TripCoordination.Data.Models.Domain.Trip>*@
+
+@model IEnumerable<TripCoordination.ViewModel.TripListingViewModelUI>
 @{
     ViewData["Title"] = "Manage Trips";
 }
@@ -26,10 +28,10 @@
                 @foreach (var trip in Model)
                 {
                     <tr>
-                        <td>@trip.TripID</td>
-                        <td>@trip.CreatorUserId</td>
+                        @* <td>@trip.TripID</td> *@
+                        <td>@trip.Name</td>
                         <td>@trip.DepartureDate</td>
-                        <td>@trip.IsFull</td>
+                        <td>@trip.Seats</td>
                         <td>
                             <a href="/Person/Edit?id=@trip.TripID" class="btn btn-success">Edit</a>
                             <a href="/Person/Delete?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
