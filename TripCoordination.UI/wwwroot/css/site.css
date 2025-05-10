@@ -37,7 +37,7 @@
 
 /* Footer styling */
 footer {
-    --drab-dark-brown: #494331; 
+    --drab-dark-brown: #494331;
     background-color: var(--drab-dark-brown);
     color: var(--dutch-white);
 }
@@ -52,3 +52,14 @@ footer {
         background-color: var(--battleship-gray);
         border-color: var(--battleship-gray);
     }
+
+@media (max-width: 1199px) {
+    .menu {
+        z-index: 99;
+       /* display: none;
+        left: -250px;*/
+        color: var(--flame);
+        Background: blue;
+    }
+
+}
