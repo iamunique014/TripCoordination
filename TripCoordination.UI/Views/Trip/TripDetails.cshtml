@@ -3,25 +3,6 @@
     ViewData["Title"] = "Trip Details";
 }
 
-@* @foreach( var item in Model)
-{
-    <div class="col-md-4 mt-5">
-        
-        <p><strong>Time:</strong> Time.ToString("hh\:mm")</p>
-        <p><strong>Pickup Location:</strong> @item.PickUpPoint</p>
-        
-        <p><strong>Destination:</strong> @item.DestinationName: @item.TownID</p>
-        <p><strong>PassengerName:</strong> @item.JoiningFirstName @item.JoiningLastName</p>
-        
-
-
-        <a href="/Trip/JoinTrip?tripID=@item.TripID&townID=@item.TownID" class=" btn btn-primary">Join Trip @item.TripID </a>
-
-    </div>
-}
- *@
-
-
 
 <div class="card mt-5">
     <div class="card-header">
@@ -71,7 +52,4 @@
         }
        
     </div>
-    @* <div class="card-footer text-center">
-        <a href="/Trips/Join/@Model" class="btn btn-success">Confirm and Join</a>
-    </div> *@
 </div>
