@@ -22,6 +22,7 @@ namespace TripCoordination.Data.Repository
         Task<IEnumerable<TripListingViewModel>> FindTripsAsync(TripListingViewModel tripListing, Trip trip);
 
         Task<IEnumerable<TripDetailsViewModel>> FindTripDetails(Trip trip, User user);
+        Task<bool> JoinTrip(TripDetailsViewModel tripDetails, User user);
 
     }
 }
