@@ -125,5 +125,31 @@ namespace TripCoordination.Data.Repository
                 return Enumerable.Empty<TripDetailsViewModel>();
             }   
         }
+
+        public async Task<bool> JoinTrip(TripDetailsViewModel tripDetails, User user)
+        {
+            try
+            {
+
+                await _db.SaveData("sp_Join_Trip", new
+                {
+                    user.UserID,
+                    tripDetails.TripID,
+                    tripDetails.TownID,
+                    tripDetails.PickUpPoint
+                    
+                    
+                });
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
     }
 }
