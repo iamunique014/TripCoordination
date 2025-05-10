@@ -31,6 +31,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddLogging();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITripRepository, TripRepository>();
