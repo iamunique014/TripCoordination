@@ -22,7 +22,17 @@ namespace TripCoordination.Data.Repository
             try
             {
 
-                await _db.SaveData("sp_Create_Profile", new { profile.Title, profile.Name, profile.Surname, profile.Email, profile.PhoneNumber, profile.Address, profile.DateOfBirth, profile.ResidenceID });
+                await _db.SaveData("sp_Create_Profile", new 
+                { 
+                    profile.Title, 
+                    profile.Name, 
+                    profile.Surname, 
+                    profile.Email, 
+                    profile.PhoneNumber, 
+                    profile.UserID, 
+                    profile.DateOfBirth, 
+                    profile.ResidenceID 
+                });
                 return true;
             }
 
@@ -31,7 +41,7 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(string id)
         {
             try
             {
@@ -40,6 +50,8 @@ namespace TripCoordination.Data.Repository
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
@@ -49,7 +61,7 @@ namespace TripCoordination.Data.Repository
             return await _db.GetData<Profile, dynamic>(query, new { });
         }
 
-        public async Task<Profile> GetByIdAsync(int id)
+        public async Task<Profile> GetByIdAsync(string id)
         {
             IEnumerable<Profile> result = await _db.GetData<Profile, dynamic>("sp_Get_Profile", new { ID = id });
             return result.FirstOrDefault();
@@ -64,6 +76,8 @@ namespace TripCoordination.Data.Repository
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
