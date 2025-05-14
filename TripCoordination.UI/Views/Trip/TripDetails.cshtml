@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TripCoordination.ViewModel.TripDetailsViewModelUI>
+﻿@model TripCoordination.ViewModel.TripDetailsViewModelUI
 @{
     ViewData["Title"] = "Trip Details";
 }
@@ -9,47 +9,44 @@
         <h2>Trip Details</h2>
     </div>
     <div class="card-body">
-        @foreach (var item in Model)
-        {
-            <div class="conatiner">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p><strong>Date:</strong> @item.DepartureDate</p>
-                        <p><strong>Destination:</strong> @item.DestinationName: @item.TownID</p>
-                        <p><strong>Available Seats:</strong> @item.Seats</p>
-                        <p><strong>Organizer:</strong> @item.CreatorFirstName @item.CreatorLastName</p>
-                    </div>
-                    <div class="col-md-6">
+        <div class="conatiner">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Date:</strong> @Model.DepartureDate</p>
+                    <p><strong>Destination:</strong> @Model.DestinationName: @Model.TownID</p>
+                    <p><strong>Available Seats:</strong> @Model.Seats</p>
+                    <p><strong>Organizer:</strong> @Model.CreatorFirstName @Model.CreatorLastName</p>
+                </div>
+                <div class="col-md-6">
 
-                        <form asp-action="JoinTrip" method="post">
+                    <form asp-action="JoinTrip" method="post">
 
-                            <input type="hidden" asp-for="@item.TripID" class="form-control" />
+                        <input type="hidden" asp-for="TripID" class="form-control" />
+                        <input type="hidden" asp-for="TownID" class="form-control" />
 
-                            <div class="mb-3 form-group col-md-2">
-                                <label asp-for="@item.JoiningFirstName" class="form-label">First Name</label>
-                                <input asp-for="@item.JoiningFirstName" class="form-control" />
-                                <span asp-validation-for="@item.JoiningFirstName" class="text-danger"></span>
-                            </div>
+                        <div class="mb-3 form-group col-md-2">
+                            <label asp-for="JoiningFirstName" class="form-label">First Name</label>
+                            <input asp-for="JoiningFirstName" class="form-control" />
+                            <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
+                        </div>
 
-                            <div class="mb-3 form-group col-md-2">
-                                <label asp-for="@item.JoiningLastName" class="form-label">Last Name</label>
-                                <input asp-for="@item.JoiningLastName" class="form-control" />
-                                <span asp-validation-for="@item.JoiningLastName" class="text-danger"></span>
-                            </div>
+                        <div class="mb-3 form-group col-md-2">
+                            <label asp-for="JoiningLastName" class="form-label">Last Name</label>
+                            <input asp-for="JoiningLastName" class="form-control" />
+                            <span asp-validation-for="JoiningLastName" class="text-danger"></span>
+                        </div>
 
-                            <div class="mb-3 form-group col-md-2">
-                                <label asp-for="@item.PickUpPoint" class="form-label">PickUp Location</label>
-                                <input asp-for="@item.PickUpPoint" class="form-control" />
-                                <span asp-validation-for="@item.PickUpPoint" class="text-danger"></span>
-                            </div>
+                        <div class="mb-3 form-group col-md-2">
+                            <label asp-for="PickUpPoint" class="form-label">PickUp Location</label>
+                            <input asp-for="PickUpPoint" class="form-control" />
+                            <span asp-validation-for="PickUpPoint" class="text-danger"></span>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary">Join Trip</button>
-                        </form>
+                        <button type="submit" class="btn btn-primary">Join Trip</button>
+                    </form>
 
-                    </div>
                 </div>
             </div>
-        }
-       
+        </div>
     </div>
 </div>
