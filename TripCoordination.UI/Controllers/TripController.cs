@@ -131,25 +131,24 @@ namespace TripCoordination.Controllers
             // Find the Trip using repository pattern
             var tripDetails = await _tripRepository.FindTripDetails(tripData, userData);
 
-
-            var viewModel = tripDetails.Select(tripDetailsViewModel => new TripDetailsViewModelUI
+            var tripDetailsUI = new TripDetailsViewModelUI
             {
-                TripID = tripDetailsViewModel.TripID,
-                TownID = tripDetailsViewModel.TownID,
-                CreatorFirstName = tripDetailsViewModel.CreatorFirstName,
-                CreatorLastName = tripDetailsViewModel.CreatorLastName,
-                JoiningFirstName = tripDetailsViewModel.JoiningFirstName,
-                JoiningLastName = tripDetailsViewModel.JoiningLastName,
-                PickUpPoint = tripDetailsViewModel.PickUpPoint,
-                DestinationName = tripDetailsViewModel.DestinationName,
-                DepartureDate = tripDetailsViewModel.DepartureDate,
-                Seats = tripDetailsViewModel.Seats,
-                UserID = tripDetailsViewModel.UserID
-                // Map additional properties here
-            }).ToList();
+                TripID = tripDetails.TripID,
+                TownID = tripDetails.TownID,
+                DepartureDate = tripDetails.DepartureDate,
+                DestinationName = tripDetails.DestinationName,
+                CreatorFirstName = tripDetails.CreatorFirstName,
+                CreatorLastName = tripDetails.CreatorLastName,
+                JoiningFirstName = tripDetails.JoiningFirstName,
+                JoiningLastName = tripDetails.JoiningLastName,
+                JoiningUserName = tripDetails.JoiningUserName,
+                PickUpPoint = tripDetails.PickUpPoint,
+                Seats = tripDetails.Seats,
+                // You can include other fields as needed
+            };
 
             //return RedirectToAction("TripListing");
-            return View(viewModel);
+            return View(tripDetailsUI);
         }
 
         [HttpPost]
