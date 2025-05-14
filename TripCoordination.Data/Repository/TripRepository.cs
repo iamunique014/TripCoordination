@@ -104,26 +104,10 @@ namespace TripCoordination.Data.Repository
             }
         }
 
-        async Task<IEnumerable<TripDetailsViewModel>> ITripRepository.FindTripDetails(Trip trip, User user)
+        public async Task<TripDetailsViewModel> FindTripDetails(Trip trip, User user)
         {
-            try
-            {
-                string query = "sp_Find_TripDetails";
-
-                return await _db.GetData<TripDetailsViewModel, dynamic>(query, new
-                {
-                    trip.TripID,
-                    trip.TownID,
-                    user.UserID
-
-                });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Entered Exception \n");
-                Console.WriteLine(ex.ToString());
-                return Enumerable.Empty<TripDetailsViewModel>();
-            }   
+                IEnumerable<TripDetailsViewModel> result = await _db.GetData<TripDetailsViewModel, dynamic>("sp_Find_TripDetails", new { trip.TripID, trip.TownID, user.UserID });
+                return result.FirstOrDefault();
         }
 
         public async Task<bool> JoinTrip(TripDetailsViewModel tripDetails, User user)
