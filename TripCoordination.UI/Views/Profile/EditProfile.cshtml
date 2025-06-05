@@ -1,9 +1,9 @@
 ﻿@model TripCoordination.Data.Models.Domain.Profile
 
 <div class="mt-5 background-container">
-    
+
     <div class="row">
-        <form class="m-2 p-2" action="CompleteProfile" method="post">
+        <form class="m-2 p-2" action="EditProfile" method="post">
 
             <div class="mb-3">
                 <label asp-for="Title" class="form-label">Title</label>
@@ -18,7 +18,7 @@
 
             <div class="col-md-4 mb-3">
                 <label asp-for="Name" class="form-label">First Name</label>
-                <input asp-for="Name" type="text" class="form-control"/>
+                <input asp-for="Name" type="text" class="form-control" />
                 <span class="text-danger" asp-validation-for="Name"></span>
             </div>
 
@@ -48,13 +48,13 @@
 
             <div class="mb-3">
                 <label asp-for="ResidenceID" class="form-label">Residence</label>
-                <select asp-for="ResidenceID">
+                <select class="form-control" asp-for="ResidenceID">
                     <option value="1">Metro rez Southern Life</option>
                     <option value="2">South Point 85</option>
                     <option value="3">Metro Rez Tebro</option>
                     <option value="4">Metro Rez FNB</option>
                     <option value="6">Metro Rez Mr Price</option>
-                    
+
                 </select>
                 <span class="text-danger" asp-validation-for="ResidenceID"></span>
             </div>
@@ -72,7 +72,7 @@
             </div>
         </form>
     </div>
-   
+
     <ul class="navbar-nav">
         <li class="nav-item">
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Profile</a>

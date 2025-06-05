@@ -71,7 +71,17 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                await _db.SaveData("sp_Update_Profile", profile);
+                await _db.SaveData("sp_Update_Profile", new
+                {
+                    profile.Title,
+                    profile.Name,
+                    profile.Surname,
+                    profile.Email,
+                    profile.PhoneNumber,
+                    profile.UserID,
+                    profile.DateOfBirth,
+                    profile.ResidenceID
+                });
                 return true;
             }
             catch (Exception ex)

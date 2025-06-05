@@ -19,6 +19,12 @@ namespace TripCoordination.Controllers
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetByIdAsync(UserID);
+
+            if(profile != null)
+            {
+                return RedirectToAction(nameof(EditProfile));
+            }
+
             return View(profile);
         }
 
@@ -49,6 +55,38 @@ namespace TripCoordination.Controllers
             return RedirectToAction(nameof(CompleteProfile));
         }
 
+        public async Task<IActionResult> EditProfile()
+        {
+            string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var profile = await _profileRepository.GetByIdAsync(UserID);
+            return View(profile);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(Profile profile)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View(profile);
+
+                profile.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                bool updateRecord = await _profileRepository.UpdateAsync(profile);
+
+                if (updateRecord)
+                    TempData["msg"] = "Successfully Added";
+                else
+                    TempData["msg"] = "Oh Hell Nah";
+            }
+
+            catch (Exception ex)
+            {
+                TempData["msg"] = "Seriously!!!!!";
+                Console.WriteLine(ex.ToString());
+            }
+            return View(profile);
+        }
     }
 }

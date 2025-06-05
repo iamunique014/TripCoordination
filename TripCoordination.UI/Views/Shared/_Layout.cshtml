@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Trip Coordination</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/SimpleDataTables/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -60,7 +61,7 @@
     }
     else
     {
-        <main class="flex-grow-1 container my-4">
+        <main class="flex-grow-1 container-fluid my-4">
             @RenderBody()
         </main>
     }
@@ -75,9 +76,37 @@
         </div>
     </footer>
 
+
+    <script>
+        /**
+        * Initiate Datatables
+        */
+        const datatables = select('.datatable', true)
+        datatables.forEach(datatable => {
+            new simpleDatatables.DataTable(datatable, {
+                perPageSelect: [5, 10, 15, ["All", -1]],
+                columns: [{
+                    select: 2,
+                    sortSequence: ["desc", "asc"]
+                },
+                {
+                    select: 3,
+                    sortSequence: ["desc"]
+                },
+                {
+                    select: 4,
+                    cellClass: "green",
+                    headerClass: "red"
+                }
+                ]
+            });
+        })
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/SimpleDataTables/simple-datatables.js"></script>
     <!-- jQuery (Select2 dependency) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Select2 JS -->

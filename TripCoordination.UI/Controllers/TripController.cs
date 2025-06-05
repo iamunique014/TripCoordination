@@ -252,6 +252,32 @@ namespace TripCoordination.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Organizer")]
+        public async Task<IActionResult> EditTrip(int TripID)
+        {
+            ViewData["ShowSidebar"] = true;
+
+            var towns = await _townRepository.GetAllAsync();
+
+            ViewBag.Destination = towns;
+
+            var townSelectList = towns.Select(t => new SelectListItem
+            {
+                Value = t.TownID.ToString(),
+                Text = t.Name
+            }).ToList();
+
+
+
+            var viewModel = new CreateTripViewModelUI
+            {
+                AvailableTowns = townSelectList,
+                DepartureDate = DateTime.Now
+            };
+
+            return View(viewModel);
+
+        }
 
 
 

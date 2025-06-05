@@ -12,15 +12,14 @@
     <div class="my-2">
         @* <a href="/Person/Add" class="btn btn-info my-2">Add more</a> *@
 
-        <a asp-action="Add" class="btn btn-info my-2">Add more</a>
+        <a asp-action="CreateTrip" asp-controller="Trip" class="btn btn-info my-2">Add more</a>
 
-        <table class="table table-striped">
+        <table class="table datatable">
             <thead>
                 <tr>
-                    <th>Title</th>
                     <th>Creator</th>
                     <th>Depature Date</th>
-                    <th>Isfull</th>
+                    <th>Seats</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -33,8 +32,8 @@
                         <td>@trip.DepartureDate</td>
                         <td>@trip.Seats</td>
                         <td>
-                            <a href="/Person/Edit?id=@trip.TripID" class="btn btn-success">Edit</a>
-                            <a href="/Person/Delete?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
+                            <a href="/Trip/EditTrip?id=@trip.TripID" class="btn btn-success">Edit</a>
+                            <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
                         </td>
                     </tr>
                 }
