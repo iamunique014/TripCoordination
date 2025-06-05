@@ -5,9 +5,101 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
 
-<div class="row">
+
+<div class="bg-container">
+    <div class="form-box register">
+        <form id="account" method="post">
+            <h1>Register</h1>
+            <div class="input-box">
+                <input type="text" asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+            </div>
+            <div class="form-floating input-box">
+                <select asp-for="Input.Role" class="form-control">
+                    @foreach (var role in Enum.GetValues(typeof(Roles)).Cast<Roles>().Where(r => r != Roles.Admin))
+                    {
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <label asp-for="Input.Role">Role</label>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <input type="password" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password" />
+            </div>
+            <div class="input-box">
+                <input type="password" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="confirm password" />
+            </div>
+            <div class="forgot-link">
+                <a href="#">Forgot password?</a>
+            </div>
+            <button id="registerSubmit" type="submit" class="btn-login">Register</button>
+            <p>or Register with social Platforms</p>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-google"></i></a>
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-github"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </form>
+    </div>
+
+    <div class="toggle-box toggleBox-right">
+        <div class="toggle-panel toggle-right">
+            <h1>Hello Welcome!</h1>
+            <p>Already have an account?</p>
+            @* <button class="btn-register" gritty >Login</button> *@
+            <a class="btn btn-register" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login</a>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
@@ -73,7 +165,7 @@
             }
         </section>
     </div>
-</div>
+</div> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

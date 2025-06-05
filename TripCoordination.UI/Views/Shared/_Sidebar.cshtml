@@ -2,19 +2,51 @@
 
 
 <div class="menu rounded mt-5">
-   
-        <a href="@Url.Action("AdminDashboard", "Admin")">  Dashboard
+    @if (User.IsInRole("Admin")){
+        <a href="@Url.Action("AdminDashboard", "Admin")">
+            Dashboard
         </a>
-        <a href="@Url.Action("ManageResidences", "Admin")"> Residences
+        <a href="@Url.Action("ManageResidences", "Admin")">
+            Residences
         </a>
-        <a href="@Url.Action("ManageTowns", "Admin")"> Towns
+        <a href="@Url.Action("ManageTowns", "Admin")">
+            Towns
         </a>
-        <a href="@Url.Action("ManageTrips", "Admin")"> Trips
+        <a href="@Url.Action("ManageTrips", "Admin")">
+            Trips
         </a>
-        <a href="@Url.Action("ManageUsers", "Admin")"> Users
+        <a href="@Url.Action("ManageUsers", "Admin")">
+            Users
         </a>
-        <a href="@Url.Action("Profile", "Admin")"> Profile
+        <a href="@Url.Action("EditProfile", "Profile")">
+            Profile
         </a>
+    }
+
+    @if (User.IsInRole("Organizer"))
+    {
+        <a href="@Url.Action("OrganizerDashboard", "Organizer")">
+            Dashboard
+        </a>
+        <a href="@Url.Action("ManageUsers", "Admin")">
+            Users
+        </a>
+        <a href="@Url.Action("EditProfile", "Profile")">
+            Profile
+        </a>
+    }
+
+    @if (User.IsInRole("Student"))
+    {
+        <a href="@Url.Action("StudentDashboard", "Student")">
+            Dashboard
+        </a>
+        
+        <a href="@Url.Action("EditProfile", "Profile")">
+            Profile
+        </a>
+    }
+
    
 </div>
 

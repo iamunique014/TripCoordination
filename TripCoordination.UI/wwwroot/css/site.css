@@ -13,12 +13,17 @@
     /* You can define additional gradient variables as needed */
 }
 
+.background-container {
+    --gradient-right: linear-gradient(90deg, var(--dutch-white), var(--battleship-gray));
+    --flame: #de541e;
+    background: var(--gradient-right);
+    color: var(--flame)
+}
 
 /*body {
     background-color: var(--dutch-white);
     color: var(--black-olive);
 }*/
-
 /* Navbar styling */
 /*.navbar {
     background-color: var(--drab-dark-brown);
@@ -63,3 +68,196 @@ footer {
     }
 
 }
+
+.layout-main {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Login Form styling */
+.loginBody {
+    --flame: #de541e;
+    --gradient-right: linear-gradient(90deg, var(--dutch-white), var(--battleship-gray));
+    background: var(--gradient-right);
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    overflow: hidden;*/
+}
+
+.bg-container .social-icons a {
+    display: inline-flex;
+    padding: 10px;
+    border: 2px solid var(--drab-dark-brown);
+    border-radius: 8px;
+    font-size: 24px;
+    color: var(--flame);
+    text-decoration: none;
+    margin: 0 6px;
+}
+
+    .bg-container .social-icons a:hover {
+        --flame: #de541e;
+        background-color: var(--drab-dark-brown);
+    }
+
+    .bg-container .row {
+        /*height: 650px;*/
+    }
+
+.bg-container .bg-light{
+    background: var(--dutch-white);
+}
+
+/*.form-box{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    color: #333;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    z-index: 1;*/ /*asdjasdsd*/
+/*}
+
+.login {
+    right: 0;
+}
+
+.register{
+    left: 0;
+}
+
+form{
+    width: 100%;
+}
+
+.bg-container h1{
+    font-size: 36px;
+    margin: -10px 0;
+}
+
+.input-box{
+    position: relative;
+    margin: 30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    padding: 13px;
+    background: #eee;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.input-box input::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+
+.forgot-link{
+    margin: -15px 0 15px;
+}
+
+.forgot-link a{
+    font-size: 14.5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.btn-login, .btn-register {
+    --flame: #de541e;
+    width: 100%;
+    height: 48px;
+    background: var(--flame);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.bg-container p{
+    font-size: 14.5px;
+    margin: 15px 0;
+}
+
+
+
+.toggle-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;*/
+   /* border-radius: 150px*/
+/*}
+
+.toggle-panel {
+    --flame: #de541e;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: var(--flame);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    border-radius: 30px 150px 150px 30px;
+}
+
+.toggle-panel p{
+    margin-bottom: 20px;
+}
+
+
+.toggle-box .btn{
+    width: 160px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+
+.toggle-right {
+    right: 0;
+    border-radius: 150px 30px 30px 150px;
+}
+
+.toggleBox-right {
+    right: 0;
+}*/
+
+/*@media(max-width: 767px){
+    .loginBody{
+        display: block;
+    }
+    .toggle-box {
+        display: none;
+    }
+
+    .form-box{
+        width: 100%;
+    }
+}*/
+
+
+/*.bg-container {
+    --flame: #de541e;
+    background: var(--flame);
+    border-radius: 0, 30px, 0, 30px;
+    width: 100%;
+    height: 100%;
+}*/
