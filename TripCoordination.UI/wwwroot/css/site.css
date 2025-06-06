@@ -94,10 +94,11 @@ footer {
     margin: 0 6px;
 }
 
-    .bg-container .social-icons a:hover {
+
+.bg-container .social-icons a:hover {
         --flame: #de541e;
         background-color: var(--drab-dark-brown);
-    }
+}
 
 
 

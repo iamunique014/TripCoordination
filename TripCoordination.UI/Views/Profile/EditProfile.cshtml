@@ -2,12 +2,12 @@
 
 <div class="mt-5 background-container">
 
-    <div class="row">
-        <form class="m-2 p-2" action="EditProfile" method="post">
+    <div class="">
+        <form class="m-2 p-4" action="EditProfile" method="post">
 
-            <div class="mb-3">
+            <div class="col-md-2 mb-3">
                 <label asp-for="Title" class="form-label">Title</label>
-                <select asp-for="Title">
+                <select asp-for="Title" class="form-control">
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
                     <option value="Ms">Miss</option>
@@ -30,7 +30,7 @@
                 <span class="text-danger" asp-validation-for="Surname"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
                 <label asp-for="Email" class="form-label">
                     Email
                 </label>
@@ -38,7 +38,7 @@
                 <span class="text-danger" asp-validation-for="Email"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
                 <label asp-for="PhoneNumber" class="form-label">
                     Cell Phone
                 </label>
@@ -46,7 +46,7 @@
                 <span class="text-danger" asp-validation-for="PhoneNumber"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
                 <label asp-for="ResidenceID" class="form-label">Residence</label>
                 <select class="form-control" asp-for="ResidenceID">
                     <option value="1">Metro rez Southern Life</option>
@@ -59,7 +59,7 @@
                 <span class="text-danger" asp-validation-for="ResidenceID"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
                 <label asp-for="DateOfBirth" class="form-label">
                     Date Of Birth
                 </label>
@@ -67,7 +67,7 @@
                 <span class="text-danger" asp-validation-for="DateOfBirth"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
