@@ -1,10 +1,16 @@
 :root {
     /* Define your colors (using HEX without the alpha suffix for simplicity) */
+    --opacity: 0.6;
     --black-olive: #3f3f37;
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     --battleship-gray: #878472;
     --flame: #de541e;
+
+    --black-olive-rgba: rgba(63, 63, 55, var(--opacity));
+    --battleship-gray-rgba: rgba(135, 132, 114, var(--opacity));
+    --dutch-white-rgba: rgba(214, 214, 177, var(--opacity));
+
     /* Example gradients using the defined colors */
     --gradient-top: linear-gradient(0deg, var(--black-olive), var(--dutch-white), var(--drab-dark-brown), var(--battleship-gray), var(--flame));
     --gradient-right: linear-gradient(90deg, var(--black-olive), var(--dutch-white), var(--drab-dark-brown), var(--battleship-gray), var(--flame));
@@ -14,10 +20,17 @@
 }
 
 .background-container {
-    --gradient-right: linear-gradient(90deg, var(--dutch-white), var(--battleship-gray));
+    --gradient-right: linear-gradient(90deg, var(--dutch-white-rgba), var(--battleship-gray-rgba));
     --flame: #de541e;
-    background: var(--gradient-right);
-    color: var(--flame)
+    background-image: var(--gradient-right), url(../images/london-2928889_1280.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--flame);
+    height: 100vh;
+}
+
+.form-container{
+    background: var(--battleship-gray);
 }
 
 /*body {
