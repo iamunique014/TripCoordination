@@ -113,10 +113,6 @@ namespace TripCoordination.Controllers
         [HttpGet]
         public async Task<IActionResult> TripDetails(int tripID, int townID)
         {
-            ViewData["ShowSidebar"] = true;
-
-
-
             var tripData = new Trip
             {
                 TripID = tripID,
@@ -154,7 +150,6 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> JoinTrip(TripDetailsViewModelUI model)
         {
-            ViewData["ShowSidebar"] = true;
 
             var userData = new User
             {
@@ -165,14 +160,6 @@ namespace TripCoordination.Controllers
 
             return View();
         }
-
-        //public async Task<IActionResult> EditTown(int townID)
-        //{
-        //    //Need to get the exact town to edit
-        //    ViewData["ShowSidebar"] = true;
-        //    var town = await _townRepository.GetByIdAsync(townID);
-        //    return View(town);
-        //}
 
         [Authorize(Roles = "Admin, Organizer")]
         public async Task<IActionResult> CreateTrip()

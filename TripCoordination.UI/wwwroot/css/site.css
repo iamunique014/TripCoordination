@@ -33,16 +33,7 @@
     background: var(--battleship-gray);
 }
 
-/*body {
-    background-color: var(--dutch-white);
-    color: var(--black-olive);
-}*/
-/* Navbar styling */
-/*.navbar {
-    background-color: var(--drab-dark-brown);
-}
-*/
-/* Navbar link styling */
+
 .nav-link {
     color: var(--battleship-gray);
 }
