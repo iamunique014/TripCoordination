@@ -1,7 +1,7 @@
 ﻿@* _Sidebar.cshtml *@
 
 
-<div class="menu rounded mt-5">
+<div class="menu rounded">
     @if (User.IsInRole("Admin")){
         <a href="@Url.Action("AdminDashboard", "Admin")">
             Dashboard
@@ -31,17 +31,6 @@
         <a href="@Url.Action("ManageUsers", "Admin")">
             Users
         </a>
-        <a href="@Url.Action("EditProfile", "Profile")">
-            Profile
-        </a>
-    }
-
-    @if (User.IsInRole("Student"))
-    {
-        <a href="@Url.Action("StudentDashboard", "Student")">
-            Dashboard
-        </a>
-        
         <a href="@Url.Action("EditProfile", "Profile")">
             Profile
         </a>

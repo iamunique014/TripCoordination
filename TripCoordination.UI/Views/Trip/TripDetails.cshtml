@@ -4,13 +4,13 @@
 }
 
 
-<div class="card mt-5">
+<div class="card">
     <div class="card-header">
         <h2>Trip Details</h2>
     </div>
     <div class="card-body">
         <div class="conatiner">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-4">
                     <p><strong>Date:</strong> @Model.DepartureDate</p>
                     <p><strong>Destination:</strong> @Model.DestinationName: @Model.TownID</p>
@@ -24,19 +24,19 @@
                         <input type="hidden" asp-for="TripID" class="form-control" />
                         <input type="hidden" asp-for="TownID" class="form-control" />
 
-                        <div class="mb-3 form-group col-md-2">
+                        <div class="mb-3 form-group col-md-4">
                             <label asp-for="JoiningFirstName" class="form-label">First Name</label>
                             <input asp-for="JoiningFirstName" class="form-control" />
                             <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3 form-group col-md-2">
+                        <div class="mb-3 form-group col-md-4">
                             <label asp-for="JoiningLastName" class="form-label">Last Name</label>
                             <input asp-for="JoiningLastName" class="form-control" />
                             <span asp-validation-for="JoiningLastName" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3 form-group col-md-2">
+                        <div class="mb-3 form-group col-md-4">
                             <label asp-for="PickUpPoint" class="form-label">PickUp Location</label>
                             <input asp-for="PickUpPoint" class="form-control" />
                             <span asp-validation-for="PickUpPoint" class="text-danger"></span>
