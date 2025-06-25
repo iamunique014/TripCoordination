@@ -11,14 +11,20 @@
         <ul class="nav nav-pills flex-column mb-auto">
             @if (User.IsInRole("Admin"))
             {
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Trip" asp-action="Create">Create Trip</a>
+                <li class= "nav-item">
+                    <a class= "nav-link" asp-controller="Admin" asp-action="AdminDashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Trip" asp-action="Index">All Trips</a>
+                    <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="User" asp-action="Manage">Manage Users</a>
+                    <a class="nav-link" asp-controller="Admin" asp-action="ManageTrips">Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="ManageResidences">Residences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
                 </li>
             }
             else if (User.IsInRole("Organizer"))
@@ -54,26 +60,7 @@
 
 
 @* <div class="menu rounded">
-    @if (User.IsInRole("Admin")){
-        <a href="@Url.Action("AdminDashboard", "Admin")">
-            Dashboard
-        </a>
-        <a href="@Url.Action("ManageResidences", "Admin")">
-            Residences
-        </a>
-        <a href="@Url.Action("ManageTowns", "Admin")">
-            Towns
-        </a>
-        <a href="@Url.Action("ManageTrips", "Admin")">
-            Trips
-        </a>
-        <a href="@Url.Action("ManageUsers", "Admin")">
-            Users
-        </a>
-        <a href="@Url.Action("EditProfile", "Profile")">
-            Profile
-        </a>
-    }
+    @if (User.IsInRole("Admin"))
 
     @if (User.IsInRole("Organizer"))
     {
