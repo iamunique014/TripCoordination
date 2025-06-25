@@ -6,7 +6,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 justify-content-between bg-warning border-end min-vh-100" style="width: 250px;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 justify-content-between bg-warning border-end sideMenu" style="width: 250px;">
         @* <h5 class="mb-3">Dashboard</h5> *@
         <ul class="nav nav-pills flex-column mb-auto">
             @if (User.IsInRole("Admin"))
