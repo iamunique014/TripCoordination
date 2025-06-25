@@ -49,6 +49,7 @@ footer {
     --drab-dark-brown: #494331;
     background-color: var(--drab-dark-brown);
     color: var(--dutch-white);
+    z-index: 1030;
 }
 
 /* Button customization */

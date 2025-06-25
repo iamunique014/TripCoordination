@@ -50,8 +50,10 @@
     {
         <div class="row">
          
-             <div class="collapse collapse-horizontal sidebar-wrapper d-md-block bg-danger sidebar" id="sidebarMenu">
-                @await Html.PartialAsync("_Sidebar")
+             <div class="collapse collapse-horizontal sidebar-wrapper d-md-block flex-column justify-content-between bg-danger sidebar" id="sidebarMenu">
+               <div>
+                   @await Html.PartialAsync("_Sidebar")
+               </div>
             </div>
 
             <main class="col-md-8 bg-info">
@@ -78,11 +80,11 @@
     }
    
     <!-- Footer -->
-    <footer class="bg-light py-3 mt-auto">
+   @*  <footer class="bg-light py-3 mt-auto">
         <div class="container text-center">
             <span class="text-muted">&copy; @DateTime.Now.Year - Trip Coordination</span>
         </div>
-    </footer>
+    </footer> *@
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
