@@ -6,8 +6,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-warning border-end min-vh-100" style="width: 250px;">
-        <h5 class="mb-3">Dashboard</h5>
+    <div class="d-flex flex-column flex-shrink-0 p-3 justify-content-between bg-warning border-end min-vh-100" style="width: 250px;">
+        @* <h5 class="mb-3">Dashboard</h5> *@
         <ul class="nav nav-pills flex-column mb-auto">
             @if (User.IsInRole("Admin"))
             {
@@ -55,5 +55,11 @@
                 </li>
             }
         </ul>
+        <div class="pe-3">
+            <a id="manage" class="btn btn-primary w-100 mb-3" asp-controller="Profile" asp-action="CompleteProfile" title="Manage">Profile</a>
+            <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="btn btn-primary w-100">Log Out</button>
+            </form>
+        </div>
     </div>
 }
