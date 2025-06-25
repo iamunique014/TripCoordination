@@ -109,12 +109,6 @@ footer {
 .bg-container .bg-light{
     background: var(--dutch-white);
 }
-/*
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-}*/
 
 
 /* Sidebar default width on larger screens */
@@ -139,24 +133,11 @@ footer {
 
         .collapse-horizontal.show {
             transform: translateX(0);
-            pointer-events: auto;
         }
 
         .collapse-horizontal:not(.show) {
-            /*
-            display: block !important;  Keeps the space for transition */
             pointer-events: none; /* Prevent interaction */
         }
 
 
-}
-
-@media (min-width: 768px) {
-    .collapse-horizontal {
-        transform: none !important;
-        transition: none !important;
-        position: static !important;
-        height: auto !important;
-        pointer-events: auto !important;
-    }
 }
