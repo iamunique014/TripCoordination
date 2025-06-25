@@ -109,4 +109,54 @@ footer {
 .bg-container .bg-light{
     background: var(--dutch-white);
 }
+/*
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}*/
 
+
+/* Sidebar default width on larger screens */
+.sidebar-wrapper {
+    width: 250px;
+}
+
+
+@media (max-width: 767.98px) {
+    .collapse-horizontal {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: #f8f9fa;
+        z-index: 1030;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .collapse-horizontal.show {
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .collapse-horizontal:not(.show) {
+            /*
+            display: block !important;  Keeps the space for transition */
+            pointer-events: none; /* Prevent interaction */
+        }
+
+
+}
+
+@media (min-width: 768px) {
+    .collapse-horizontal {
+        transform: none !important;
+        transition: none !important;
+        position: static !important;
+        height: auto !important;
+        pointer-events: auto !important;
+    }
+}
