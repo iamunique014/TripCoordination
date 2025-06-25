@@ -122,21 +122,24 @@ footer {
         position: fixed;
         top: 56px;
         left: 0;
-        height: 100vh;
+        height: 92vh;
         width: 250px;
         background-color: #f8f9fa;
         z-index: 1030;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
         transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
         .collapse-horizontal.show {
+            opacity: 1;
             transform: translateX(0);
         }
 
         .collapse-horizontal:not(.show) {
             pointer-events: none; /* Prevent interaction */
+            opacity: 0;
         }
 
 
