@@ -1,7 +1,59 @@
 ﻿@* _Sidebar.cshtml *@
 
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
-<div class="menu rounded">
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-warning border-end min-vh-100" style="width: 250px;">
+        <h5 class="mb-3">Dashboard</h5>
+        <ul class="nav nav-pills flex-column mb-auto">
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="Create">Create Trip</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="Index">All Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="User" asp-action="Manage">Manage Users</a>
+                </li>
+            }
+            else if (User.IsInRole("Organizer"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="MyTrips">My Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="Create">Create Trip</a>
+                </li>
+            }
+            else if (User.IsInRole("Student"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="Booking">Book Trip</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="MyTrips">My Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Profile" asp-action="Index">Profile</a>
+                </li>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="Search">Search Trips</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+
+@* <div class="menu rounded">
     @if (User.IsInRole("Admin")){
         <a href="@Url.Action("AdminDashboard", "Admin")">
             Dashboard
@@ -37,9 +89,53 @@
     }
 
    
-</div>
+</div> *@
 
-<style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <style>
     .menu {
         position: fixed;
         width: 250px;
@@ -69,4 +165,4 @@
     }
 
 
-</style>
+</style> *@

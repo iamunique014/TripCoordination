@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Create Trip";
 }
-<div class="">
+<div class="bg-light">
     <h2>Create a New Trip</h2>
 
     <form asp-action="CreateTrip" method="post" class="needs-validation" novalidate>
@@ -12,7 +12,7 @@
             <span asp-validation-for="DepartureDate" class="text-danger"></span>
         </div>
 
-        <!-- Select2 Multi-select for Towns -->
+        <!-- Select2 Multi-select for Towns  -->
         <div class="mb-3 form-group col-md-4">
             <label for="SelectedTownIds" class="form-label">Select Drop-Off Locations</label>
             <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="form-select" multiple="multiple" style="width:100%;">
