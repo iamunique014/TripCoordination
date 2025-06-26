@@ -5,18 +5,18 @@
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info mt-5">
+    <div class="alert alert-info mt-3">
         No trips available at the moment. Please check back later.
     </div>
 }
 else
 {
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-3">
         @foreach (var tripListing in Model)
-        {           
-            <div class="col-md-10 mb-4">
-                <div class="card h-100">
+        {
+            <div class="col-md-8 mb-4">
+                <div class="card-container">
                     <div class="card-body">
                         <h5 class="card-title">Organizer: @tripListing.Name </h5>
                         <p class="card-text">
@@ -25,10 +25,8 @@ else
                             <strong>Seats Available: @tripListing.Seats</strong>
                         </p>
                     </div>
-                    <div class="card-footer text-center">
-                        @* <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a> *@
-                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary">Join Trip @tripListing.TripID </a>
-                       @*  <a asp-controller="Trip" asp-action="TripDetails"  class="btn btn-primary">Join Trip</a> *@
+                    <div class="card-footer text-center">    
+                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-25">Join Trip @tripListing.TripID </a>
                     </div>
                 </div>
             </div>

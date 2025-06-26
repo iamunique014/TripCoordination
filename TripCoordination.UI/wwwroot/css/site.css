@@ -163,7 +163,7 @@
     margin-bottom: 2rem;
 }
 
-.input-control, #SelectedTownIds{
+.input-control{
     --dutch-white: #d6d6b1;
     --battleship-gray: #878472;
     background-color: var(--dutch-white);
@@ -178,6 +178,30 @@
     color: var(--drab-dark-brown);
     margin-bottom: .5rem;
 }
+
+/*============================================*/
+/*             TripListing styles             */
+/*============================================*/
+
+.card-container {
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    background-color: var(--dutch-white);
+    border-radius: 1rem;
+    border: .08rem solid;
+    border-color: var(--drab-dark-brown);
+    box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
+}
+
+.card-container:hover{
+    border-color: var(--flame);
+}
+
+.card-body {
+    --drab-dark-brown: #494331;
+    color: var(--drab-dark-brown);
+}
+
 /*============================================*/
 /*               Footer styling               */
 /*============================================*/
