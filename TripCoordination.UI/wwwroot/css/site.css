@@ -19,6 +19,11 @@
     /* You can define additional gradient variables as needed */
 }
 
+.body {
+    --dutch-white: #d6d6b1;
+    background: var(--dutch-white)
+}
+
 .background-container {
     --gradient-right: linear-gradient(90deg, var(--dutch-white-rgba), var(--battleship-gray-rgba));
     --flame: #de541e;
