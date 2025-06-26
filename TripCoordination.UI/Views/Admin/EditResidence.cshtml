@@ -3,39 +3,46 @@
     ViewData["Title"] = "Edit Residence";
 }
 
-<h3>Update Residence</h3>
+<div class="page-title p-3 mt-3">
+    <h3 >Edit Residence Information</h3>
+</div>
 
-@* <a href="/Person/DisplayAll" class="my-2 btn btn-primary">Display All</a> *@
+<div class="form-container p-3">
 
-<form asp-action="EditResidence" method="post">
-    <input asp-for="ResidenceID" type="hidden" class="form-control">
+    @* <a href="/Person/DisplayAll" class="my-2 btn btn-primary">Display All</a> *@
 
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Name</label>
-        <input asp-for="Name" type="text" class="form-control">
+    <form asp-action="EditResidence" method="post">
+        <input asp-for="ResidenceID" type="hidden" class="form-control">
 
-        <span class="text-danger" asp-validation-for="Name"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Address" class="form-label">
-            Address
-        </label>
-        <textarea class="form-control" asp-for="Address" rows="3"></textarea>
-
-        <span class="text-danger" asp-validation-for="Address"></span>
-    </div>
-
-    @if (TempData["msg"] != null)
-    {
         <div class="mb-3">
-            @TempData["msg"]
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" type="text" class="form-control">
+
+            <span class="text-danger" asp-validation-for="Name"></span>
         </div>
-    }
 
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">
+                Address
+            </label>
+            <textarea class="form-control" asp-for="Address" rows="3"></textarea>
 
-</form>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+
+        @if (TempData["msg"] != null)
+        {
+            <div class="mb-3">
+                @TempData["msg"]
+            </div>
+        }
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+    </form>
+</div>
+
+
 
