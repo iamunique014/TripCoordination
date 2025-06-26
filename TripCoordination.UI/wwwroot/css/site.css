@@ -173,6 +173,11 @@
     padding: 1rem;
 }
 
+.label-control {
+    --drab-dark-brown: #494331;
+    color: var(--drab-dark-brown);
+    margin-bottom: .5rem;
+}
 /*============================================*/
 /*               Footer styling               */
 /*============================================*/
