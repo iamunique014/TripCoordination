@@ -16,16 +16,16 @@
 
         <div class="mb-3">
             <label asp-for="Name" class="form-label">Name</label>
-            <input asp-for="Name" type="text" class="form-control">
+            <input asp-for="Name" type="text" class="input-control">
 
             <span class="text-danger" asp-validation-for="Name"></span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 d-flex flex-column">
             <label asp-for="Address" class="form-label">
                 Address
             </label>
-            <textarea class="form-control" asp-for="Address" rows="3"></textarea>
+            <textarea class="input-control" asp-for="Address" rows="3"></textarea>
 
             <span class="text-danger" asp-validation-for="Address"></span>
         </div>
