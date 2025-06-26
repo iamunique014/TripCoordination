@@ -7,6 +7,40 @@
     <h3>Confirm Trip Details and join</h3>
 </div>
 
+<div class="form-container p-3">
+    <form asp-action="JoinTrip" method="post">
+
+        <input type="hidden" asp-for="TripID" class="form-control" />
+        <input type="hidden" asp-for="TownID" class="form-control" />
+
+        <div class="mb-3 col-md-4">
+            <label asp-for="JoiningFirstName" class="form-label">First Name</label>
+            <input asp-for="JoiningFirstName" class="form-control" />
+            <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-md-4">
+            <label asp-for="JoiningLastName" class="form-label">Last Name</label>
+            <input asp-for="JoiningLastName" class="form-control" />
+            <span asp-validation-for="JoiningLastName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-md-4">
+            <label asp-for="PickUpPoint" class="form-label">PickUp Location</label>
+            <input asp-for="PickUpPoint" class="form-control" />
+            <span asp-validation-for="PickUpPoint" class="text-danger"></span>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary w-50">Join Trip</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
 
 <div class="card">
     <div class="card-header">
@@ -23,31 +57,7 @@
                 </div>
                 <div class="col-md-6">
 
-                    <form asp-action="JoinTrip" method="post">
-
-                        <input type="hidden" asp-for="TripID" class="form-control" />
-                        <input type="hidden" asp-for="TownID" class="form-control" />
-
-                        <div class="mb-3 form-group col-md-4">
-                            <label asp-for="JoiningFirstName" class="form-label">First Name</label>
-                            <input asp-for="JoiningFirstName" class="form-control" />
-                            <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3 form-group col-md-4">
-                            <label asp-for="JoiningLastName" class="form-label">Last Name</label>
-                            <input asp-for="JoiningLastName" class="form-control" />
-                            <span asp-validation-for="JoiningLastName" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3 form-group col-md-4">
-                            <label asp-for="PickUpPoint" class="form-label">PickUp Location</label>
-                            <input asp-for="PickUpPoint" class="form-control" />
-                            <span asp-validation-for="PickUpPoint" class="text-danger"></span>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Join Trip</button>
-                    </form>
+                    
 
                 </div>
             </div>
