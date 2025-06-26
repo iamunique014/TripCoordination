@@ -7,25 +7,25 @@
     <h3>Confirm Trip Details</h3>
 </div>
 
-<div class="form-container p-3">
+<div class="form-container p-3 d-flex justify-content-between">
     <form asp-action="JoinTrip" method="post">
 
         <input type="hidden" asp-for="TripID" class="form-control" />
         <input type="hidden" asp-for="TownID" class="form-control" />
 
-        <div class="mb-3 col-md-4">
+        <div class="mb-3">
             <label asp-for="JoiningFirstName" class="label-control">First Name</label>
             <input asp-for="JoiningFirstName" class="input-control" />
             <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
         </div>
 
-        <div class="mb-3 col-md-4">
+        <div class="mb-3">
             <label asp-for="JoiningLastName" class="label-control">Last Name</label>
             <input asp-for="JoiningLastName" class="input-control" />
             <span asp-validation-for="JoiningLastName" class="text-danger"></span>
         </div>
 
-        <div class="mb-3 col-md-4">
+        <div class="mb-3">
             <label asp-for="PickUpPoint" class="label-control">PickUp Location</label>
             <input asp-for="PickUpPoint" class="input-control" />
             <span asp-validation-for="PickUpPoint" class="text-danger"></span>
@@ -35,32 +35,14 @@
             <button type="submit" class="btn btn-primary w-50">Join Trip</button>
         </div>
     </form>
+
+    <div class="trip-details">
+        <p><strong>Date:</strong> @Model.DepartureDate</p>
+        <p><strong>Destination:</strong> @Model.DestinationName: @Model.TownID</p>
+        <p><strong>Available Seats:</strong> @Model.Seats</p>
+        <p><strong>Organizer:</strong> @Model.CreatorFirstName @Model.CreatorLastName</p>
+    </div>
+
 </div>
 
 
-
-
-
-
-<div class="card">
-    <div class="card-header">
-        
-    </div>
-    <div class="card-body">
-        <div class="conatiner">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <p><strong>Date:</strong> @Model.DepartureDate</p>
-                    <p><strong>Destination:</strong> @Model.DestinationName: @Model.TownID</p>
-                    <p><strong>Available Seats:</strong> @Model.Seats</p>
-                    <p><strong>Organizer:</strong> @Model.CreatorFirstName @Model.CreatorLastName</p>
-                </div>
-                <div class="col-md-6">
-
-                    
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
