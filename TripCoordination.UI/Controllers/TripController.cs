@@ -48,7 +48,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> TripListing(TripListingViewModelUI model)
         {
-
+            ViewData["ShowSidebar"] = true;
             if (ModelState.IsValid)
             {
                 try
@@ -113,6 +113,7 @@ namespace TripCoordination.Controllers
         [HttpGet]
         public async Task<IActionResult> TripDetails(int tripID, int townID)
         {
+            ViewData["ShowSidebar"] = true;
             var tripData = new Trip
             {
                 TripID = tripID,
@@ -150,7 +151,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> JoinTrip(TripDetailsViewModelUI model)
         {
-
+  
             var userData = new User
             {
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
