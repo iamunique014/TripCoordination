@@ -29,20 +29,65 @@
     height: 100vh;
 }
 
+.ColorOne{
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background: var(--black-olive);
+}
+
+.ColorTwo {
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background: var(--dutch-white);
+}
+
+.ColorThree {
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background: var(--battleship-gray);
+}
+
+.ColorFour {
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background: var(--drab-dark-brown)
+}
+
 .form-container{
     background: var(--battleship-gray);
 }
 
 
-.nav-link {
-    color: var(--battleship-gray);
+/*============================================*/
+/*               Navbar styles                */
+/*============================================*/
+.navbar {
+    --drab-dark-brown: #494331;
+    background: var(--drab-dark-brown);
 }
 
-    .nav-link.active,
-    .nav-link:hover {
-        color: var(--flame);
-        background-color: var(--gradient-top); /* Example usage of gradient */
-    }
+.navbar-brand span {
+    --flame: #de541e;
+    color: var(--flame);
+}
+
+.nav-item .nav-link {
+    --dutch-white: #d6d6b1;
+    color: var(--dutch-white);
+}
+
+.nav-link.active, .nav-link:hover {
+    --flame: #de541e;
+    color: var(--flame);
+}
 
 /* Footer styling */
 footer {
