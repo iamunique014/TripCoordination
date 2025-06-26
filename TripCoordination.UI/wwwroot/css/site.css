@@ -89,6 +89,26 @@
     color: var(--flame);
 }
 
+
+/*============================================*/
+/*               Sidebar styles                */
+/*============================================*/
+
+.side-menu {
+    --black-olive: #3f3f37;
+    background: var(--black-olive);
+    height: 92vh;
+}
+
+    .side-menu .nav-item {
+        --dutch-white: #d6d6b1;
+        color: var(--dutch-white)
+    }
+        .side-menu .nav-item:active, .side-menu .nav-item:hover {
+            --flame: #de541e;
+            color: var(--flame)
+        }
+
 /* Footer styling */
 footer {
     --drab-dark-brown: #494331;
@@ -188,8 +208,4 @@ footer {
         }
 
 
-}
-
-.sideMenu{
-    height: 92vh;
 }
