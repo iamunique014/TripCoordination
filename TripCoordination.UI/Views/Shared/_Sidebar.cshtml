@@ -6,15 +6,15 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 justify-content-between bg-warning border-end sideMenu" style="width: 250px;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 justify-content-between border-end side-menu" style="width: 250px;">
         @* <h5 class="mb-3">Dashboard</h5> *@
         <ul class="nav nav-pills flex-column mb-auto">
             @if (User.IsInRole("Admin"))
             {
-                <li class= "nav-item ColorOne">
+                <li class= "nav-item">
                     <a class="nav-link" asp-controller="Admin" asp-action="AdminDashboard">Dashboard black-olive</a>
                 </li>
-                <li class="nav-item ColorTwo">
+                <li class="nav-item">
                     <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip dutch-white</a>
                 </li>
                 <li class="nav-item ColorThree">
