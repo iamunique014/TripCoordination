@@ -4,7 +4,7 @@
 }
 
 <div class="page-title p-3 mt-3 label-control">
-    <h3>Confirm Trip Details and join</h3>
+    <h3>Confirm Trip Details</h3>
 </div>
 
 <div class="form-container p-3">
@@ -14,20 +14,20 @@
         <input type="hidden" asp-for="TownID" class="form-control" />
 
         <div class="mb-3 col-md-4">
-            <label asp-for="JoiningFirstName" class="form-label">First Name</label>
-            <input asp-for="JoiningFirstName" class="form-control" />
+            <label asp-for="JoiningFirstName" class="label-control">First Name</label>
+            <input asp-for="JoiningFirstName" class="input-control" />
             <span asp-validation-for="JoiningFirstName" class="text-danger"></span>
         </div>
 
         <div class="mb-3 col-md-4">
-            <label asp-for="JoiningLastName" class="form-label">Last Name</label>
-            <input asp-for="JoiningLastName" class="form-control" />
+            <label asp-for="JoiningLastName" class="label-control">Last Name</label>
+            <input asp-for="JoiningLastName" class="input-control" />
             <span asp-validation-for="JoiningLastName" class="text-danger"></span>
         </div>
 
         <div class="mb-3 col-md-4">
-            <label asp-for="PickUpPoint" class="form-label">PickUp Location</label>
-            <input asp-for="PickUpPoint" class="form-control" />
+            <label asp-for="PickUpPoint" class="label-control">PickUp Location</label>
+            <input asp-for="PickUpPoint" class="input-control" />
             <span asp-validation-for="PickUpPoint" class="text-danger"></span>
         </div>
 
