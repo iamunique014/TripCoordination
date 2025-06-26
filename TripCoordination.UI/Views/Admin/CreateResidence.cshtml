@@ -3,37 +3,42 @@
     ViewData["Title"] = "Add";
 }
 
-<h3>Add Residence</h3>
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Create New Residence</h3>
+</div>
 
-<a href="/Admin/DisplayAll" class="my-2 btn btn-primary">Display All</a>
+<div class="form-container p-3">
 
-<form asp-action="CreateResidence" method="post">
+    <form asp-action="CreateResidence" method="post">
 
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Name</label>
-        <input asp-for="Name" type="text" class="form-control">
-
-        <span class="text-danger" asp-validation-for="Name"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Address" class="form-label">
-            Address
-        </label>
-        <input asp-for="Address" type="text" class="form-control">
-        <span class="text-danger" asp-validation-for="Address"></span>
-    </div>
-
-    @if (TempData["msg"] != null)
-    {
         <div class="mb-3">
-            @TempData["msg"]
+            <label asp-for="Name" class="label-control">Name</label>
+            <input asp-for="Name" type="text" class="input-control">
+
+            <span class="text-danger" asp-validation-for="Name"></span>
         </div>
-    }
 
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="label-control">
+                Address
+            </label>
+            <textarea asp-for="Address" class="input-control" rows="3"></textarea>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
 
-</form>
+        @if (TempData["msg"] != null)
+        {
+            <div class="mb-3">
+                @TempData["msg"]
+            </div>
+        }
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-50">Save</button>
+        </div>
+
+    </form>
+</div>
+
+
 
