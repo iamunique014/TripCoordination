@@ -2,20 +2,23 @@
 @{
     ViewData["Title"] = "Create Trip";
 }
-<div class="form-container">
-    <h2>Create a New Trip</h2>
 
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Create New Trip</h3>
+</div>
+
+<div class="form-container p-3">
     <form asp-action="CreateTrip" method="post" class="needs-validation" novalidate>
-        <div class="mb-3 form-group col-md-2">
-            <label asp-for="DepartureDate" class="form-label">Departure Date</label>
-            <input asp-for="DepartureDate" class="form-control" type="datetime-local" step="60" />
+        <div class="mb-3">
+            <label asp-for="DepartureDate" class="label-control">Departure Date</label>
+            <input asp-for="DepartureDate" class="input-control" type="datetime-local" step="60" />
             <span asp-validation-for="DepartureDate" class="text-danger"></span>
         </div>
 
         <!-- Select2 Multi-select for Towns  -->
-        <div class="mb-3 form-group col-md-4">
-            <label for="SelectedTownIds" class="form-label">Select Drop-Off Locations</label>
-            <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="form-select" multiple="multiple" style="width:100%;">
+        <div class="mb-3">
+            <label for="SelectedTownIds" class="label-control">Select Drop-Off Locations</label>
+            <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="input-control" multiple="multiple">
                 @foreach (var town in Model.AvailableTowns)
                 {
                     <option value="@town.Value">@town.Text</option>
@@ -24,13 +27,14 @@
             <span asp-validation-for="SelectedTownIds" class="text-danger"></span>
         </div>
 
-        <div class="mb-3 d-block form-group">
-            <label asp-for="Seats" class="form-label">Seats</label>
-            <input asp-for="Seats" type="number" class="text-center" />
+        <div class="mb-3">
+            <label asp-for="Seats" class="label-control">Seats</label>
+            <input asp-for="Seats" type="number" class="input-control" />
             <span asp-validation-for="Seats" class="text-danger"></span>
         </div>
-
-        <button type="submit" class="btn btn-primary">Create Trip</button>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-50">Create Trip</button>
+        </div>
     </form>
 </div>
 

@@ -163,7 +163,7 @@
     margin-bottom: 2rem;
 }
 
-.input-control {
+.input-control, #SelectedTownIds{
     --dutch-white: #d6d6b1;
     --battleship-gray: #878472;
     background-color: var(--dutch-white);
