@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit Residence";
 }
 
-<div class="page-title p-3 mt-3">
+<div class="page-title p-3 mt-3 label-control">
     <h3 >Edit Residence Information</h3>
 </div>
 
@@ -15,14 +15,14 @@
         <input asp-for="ResidenceID" type="hidden" class="form-control">
 
         <div class="mb-3">
-            <label asp-for="Name" class="form-label">Name</label>
+            <label asp-for="Name" class="label-control">Name</label>
             <input asp-for="Name" type="text" class="input-control">
 
             <span class="text-danger" asp-validation-for="Name"></span>
         </div>
 
         <div class="mb-3 d-flex flex-column">
-            <label asp-for="Address" class="form-label">
+            <label asp-for="Address" class="label-control">
                 Address
             </label>
             <textarea class="input-control" asp-for="Address" rows="3"></textarea>
