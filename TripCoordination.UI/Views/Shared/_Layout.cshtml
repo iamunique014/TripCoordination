@@ -31,13 +31,6 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Trip" asp-action="TripListing">Trips</a>
                     </li>
-
-                    @if (User.IsInRole("Admin") || User.IsInRole("Organizer"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
-                        </li>
-                    }
                     
                 </ul>
                 <partial name="_LoginPartial" /> 
@@ -60,15 +53,6 @@
                 @RenderBody()
             </main>
             
-            
-            @*   <div class="col-2">
-                @await Html.PartialAsync("_Sidebar")
-            </div>
-            <div class="col-10">
-                <main role="main" class="pb-3 bg-light">
-                    @RenderBody()
-                </main> 
-            </div>*@
         </div>
         
     }
