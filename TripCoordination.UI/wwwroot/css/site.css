@@ -149,15 +149,24 @@
 /*                Form styles                 */
 /*============================================*/
 
-.form-container{
 
+
+.form-container, .page-title {
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background-color: var(--dutch-white);
+    border-radius: 1rem;
+    box-shadow: 4px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
 
 
 /*============================================*/
 /*               Footer styling               */
 /*============================================*/
-
 .footer {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
