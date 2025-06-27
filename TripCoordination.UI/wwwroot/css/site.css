@@ -100,7 +100,10 @@
 /*               Sidebar styles               */
 /*============================================*/
 .sidebar-wrapper {
+    --black-olive: #3f3f37;
+    background: var(--black-olive);
     width: 250px;
+    height: 92vh;
 }
 
 .side-menu {
