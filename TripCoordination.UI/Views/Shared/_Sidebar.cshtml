@@ -42,6 +42,36 @@
                     <a class="nav-link" asp-controller="Trip" asp-action="Create">Create Trip</a>
                 </li>
             }
+            else if (User.IsInRole("Student"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Student" asp-action="UserDashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="MyTrips">My Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Requests</a>
+                </li>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Student" asp-action="UserDashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Trip" asp-action="MyTrips">My Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Requests</a>
+                </li>
+            }
          
         </ul>
         <div class="">
