@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,7 +42,7 @@
     </nav>
 
     <!-- Main Content -->
-    @if (ViewData["ShowSidebar"] != null && (bool)ViewData["ShowSidebar"])
+    @if (ViewData["ShowSidebar"] != null && (bool)ViewData["ShowSidebar"] && SignInManager.IsSignedIn(User))
     {
         <div class="row">
          
