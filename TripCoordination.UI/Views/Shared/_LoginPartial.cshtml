@@ -13,9 +13,16 @@
                 <i class="bi bi-person-circle"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Action</a></li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a id="manage" class="dropdown-item" asp-controller="Admin" asp-action="AdminDashboard" title="Dashboard">Dashboard</a></li>
+                }
+                else if(User.IsInRole("Organizer"))
+                {
+                    <li><a id="manage" class="dropdown-item" asp-controller="TripCreator" asp-action="OrganizerDashboard" title="Dashboard">Dashboard</a></li>
+                }
                 <li><a id="manage" class="dropdown-item" asp-controller="Profile" asp-action="CompleteProfile" title="Manage">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <form id="logoutForm" class="form-inline dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
