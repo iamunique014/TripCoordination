@@ -16,7 +16,7 @@
 <body class="d-flex flex-column min-vh-100 body">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark">
-        <div class="container">
+        <div class="container-fluid">
             <div class="d-flex align-items-center">
                 @if (SignInManager.IsSignedIn(User) && (ViewData["HideSidebarToggle"] as bool? != true))
                 {
