@@ -95,6 +95,14 @@
         color: var(--flame);
     }
 
+.btn-flame i {
+    --flame: #de541e;
+    --dutch-white: #d6d6b1;
+    color: var(--dutch-white);
+
+}
+
+
 
 /*============================================*/
 /*               Sidebar styles               */
