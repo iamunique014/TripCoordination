@@ -34,6 +34,7 @@ namespace TripCoordination.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewData["HideSidebarToggle"] = true;
             var towns = await _townRepository.GetAllAsync();
 
             ViewBag.Destination = towns;
