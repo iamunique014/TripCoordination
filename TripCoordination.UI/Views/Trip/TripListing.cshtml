@@ -21,12 +21,12 @@ else
                         <h5 class="card-title">Organizer: @tripListing.Name </h5>
                         <p class="card-text">
                             <strong>Date: </strong>@tripListing.DepartureDate.ToLongDateString()<br />
-                            <strong>Destination: </strong>@tripListing.DestinationName : @tripListing.DestinationID<br />
+                            <strong>Destination: </strong>@tripListing.DestinationName<br />
                             <strong>Seats Available: @tripListing.Seats</strong>
                         </p>
                     </div>
                     <div class="card-footer text-center">    
-                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-25">Join Trip @tripListing.TripID </a>
+                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-25">Join Trip</a>
                     </div>
                 </div>
             </div>
