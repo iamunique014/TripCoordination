@@ -1,1 +1,23 @@
-﻿
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripWithDestinationsViewModel>
+
+<h2>Trip Details</h2>
+@foreach(var trip in Model)
+{
+    <p><strong>Departure:</strong> @trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+    <p><strong>Organizer:</strong> @trip.CreatorName</p>
+    <p><strong>Available Seats:</strong> @trip.Seats</p>
+
+    <h4>Destinations</h4>
+    @foreach (var dest in trip.Destinations)
+    {
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>@dest.DestinationName</span>
+            <form method="post" asp-action="RemoveDestination" asp-controller="Trip">
+                <input type="hidden" name="tripDestinationId" value="@dest.TripDestinationID" />
+                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+            </form>
+        </div>
+    }
+}
+
+
