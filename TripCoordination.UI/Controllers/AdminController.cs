@@ -233,6 +233,13 @@ namespace TripCoordination.Controllers
             return View(trip);
         }
 
+        public async Task<IActionResult> EditTripDestinations(int tripID)
+        {
+            var trip = await _tripRepository.GetTripWithDestinationsAsync(tripID);
+            return View(trip);  // this returns a single TripWithDestinationsViewModel
+        }
+
+
         //[HttpGet]
         //public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
         //{
