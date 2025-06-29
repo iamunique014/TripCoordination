@@ -224,77 +224,88 @@ namespace TripCoordination.Controllers
         //}
 
         [HttpGet]
-        public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
+        public async Task<IActionResult> ManageTrips()
         {
-            //This is important so that the query doesn't return null.
-            string date = "1/2/1754";
             ViewData["ShowSidebar"] = true;
-            //if (ModelState.IsValid)
-            //{
 
-            try
-            {
-                // map a new Trip to find
-                var trip = new Trip
-                {
-                    //CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
-                    DepartureDate = DateTime.Parse(date)
-                    //TownID = model.DestinationID
-                };
+            var trip = await _tripRepository.GetAllAsync();
 
-
-                // Find the Trip using repository pattern
-                var availableTrips = await _tripRepository.FindTripsAsync(model, trip);
-
-                var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
-                {
-                    TripID = tripListing.TripID,
-                    DestinationID = tripListing.DestinationID,
-                    Name = tripListing.Surname + " " + tripListing.Name,
-                    Surname = tripListing.Surname,
-                    DestinationName = tripListing.DestinationName,
-                    DepartureDate = tripListing.DepartureDate,
-                    Seats = tripListing.Seats
-                    // Map additional properties here
-                }).ToList();
-
-                //return RedirectToAction("TripListing");
-                return View(viewModel);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception details for debugging purposes.
-                //_logger.LogError(ex, "Error occurred while creating trip.");
-                // Add a generic error message to the ModelState.
-                ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
-                Console.WriteLine(ex.ToString());
-            }
-
-            //}
-
-
-
-
-            ////log ModelState errors for additional debugging
-            //foreach (var state in ModelState)
-            //{
-            //    foreach (var error in state.Value.Errors)
-            //    {
-            //        //_logger.LogDebug($"ModelState error in '{state.Key}': {error.ErrorMessage}");
-            //        Console.WriteLine("{0}", error.ErrorMessage);
-            //    }
-            //}
-
-            //// Reloading available towns if the model state is invalid
-            //var towns = await _townRepository.GetAllAsync();
-            //model.AvailableTowns = towns.Select(t => new SelectListItem
-            //{
-            //    Value = t.TownID.ToString(),
-            //    Text = t.Name
-            //}).ToList();
-
-            return View(new List<TripListingViewModelUI>());
+            return View(trip);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
+        //{
+        //    //This is important so that the query doesn't return null.
+        //    string date = "1/2/1754";
+        //    ViewData["ShowSidebar"] = true;
+        //    //if (ModelState.IsValid)
+        //    //{
+
+        //    try
+        //    {
+        //        // map a new Trip to find
+        //        var trip = new Trip
+        //        {
+        //            //CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
+        //            DepartureDate = DateTime.Parse(date)
+        //            //TownID = model.DestinationID
+        //        };
+
+
+        //        // Find the Trip using repository pattern
+        //        var availableTrips = await _tripRepository.FindTripsAsync(model, trip);
+
+        //        var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
+        //        {
+        //            TripID = tripListing.TripID,
+        //            DestinationID = tripListing.DestinationID,
+        //            Name = tripListing.Surname + " " + tripListing.Name,
+        //            Surname = tripListing.Surname,
+        //            DestinationName = tripListing.DestinationName,
+        //            DepartureDate = tripListing.DepartureDate,
+        //            Seats = tripListing.Seats
+        //            // Map additional properties here
+        //        }).ToList();
+
+        //        //return RedirectToAction("TripListing");
+        //        return View(viewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception details for debugging purposes.
+        //        //_logger.LogError(ex, "Error occurred while creating trip.");
+        //        // Add a generic error message to the ModelState.
+        //        ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
+        //        Console.WriteLine(ex.ToString());
+        //    }
+
+        //    //}
+
+
+        //    ////log ModelState errors for additional debugging
+        //    //foreach (var state in ModelState)
+        //    //{
+        //    //    foreach (var error in state.Value.Errors)
+        //    //    {
+        //    //        //_logger.LogDebug($"ModelState error in '{state.Key}': {error.ErrorMessage}");
+        //    //        Console.WriteLine("{0}", error.ErrorMessage);
+        //    //    }
+        //    //}
+
+        //    //// Reloading available towns if the model state is invalid
+        //    //var towns = await _townRepository.GetAllAsync();
+        //    //model.AvailableTowns = towns.Select(t => new SelectListItem
+        //    //{
+        //    //    Value = t.TownID.ToString(),
+        //    //    Text = t.Name
+        //    //}).ToList();
+
+        //    return View(new List<TripListingViewModelUI>());
+        //}
+
+
+
 
         public async Task<IActionResult> CreateTrip()
         {
