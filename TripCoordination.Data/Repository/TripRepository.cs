@@ -75,7 +75,7 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                string query = "sp_Get_Trip_With_Destinations";
+                string query = "sp_Find_Trips";
                 return await _db.GetData<TripWithDestinationsViewModel, dynamic>(query, new { tripID });
             }
             catch (Exception ex)
