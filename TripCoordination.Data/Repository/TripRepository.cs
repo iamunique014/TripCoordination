@@ -58,7 +58,7 @@ namespace TripCoordination.Data.Repository
         }
         public async Task<IEnumerable<Trip>> GetAllAsync()
         {
-            string query = "sp_Find_Trips";
+            string query = "sp_GetAll_Trips";
             return await _db.GetData<Trip, dynamic>(query, new { });
         }
 
