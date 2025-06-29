@@ -8,7 +8,7 @@ namespace TripCoordination.Common.ViewModel
 {
     public class TripDestinationViewModel
     {
-        public int TripDestinationID { get; set; }  // ID from TripDestinationTowns table
+        public int TripDestinationTownID { get; set; }  // ID from TripDestinationTowns table
         public int TownID { get; set; }
         public string DestinationName { get; set; }
     }
