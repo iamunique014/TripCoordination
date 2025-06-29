@@ -70,6 +70,12 @@
     background: var(--battleship-gray);
 }
 
+.text-color-primary {
+    --drab-dark-brown: #494331;
+    --flame: #de541e;
+    color: var(--flame);
+}
+
 
 /*============================================*/
 /*               Navbar styles                */
