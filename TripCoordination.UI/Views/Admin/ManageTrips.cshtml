@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TripCoordination.Data.Models.Domain.Trip>
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripViewModel>
 @{
     ViewData["Title"] = "Manage Trips";
 }
@@ -26,7 +26,7 @@
                 {
                     <tr>
                          @* <td>@trip.TripID</td>  *@
-                        <td>@trip.Name</td>
+                        <td>@trip.CreatorName @trip.CreatorSurname</td>
                         <td>@trip.DepartureDate</td>
                         <td>@trip.Seats</td>
                         <td>
