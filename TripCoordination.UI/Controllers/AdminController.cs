@@ -235,6 +235,7 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> TripWithDestinations(int tripID)
         {
+            ViewData["ShowSidebar"] = true;
             var trip = await _tripRepository.GetTripWithDestinations(tripID);
             return View(trip);  // this returns a single TripWithDestinationsViewModel
         }
