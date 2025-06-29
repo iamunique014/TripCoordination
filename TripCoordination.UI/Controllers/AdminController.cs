@@ -233,7 +233,7 @@ namespace TripCoordination.Controllers
             return View(trip);
         }
 
-        public async Task<IActionResult> EditTripDestinations(int tripID)
+        public async Task<IActionResult> TripWithDestinations(int tripID)
         {
             var trip = await _tripRepository.GetTripWithDestinations(tripID);
             return View(trip);  // this returns a single TripWithDestinationsViewModel
