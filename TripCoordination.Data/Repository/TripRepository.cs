@@ -56,10 +56,19 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<IEnumerable<Trip>> GetAllAsync()
+        public async Task<IEnumerable<TripViewModel>> GetAllAsync()
         {
-            string query = "sp_GetAll_Trips";
-            return await _db.GetData<Trip, dynamic>(query, new { });
+            try
+            {
+                string query = "sp_GetAll_Trips";
+                return await _db.GetData<TripViewModel, dynamic>(query, new { });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<TripViewModel>();
+            }
         }
 
         public async Task<IEnumerable<TripListingViewModel>> FindTripsAsync(TripListingViewModel tripListing, Trip trip)
