@@ -226,6 +226,7 @@ namespace TripCoordination.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
         {
+            //This is important so that the query doesn't return null.
             string date = "1/2/1754";
             ViewData["ShowSidebar"] = true;
             //if (ModelState.IsValid)
