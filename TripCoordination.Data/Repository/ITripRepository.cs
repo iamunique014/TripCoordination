@@ -18,6 +18,7 @@ namespace TripCoordination.Data.Repository
         Task<Trip> GetByIdAsync(int tripID);
 
         Task<IEnumerable<TripViewModel>> GetAllAsync();
+        Task<IEnumerable<TripWithDestinationsViewModel>> GetTripWithDestinations(int tripID);
 
         Task<IEnumerable<TripListingViewModel>> FindTripsAsync(TripListingViewModel tripListing, Trip trip);
 
