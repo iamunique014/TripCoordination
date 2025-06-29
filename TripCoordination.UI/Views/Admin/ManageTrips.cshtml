@@ -18,6 +18,7 @@
                     <th>Creator</th>
                     <th>Depature Date</th>
                     <th>Seats</th>
+                    <th>IsFull</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                         <td>@trip.CreatorName @trip.CreatorSurname</td>
                         <td>@trip.DepartureDate</td>
                         <td>@trip.Seats</td>
+                        <td>@trip.IsFull</td>
                         <td>
                             <a href="/Trip/EditTrip?id=@trip.TripID" class="btn btn-success">Edit</a>
                             <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
