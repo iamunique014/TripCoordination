@@ -11,8 +11,8 @@ namespace TripCoordination.Common.ViewModel
         [Required(ErrorMessage = "Please Enter a pickUpPoint eg. Res Address")]
         public string PickUpLocation { get; set; }
         public DateTime DepartureDate { get; set; }
-        public string? Name { get; set; }
-        public string? Surname { get; set; }
+        public string? CreatorName { get; set; }
+        public string? CreatorSurname { get; set; }
         public string? DestinationName { get; set; }
         public int Seats { get; set; }
               

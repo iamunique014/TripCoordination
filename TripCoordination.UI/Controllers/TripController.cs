@@ -69,8 +69,8 @@ namespace TripCoordination.Controllers
                     {
                         TripID = tripListing.TripID,
                         DestinationID = tripListing.DestinationID,
-                        Name = tripListing.Surname + " " + tripListing.Name,
-                        Surname = tripListing.Surname,
+                        CreatorName = tripListing.CreatorSurname + " " + tripListing.CreatorName,
+                        CreatorSurname = tripListing.CreatorSurname,
                         DestinationName = tripListing.DestinationName,
                         DepartureDate = tripListing.DepartureDate,
                         Seats = tripListing.Seats
