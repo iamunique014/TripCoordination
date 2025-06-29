@@ -9,7 +9,7 @@ namespace TripCoordination.Common.ViewModel
     public class TripViewModel
     {
         public int TripID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public DateTime DepartureDate { get; set; }
         public int Seats { get; set; }
         public string CreatorName { get; set; }
