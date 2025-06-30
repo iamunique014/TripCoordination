@@ -294,6 +294,32 @@ namespace TripCoordination.Controllers
         }
 
 
+        //=========================================//
+        //      TripDestinationTownController      //
+        //=========================================//
+
+        [Authorize(Roles = "Admin, Organizer")]
+        public async Task<IActionResult> DeleteTripDestinationTown(int tripDestinationTownID, int tripID)
+        {
+            ViewData["ShowSidebar"] = true;
+
+            var result = await _tripDestinationTownRepository.DeleteDestinationTwonAsync(tripDestinationTownID);
+
+            if (!result)
+            {
+                TempData["Error"] = "Failed to remove destination!";
+            }
+            else
+            {
+                TempData["Succes"] ="Destination Deleted Succesfuly";
+            }
+
+                return RedirectToAction("TripWithDestinations", "Admin", new { tripID });
+        }
+
+
+
+
         //[HttpPost]
         //public async Task<IActionResult> CreateTrip(CreateTripViewModelUI model)
         //{
