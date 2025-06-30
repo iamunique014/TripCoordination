@@ -19,8 +19,8 @@
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span>@dest.DestinationName</span>
                 <form method="post" asp-action="DeleteTripDestinationTown" asp-controller="Trip">
-                    <input type="hidden" asp-for="@dest.TripDestinationTownID" />
-                   @*  <input type="hidden" name="tripDestinationId" value="@dest.TripDestinationTownID" /> *@
+                    <input type="hidden" name="tripDestinationTownID" value="@dest.TripDestinationTownID" />
+                    <input type="hidden" name="tripID" value="@trip.TripID" /> 
                     <button type="submit" class="btn btn-sm btn-danger">Remove</button>
                 </form>
             </div>
