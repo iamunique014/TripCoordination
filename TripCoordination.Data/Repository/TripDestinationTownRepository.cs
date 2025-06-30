@@ -43,7 +43,7 @@ namespace TripCoordination.Data.Repository
             catch (Exception ex)
             {
                 Console.WriteLine("Entered Exception: ");
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine("Failed to remove destination: " + ex.ToString());
                 return false;
             }
         }
