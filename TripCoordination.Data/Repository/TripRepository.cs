@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Domain;
+using TripCoordination.ViewModel;
 
 
 namespace TripCoordination.Data.Repository
@@ -56,10 +57,55 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<IEnumerable<Trip>> GetAllAsync()
+        public async Task<IEnumerable<TripViewModel>> GetAllAsync()
         {
-            string query = "sp_Find_Trips";
-            return await _db.GetData<Trip, dynamic>(query, new { });
+            try
+            {
+                string query = "sp_GetAll_Trips";
+                return await _db.GetData<TripViewModel, dynamic>(query, new { });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<TripViewModel>();
+            }
+        }
+
+        public async Task<IEnumerable<TripWithDestinationsViewModel>> GetTripWithDestinations(int tripID)
+        {
+            try
+            {
+                string query = "sp_Find_Trips";
+                var result = await _db.GetData<TripFlatRow, dynamic>(query, new { tripID });
+
+                var trips = result.GroupBy(r => r.TripID).Select(g => new TripWithDestinationsViewModel
+                {
+                    TripID = g.Key,
+                    DepartureDate = g.First().DepartureDate,
+                    CreatorName = $"{g.First().CreatorName} {g.First().CreatorSurname}",
+                    IsFull = g.First().IsFull,
+                    Seats = g.First().Seats,
+                    Destinations = g
+                .Where(d => d.DestinationID != null)
+                    .Select(d => new TripDestinationViewModel
+                    {
+                        TripDestinationTownID = d.TripDestinationTownID,
+                        TownID = d.DestinationID ?? 0,
+                        DestinationName = d.DestinationName
+                    }).ToList()
+                }).ToList();
+
+
+                return trips;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<TripWithDestinationsViewModel>();
+            }
         }
 
         public async Task<IEnumerable<TripListingViewModel>> FindTripsAsync(TripListingViewModel tripListing, Trip trip)

@@ -69,8 +69,8 @@ namespace TripCoordination.Controllers
                     {
                         TripID = tripListing.TripID,
                         DestinationID = tripListing.DestinationID,
-                        Name = tripListing.Surname + " " + tripListing.Name,
-                        Surname = tripListing.Surname,
+                        CreatorName = tripListing.CreatorSurname + " " + tripListing.CreatorName,
+                        CreatorSurname = tripListing.CreatorSurname,
                         DestinationName = tripListing.DestinationName,
                         DepartureDate = tripListing.DepartureDate,
                         Seats = tripListing.Seats
@@ -266,7 +266,32 @@ namespace TripCoordination.Controllers
             return View(viewModel);
 
         }
+        [Authorize(Roles = "Admin, Organizer")]
+        public async Task<IActionResult> DeleteTrip(int id)
+        {
+            ViewData["ShowSidebar"] = true;
 
+            var towns = await _townRepository.GetAllAsync();
+
+            ViewBag.Destination = towns;
+
+            var townSelectList = towns.Select(t => new SelectListItem
+            {
+                Value = t.TownID.ToString(),
+                Text = t.Name
+            }).ToList();
+
+
+
+            var viewModel = new CreateTripViewModelUI
+            {
+                AvailableTowns = townSelectList,
+                DepartureDate = DateTime.Now
+            };
+
+            return View(viewModel);
+
+        }
 
 
         //[HttpPost]
