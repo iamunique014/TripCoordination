@@ -37,7 +37,7 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                await _db.SaveData("sp_Remove_TripDestination", new { ID = tripDestinationTownID });
+                await _db.SaveData("sp_Remove_TripDestination", new { tripDestinationTownID });
                 return true;
             }
             catch (Exception ex)

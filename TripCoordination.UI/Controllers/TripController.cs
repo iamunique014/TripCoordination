@@ -299,7 +299,7 @@ namespace TripCoordination.Controllers
         //=========================================//
 
         [Authorize(Roles = "Admin, Organizer")]
-        public async Task<IActionResult> DeleteTripDestinationTown(int tripDestinationTownID)
+        public async Task<IActionResult> DeleteTripDestinationTown(int tripDestinationTownID, int tripID)
         {
             ViewData["ShowSidebar"] = true;
 
@@ -310,7 +310,7 @@ namespace TripCoordination.Controllers
                 TempData["Error"] = "Failed to remove destination!";
             }
 
-            return RedirectToAction("TripWithDestinations");
+            return RedirectToAction("TripWithDestinations", "Admin", new { tripID});
         }
 
 
