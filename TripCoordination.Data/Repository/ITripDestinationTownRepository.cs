@@ -11,7 +11,7 @@ namespace TripCoordination.Data.Repository
     {
         Task<bool> AddAsync(TripDestinationTown tripDestinationTown, Trip trip);
         Task<bool> UpdateAsync(TripDestinationTown tripDestinationTown);
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteDestinationTwonAsync(int tripDestinationTownID);
 
         Task<TripDestinationTown> GetByIdAsync(int id);
 
