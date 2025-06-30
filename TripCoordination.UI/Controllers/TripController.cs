@@ -309,8 +309,12 @@ namespace TripCoordination.Controllers
             {
                 TempData["Error"] = "Failed to remove destination!";
             }
+            else
+            {
+                TempData["Succes"] ="Destination Deleted Succesfuly";
+            }
 
-            return RedirectToAction("TripWithDestinations", "Admin", new { tripID});
+                return RedirectToAction("TripWithDestinations", "Admin", new { tripID });
         }
 
 
