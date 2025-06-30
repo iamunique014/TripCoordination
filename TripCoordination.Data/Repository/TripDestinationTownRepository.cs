@@ -33,15 +33,17 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteDestinationTwonAsync(int tripDestinationTownID)
         {
             try
             {
-                await _db.SaveData("sp_Delete_TripDestinationTown", new { ID = id });
+                await _db.SaveData("sp_Remove_TripDestination", new { tripDestinationTownID });
                 return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Entered Exception: ");
+                Console.WriteLine("Failed to remove destination: " + ex.ToString());
                 return false;
             }
         }
