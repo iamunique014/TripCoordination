@@ -16,9 +16,9 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> CompleteProfile()
         {
-            string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var profile = await _profileRepository.GetByIdAsync(UserID);
+            var profile = await _profileRepository.GetUserProfileAsync(userID);
 
             if(profile != null)
             {
@@ -59,7 +59,7 @@ namespace TripCoordination.Controllers
         {
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var profile = await _profileRepository.GetByIdAsync(UserID);
+            var profile = await _profileRepository.GetUserProfileAsync(UserID);
             return View(profile);
         }
 
