@@ -13,7 +13,7 @@ namespace TripCoordination.Data.Repository
         Task<bool> UpdateAsync(Profile profile);
         Task<bool> DeleteAsync(string id);
 
-        Task<Profile> GetByIdAsync(string id);
+        Task<Profile> GetUserProfileAsync(string userID);
 
         Task<IEnumerable<Profile>> GetAllAsync();
     }
