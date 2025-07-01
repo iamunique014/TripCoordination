@@ -8,6 +8,7 @@ using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Data;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
+using TripCoordination.Data.Services;
 using TripCoordination.ViewModel;
 
 
@@ -18,6 +19,7 @@ namespace TripCoordination.Controllers
     {
         private readonly ILogger<TripController> _logger;
 
+        private readonly IProfileService _profileService;
         private readonly ITripRepository _tripRepository;
         private readonly ITownRepository _townRepository;
         private readonly ITripDestinationTownRepository _tripDestinationTownRepository;
@@ -29,9 +31,10 @@ namespace TripCoordination.Controllers
         private readonly ApplicationDbContext _context;
        
 
-        public TripController(ILogger<TripController> logger, ApplicationDbContext context,ITripRepository tripRepository, ITownRepository townRepository, ITripDestinationTownRepository tripDestinationTownRepository)
+        public TripController(ILogger<TripController> logger, ApplicationDbContext context, IProfileService profileService,ITripRepository tripRepository, ITownRepository townRepository, ITripDestinationTownRepository tripDestinationTownRepository)
         {
             _logger = logger;
+            _profileService = profileService;
             _tripRepository = tripRepository;
             _townRepository = townRepository;
             _tripDestinationTownRepository = tripDestinationTownRepository;
@@ -166,6 +169,14 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> CreateTrip()
         {
             ViewData["ShowSidebar"] = true;
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!await _profileService.HasProfileAsync(userId))
+            {
+                TempData["Info"] = "Please complete your profile before creating a trip.";
+                return RedirectToAction("CompleteProfile", "Profile");
+            }
 
             var towns = await _townRepository.GetAllAsync();
 
