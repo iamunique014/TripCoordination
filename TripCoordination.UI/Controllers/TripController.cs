@@ -160,6 +160,13 @@ namespace TripCoordination.Controllers
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
+
+            if (!await _profileService.HasProfileAsync(userData.UserID))
+            {
+                TempData["Info"] = "Please complete your profile before creating a trip.";
+                return RedirectToAction("CompleteProfile", "Profile");
+            }
+
             var joinTrip = _tripRepository.JoinTrip(model, userData);
 
             return View();
