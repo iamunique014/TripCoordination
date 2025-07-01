@@ -1,6 +1,18 @@
 ﻿@model TripCoordination.Data.Models.Domain.Profile
 
-<div class="mt-5 background-container">
+@if (TempData["Info"] != null)
+{
+    <div class="alert alert-info alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Info"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="background-container">
     
     <div class="row">
         <form class="m-2 p-2" action="CompleteProfile" method="post">
