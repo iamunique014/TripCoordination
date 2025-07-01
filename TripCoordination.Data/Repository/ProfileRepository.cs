@@ -91,5 +91,20 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
+
+        public async Task<Profile> GetUserProfileAsync(string userID)
+        {
+            try
+            {
+                IEnumerable<Profile> userProfile = await _db.GetData<Profile, dynamic>("sp_Get_User_Profile", new { userID });
+                return userProfile.FirstOrDefault();
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
     }
 }
