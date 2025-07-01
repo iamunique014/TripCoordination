@@ -128,6 +128,12 @@ namespace TripCoordination.Controllers
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
+            if (!await _profileService.HasProfileAsync(userData.UserID))
+            {
+                TempData["Info"] = "Please complete your profile before creating a trip.";
+                return RedirectToAction("CompleteProfile", "Profile");
+            }
+
             // Find the Trip using repository pattern
             var tripDetails = await _tripRepository.FindTripDetails(tripData, userData);
 
@@ -160,12 +166,6 @@ namespace TripCoordination.Controllers
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
-
-            if (!await _profileService.HasProfileAsync(userData.UserID))
-            {
-                TempData["Info"] = "Please complete your profile before creating a trip.";
-                return RedirectToAction("CompleteProfile", "Profile");
-            }
 
             var joinTrip = _tripRepository.JoinTrip(model, userData);
 
