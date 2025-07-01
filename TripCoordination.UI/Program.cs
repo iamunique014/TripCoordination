@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TripCoordination.Data.DataAccess;
-using TripCoordination.Data.Repository;
-using TripCoordination.Data.Models.Data;
 using TripCoordination.Areas.Identity.Data;
+using TripCoordination.Data.DataAccess;
+using TripCoordination.Data.Models.Data;
+using TripCoordination.Data.Repository;
+using TripCoordination.Data.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddLogging();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITripRepository, TripRepository>();
