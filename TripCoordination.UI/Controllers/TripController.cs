@@ -185,44 +185,39 @@ namespace TripCoordination.Controllers
                 return RedirectToAction("CompleteProfile", "Profile");
             }
 
-            var towns = await _townRepository.GetAllAsync();
-
-            ViewBag.Destination = towns;
-            
-            var townSelectList = towns.Select(t => new SelectListItem
+            var model = new CreateTripViewModelUI
             {
-                Value = t.TownID.ToString(),
-                Text = t.Name
-            }).ToList();
-
-            
-
-            var viewModel = new CreateTripViewModelUI
-            {
-                AvailableTowns = townSelectList,
-                DepartureDate = DateTime.Now 
+                DepartureDate = DateTime.Now
             };
 
-            return View(viewModel);
+            await PopulateCreateTripViewModelAsync(model);
+
+            return View(model);
            
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> CreateTrip(CreateTripViewModelUI model)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                    var townIds = string.Join(",", model.SelectedTownIds);
+            ViewData["ShowSidebar"] = true;
 
-                    // Define the stored procedure name and parameters
-                    var storedProc = "[dbo].[sp_Create_Trip_With_Destinations]";
-                    var parameters = new[]
-                    {
+            if (!ModelState.IsValid)
+            {
+                // Reload available towns if the model state is invalid
+                await PopulateCreateTripViewModelAsync(model);
+                return View(model);
+            }
+            
+            //Try Add trip if model state is valid
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var townIds = string.Join(",", model.SelectedTownIds);
+
+                // Define the stored procedure name and parameters
+                var storedProc = "[dbo].[sp_Create_Trip_With_Destinations]";
+                var parameters = new[]
+                {
                         new SqlParameter("@CreatorUserID", userId),
                         new SqlParameter("@DepartureDate", model.DepartureDate),
                         new SqlParameter("@IsFull", false),
@@ -230,42 +225,50 @@ namespace TripCoordination.Controllers
                         new SqlParameter("@TownIDs", townIds)
                     };
 
-                    // Execute the stored procedure
-                    var result = await _context.Database.ExecuteSqlRawAsync(
-                        $"EXEC {storedProc} @CreatorUserID, @DepartureDate, @IsFull, @Seats, @TownIDs",
-                        parameters
-                    );
+                // Execute the stored procedure
+                var result = await _context.Database.ExecuteSqlRawAsync(
+                    $"EXEC {storedProc} @CreatorUserID, @DepartureDate, @IsFull, @Seats, @TownIDs",
+                    parameters
+                );
 
-                    TempData["Success"] = "Trip created successfully!";
+                TempData["Success"] = "Trip created successfully!";
 
-                    // Handle the result as needed
-                    // For example, redirect to the ManageTrips action
-                    if (User.IsInRole("Admin"))
-                    {
-                        return RedirectToAction("ManageTrips", "Admin");
-                    }
-                    else
-                    {
-                        return RedirectToAction("MyTrips", "TripCreator");
-                    }
-                }
-                catch (Exception ex)
+                
+                // Rediret conditionally
+                if (User.IsInRole("Admin"))
                 {
-                    _logger.LogError(ex, "Error occurred while creating trip.");
-                    ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
-                    TempData["Error"] = "An error occurred while creating the trip. Please try again.";
+                    return RedirectToAction("ManageTrips", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("MyTrips", "TripCreator");
                 }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while creating trip.");
+                ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
+                TempData["Error"] = "An error occurred while creating the trip. Please try again.";
+            }
 
-            // Reload available towns if the model state is invalid
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("ManageTrips", "Admin");
+            }
+            else
+            {
+                return RedirectToAction("MyTrips", "TripCreator");
+            }
+        }
+
+        private async Task PopulateCreateTripViewModelAsync(CreateTripViewModelUI model)
+        {
             var towns = await _townRepository.GetAllAsync();
             model.AvailableTowns = towns.Select(t => new SelectListItem
             {
                 Value = t.TownID.ToString(),
                 Text = t.Name
             }).ToList();
-
-            return View(model);
         }
 
         [Authorize(Roles = "Admin, Organizer")]

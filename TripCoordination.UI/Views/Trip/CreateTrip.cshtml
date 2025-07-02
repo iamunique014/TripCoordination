@@ -29,7 +29,7 @@
         <!-- Select2 Multi-select for Towns  -->
         <div class="mb-3">
             <label for="SelectedTownIds" class="label-control">Select Drop-Off Locations</label>
-            <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="input-control" multiple="multiple">
+            <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="input-control" multiple>
                 @foreach (var town in Model.AvailableTowns)
                 {
                     <option value="@town.Value">@town.Text</option>
