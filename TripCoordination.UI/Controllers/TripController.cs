@@ -238,7 +238,14 @@ namespace TripCoordination.Controllers
 
                     // Handle the result as needed
                     // For example, redirect to the ManageTrips action
-                    return RedirectToAction("ManageTrips");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ManageTrips", "Admin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("MyTrips", "TripCreator");
+                    }
                 }
                 catch (Exception ex)
                 {
