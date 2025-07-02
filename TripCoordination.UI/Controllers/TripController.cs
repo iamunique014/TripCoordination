@@ -207,11 +207,10 @@ namespace TripCoordination.Controllers
            
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> CreateTrip(CreateTripViewModelUI model)
         {
+            ViewData["ShowSidebar"] = true;
             if (ModelState.IsValid)
             {
                 try
