@@ -236,14 +236,24 @@ namespace TripCoordination.Controllers
                         parameters
                     );
 
+                    TempData["Success"] = "Trip created successfully!";
+
                     // Handle the result as needed
                     // For example, redirect to the ManageTrips action
-                    return RedirectToAction("ManageTrips");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ManageTrips", "Admin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("MyTrips", "TripCreator");
+                    }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error occurred while creating trip.");
                     ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
+                    TempData["Error"] = "An error occurred while creating the trip. Please try again.";
                 }
             }
 

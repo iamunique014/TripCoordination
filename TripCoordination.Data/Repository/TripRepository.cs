@@ -72,6 +72,21 @@ namespace TripCoordination.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<TripViewModel>> GetAllUserTripsAsync(string userID)
+        {
+            try
+            {
+                string query = "sp_Get_All_User_Trips";
+                return await _db.GetData<TripViewModel, dynamic>(query, new { userID });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<TripViewModel>();
+            }
+        }
+
         public async Task<IEnumerable<TripWithDestinationsViewModel>> GetTripWithDestinations(int tripID)
         {
             try
