@@ -14,10 +14,12 @@ namespace TripCoordination.Controllers
         private readonly IProfileRepository _profileRepository;
         private readonly IUserRoleRepository _UserRoleRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly ITripRepository _tripRepository;
 
-        public TripCreatorController(ILogger<TripCreatorController> logger, IResidenceRepository residenceRepository, IUserRepository userRepository, IProfileRepository profileRepository, IUserRoleRepository userRoleRepository, IRoleRepository roleRepository)
+        public TripCreatorController(ILogger<TripCreatorController> logger, ITripRepository tripRepository, IResidenceRepository residenceRepository, IUserRepository userRepository, IProfileRepository profileRepository, IUserRoleRepository userRoleRepository, IRoleRepository roleRepository)
         {
             _logger = logger;
+            _tripRepository = tripRepository;
             _residenceRepository = residenceRepository;
             _userRepository = userRepository;
             _profileRepository = profileRepository;
@@ -41,5 +43,14 @@ namespace TripCoordination.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> MyTrips()
+        {
+            ViewData["ShowSidebar"] = true;
+
+            var trip = await _tripRepository.GetAllAsync();
+
+            return View(trip);
+        }
     }
 }
