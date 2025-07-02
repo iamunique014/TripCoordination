@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 using TripCoordination.UI.Controllers;
@@ -48,7 +49,9 @@ namespace TripCoordination.Controllers
         {
             ViewData["ShowSidebar"] = true;
 
-            var trip = await _tripRepository.GetAllAsync();
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var trip = await _tripRepository.GetAllUserTripsAsync(userID);
 
             return View(trip);
         }
