@@ -1,0 +1,95 @@
+﻿@model TripCoordination.Data.Models.Domain.Profile
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Profile Information</h3>
+</div>
+
+else if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="form-container p-3">
+    <div class="text-end">
+        <a asp-controller="Profile" asp-action="EditProfile">Edit Profile</a>
+    </div>
+    <form class="row" action="CompleteProfile" method="post">
+
+        <div class="col-8 mb-3">
+            <label asp-for="Title" class="label-control">Title</label>
+            <select asp-for="Title" class="input-control" disabled>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Miss</option>
+                <option value="Dr">Doctor</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="row names">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Name" class="label-control">First Name</label>
+                <input asp-for="Name" type="text" class="input-control" disabled />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Surname" class="label-control">
+                    Last Name
+                </label>
+                <input asp-for="Surname" type="text" class="input-control" disabled>
+                <span class="text-danger" asp-validation-for="Surname"></span>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label asp-for="Email" class="label-control">
+                    Email
+                </label>
+                <input asp-for="Email" type="email" class="input-control" disabled>
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="PhoneNumber" class="label-control">
+                    Cell Phone
+                </label>
+                <input asp-for="PhoneNumber" type="number" class="input-control" disabled>
+                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="ResidenceID" class="label-control">Residence</label>
+                <select asp-for="ResidenceID" class="input-control" disabled>
+                    <option value="1">Metro rez Southern Life</option>
+                    <option value="2">South Point 85</option>
+                    <option value="3">Metro Rez Tebro</option>
+                    <option value="4">Metro Rez FNB</option>
+                    <option value="6">Metro Rez Mr Price</option>
+
+                </select>
+                <span class="text-danger" asp-validation-for="ResidenceID"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="DateOfBirth" class="label-control">
+                    Date Of Birth
+                </label>
+                <input asp-for="DateOfBirth" type="date" class="input-control" disabled>
+                <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Profile</a>
+    </li>
+</ul>
