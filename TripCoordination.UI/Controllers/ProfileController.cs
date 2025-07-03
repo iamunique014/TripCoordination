@@ -20,10 +20,10 @@ namespace TripCoordination.Controllers
 
             var profile = await _profileRepository.GetUserProfileAsync(userID);
 
-            if(profile != null)
-            {
-                return RedirectToAction(nameof(EditProfile));
-            }
+            //if(profile != null)
+            //{
+            //    return RedirectToAction(nameof(EditProfile));
+            //}
 
             return View(profile);
         }
