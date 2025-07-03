@@ -14,16 +14,30 @@ namespace TripCoordination.Controllers
             _profileRepository = profileRepository;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ViewProfile()
+        {
+            ViewData["ShowSidebar"] = true;
+            string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var profile = await _profileRepository.GetUserProfileAsync(UserID);
+            if (profile != null)
+            {
+                return View(profile);
+            }
+            else
+            {
+                return RedirectToAction("CompleteProfile");
+            }
+        } 
+
+
         public async Task<IActionResult> CompleteProfile()
         {
+            ViewData["ShowSidebar"] = true;
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(userID);
-
-            if(profile != null)
-            {
-                return RedirectToAction(nameof(EditProfile));
-            }
 
             return View(profile);
         }
@@ -31,6 +45,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> CompleteProfile(Profile profile)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)
@@ -41,11 +56,12 @@ namespace TripCoordination.Controllers
                 bool addProfile = await _profileRepository.AddAsync(profile);
                 if (addProfile)
                 {
-                    TempData["msg"] = "Sucessfully Added";
+                    TempData["Success"] = "Profile created successfully";
+                    return RedirectToAction(nameof(ViewProfile));
                 }
                 else
                 {
-                    TempData["msg"] = "Could not add";
+                    TempData["Error"] = "Failed to create profile";
                 }
             }
             catch (Exception ex)
@@ -57,6 +73,7 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> EditProfile()
         {
+            ViewData["ShowSidebar"] = true;
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(UserID);
@@ -66,6 +83,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(Profile profile)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)
@@ -76,14 +94,20 @@ namespace TripCoordination.Controllers
                 bool updateRecord = await _profileRepository.UpdateAsync(profile);
 
                 if (updateRecord)
-                    TempData["msg"] = "Successfully Added";
+                {
+                    TempData["Success"] = "Profile update Successfully";
+                    return RedirectToAction("ViewProfile");
+                }
                 else
-                    TempData["msg"] = "Oh Hell Nah";
+                {
+                    TempData["Error"] = "Failed to update profile";
+                }
+                    
             }
 
             catch (Exception ex)
             {
-                TempData["msg"] = "Seriously!!!!!";
+                TempData["message"] = "Something went wrong please try again !!";
                 Console.WriteLine(ex.ToString());
             }
             return View(profile);

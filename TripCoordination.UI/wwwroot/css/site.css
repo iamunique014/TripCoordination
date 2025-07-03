@@ -44,16 +44,6 @@
     box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
 }
 
-.background-container {
-    --gradient-right: linear-gradient(90deg, var(--dutch-white-rgba), var(--battleship-gray-rgba));
-    --flame: #de541e;
-    background-image: var(--gradient-right), url(../images/london-2928889_1280.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: var(--flame);
-    height: 100vh;
-}
-
 .ColorOne{
     --black-olive: #3f3f37;
     --dutch-white: #d6d6b1;
