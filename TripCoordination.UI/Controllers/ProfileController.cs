@@ -16,6 +16,7 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> ViewProfile()
         {
+            ViewData["ShowSidebar"] = true;
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(UserID);
@@ -62,6 +63,7 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> EditProfile()
         {
+            ViewData["ShowSidebar"] = true;
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(UserID);
@@ -71,6 +73,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(Profile profile)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)

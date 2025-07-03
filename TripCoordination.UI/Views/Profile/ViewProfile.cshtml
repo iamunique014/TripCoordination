@@ -4,7 +4,7 @@
     <h3>Profile Information</h3>
 </div>
 
-else if (TempData["Success"] != null)
+@if (TempData["Success"] != null)
 {
     <div class="alert alert-success alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i>
@@ -14,7 +14,6 @@ else if (TempData["Success"] != null)
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-
 
 <div class="form-container p-3">
     <div class="text-end">
