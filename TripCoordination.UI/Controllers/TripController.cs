@@ -130,7 +130,7 @@ namespace TripCoordination.Controllers
 
             if (!await _profileService.HasProfileAsync(userData.UserID))
             {
-                TempData["Info"] = "Please complete your profile before creating a trip.";
+                TempData["Info"] = "Please complete your profile before joining a trip.";
                 return RedirectToAction("CompleteProfile", "Profile");
             }
 
