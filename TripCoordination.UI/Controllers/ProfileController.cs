@@ -14,13 +14,14 @@ namespace TripCoordination.Controllers
             _profileRepository = profileRepository;
         }
 
+        [HttpGet]
         public async Task<IActionResult> ViewProfile()
         {
             ViewData["ShowSidebar"] = true;
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(UserID);
-            if(profile != null)
+            if (profile != null)
             {
                 return View(profile);
             }
@@ -29,6 +30,7 @@ namespace TripCoordination.Controllers
                 return RedirectToAction("CompleteProfile");
             }
         } 
+
 
         public async Task<IActionResult> CompleteProfile()
         {
@@ -55,6 +57,7 @@ namespace TripCoordination.Controllers
                 if (addProfile)
                 {
                     TempData["Success"] = "Profile created successfully";
+                    return RedirectToAction(nameof(ViewProfile));
                 }
                 else
                 {
