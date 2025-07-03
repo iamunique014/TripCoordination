@@ -11,11 +11,11 @@
     </div>
 }
 
-<div class="row">
-    <form class="m-2 p-2" action="CompleteProfile" method="post">
+<div class="form-container p-3">
+    <form class="m-2 " action="CompleteProfile" method="post">
 
         <div class="mb-3">
-            <label asp-for="Title" class="form-label">Title</label>
+            <label asp-for="Title" class="label-control">Title</label>
             <select asp-for="Title">
                 <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
@@ -26,13 +26,13 @@
         </div>
 
         <div class="col-md-4 mb-3">
-            <label asp-for="Name" class="form-label">First Name</label>
+            <label asp-for="Name" class="label-control">First Name</label>
             <input asp-for="Name" type="text" class="form-control" />
             <span class="text-danger" asp-validation-for="Name"></span>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label asp-for="Surname" class="form-label">
+            <label asp-for="Surname" class="label-control">
                 Last Name
             </label>
             <input asp-for="Surname" type="text" class="form-control">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Email" class="form-label">
+            <label asp-for="Email" class="label-control">
                 Email
             </label>
             <input asp-for="Email" type="email" class="form-control">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="PhoneNumber" class="form-label">
+            <label asp-for="PhoneNumber" class="label-control">
                 Cell Phone
             </label>
             <input asp-for="PhoneNumber" type="number" class="form-control">
@@ -56,7 +56,7 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="ResidenceID" class="form-label">Residence</label>
+            <label asp-for="ResidenceID" class="label-control">Residence</label>
             <select asp-for="ResidenceID">
                 <option value="1">Metro rez Southern Life</option>
                 <option value="2">South Point 85</option>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="DateOfBirth" class="form-label">
+            <label asp-for="DateOfBirth" class="label-control">
                 Date Of Birth
             </label>
             <input asp-for="DateOfBirth" type="date" class="form-control">
