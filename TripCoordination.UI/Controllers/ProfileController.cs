@@ -16,6 +16,7 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> CompleteProfile()
         {
+            ViewData["ShowSidebar"] = true;
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(userID);
@@ -31,6 +32,7 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> CompleteProfile(Profile profile)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)
