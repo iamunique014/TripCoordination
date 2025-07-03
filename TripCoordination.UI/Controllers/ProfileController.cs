@@ -20,7 +20,14 @@ namespace TripCoordination.Controllers
             string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var profile = await _profileRepository.GetUserProfileAsync(UserID);
-            return View(profile);
+            if(profile != null)
+            {
+                return View(profile);
+            }
+            else
+            {
+                return RedirectToAction("CompleteProfile");
+            }
         } 
 
         public async Task<IActionResult> CompleteProfile()
