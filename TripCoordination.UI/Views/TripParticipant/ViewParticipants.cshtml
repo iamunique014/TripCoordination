@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripParticipantViewModel>
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Trip Participants</h3>
+</div>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger d-flex alert-conatiner-win alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+else if (TempData["Succes"] != null)
+{
+    <div class="alert alert-success alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Succes"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (Model.Any())
+{
+    <div class="form-container p-3 label-control">
+        <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+        <p><strong>Seats:</strong> @Model.First().Seats</p>
+        <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>
+    </div>
+
+    <div class="form-container p-3 label-control">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Seat</th>
+                    <th>Pickup Point</th>
+                    <th>Destination</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var participant in Model)
+                {
+                    <tr>
+                        <td>@participant.ParticipantName</td>
+                        <td>@participant.ParticipantSurname</td>
+                        <td>@participant.ParticipantEmail</td>
+                        <td>@participant.PhoneNumber</td>
+                        <td>@participant.SeatNumber</td>
+                        <td>@participant.PickUpPoint</td>
+                        <td>@participant.DestinationName</td>
+                        <td>
+                            <form method="post" asp-action="DeleteTripParticipant" asp-controller="TripParticipant">
+                                <input type="hidden" name="tripParticipantID" value="@participant.TripParticipantID" />
+                                <input type="hidden" name="tripID" value="@participant.TripID" />
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+   
+}
+else
+{
+    <div class="alert alert-info alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            No participants found for this trip.
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+

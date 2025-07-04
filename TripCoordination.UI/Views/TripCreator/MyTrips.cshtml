@@ -43,7 +43,8 @@
                         <td>@trip.Seats</td>
                         <td>@trip.IsFull</td>
                         <td>
-                            <a href="/Admin/TripWithDestinations?tripID=@trip.TripID" class="btn btn-success">Edit</a>
+                            <a href="/Admin/TripWithDestinations?tripID=@trip.TripID" class="btn btn-info">Details</a>
+                            <a href="/TripParticipant/ViewParticipants?tripID=@trip.TripID" class="btn btn-warning">View Participants</a>
                             <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
                         </td>
                     </tr>
