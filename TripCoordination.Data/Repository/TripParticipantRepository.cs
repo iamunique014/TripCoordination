@@ -75,5 +75,20 @@ namespace TripCoordination.Data.Repository
             string query = "sp_Get_TripParticipants_By_TripID";
             return await _db.GetData<TripParticipantViewModel, dynamic>(query, new { tripID});
         }
+
+        public async Task<bool> DeleteTripParticipantAsync(int tripParticipantID, int tripID)
+        {
+            try
+            {
+                await _db.SaveData("sp_Remove_TripParticipant", new { tripParticipantID, tripID });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception: ");
+                Console.WriteLine("Failed to remove participant: " + ex.ToString());
+                return false;
+            }
+        }
     }
 }
