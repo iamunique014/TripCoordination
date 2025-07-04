@@ -4,16 +4,16 @@
     <h3>Trip Participants</h3>
 </div>
 
-
-    @if (Model.Any())
-    {
+@if (Model.Any())
+{
     <div class="form-container p-3 label-control">
-            <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
-            <p><strong>Seats:</strong> @Model.First().Seats</p>
-            <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>
-        </div>
+        <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+        <p><strong>Seats:</strong> @Model.First().Seats</p>
+        <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>
+    </div>
 
-    <table class="table table-striped form-container p-3 label-control">
+    <div class="form-container p-3 label-control">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -40,8 +40,17 @@
                 }
             </tbody>
         </table>
-    }
-    else
-    {
-        <p>No participants found for this trip.</p>
-    }
+    </div>
+   
+}
+else
+{
+    <div class="alert alert-info alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            No participants found for this trip.
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
