@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 
 namespace TripCoordination.Data.Repository
@@ -16,6 +17,6 @@ namespace TripCoordination.Data.Repository
         Task<TripParticipant> GetByIdAsync(int id);
 
         Task<IEnumerable<TripParticipant>> GetAllAsync();
-        Task<IEnumerable<TripParticipant>> GetParticipantsByTripIDAsync(int tripID);
+        Task<IEnumerable<TripParticipantViewModel>> GetParticipantsByTripIDAsync(int tripID);
     }
 }
