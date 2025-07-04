@@ -1,30 +1,47 @@
 ﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripParticipantViewModel>
 
-<h2>Trip Participants</h2>
+<div class="container mt-5">
+    <h2>Trip Participants</h2>
+    @if (Model.Any())
+    {
+        <div class="card mb-4 p-3">
+            <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+            <p><strong>Seats:</strong> @Model.First().Seats</p>
+            <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>
+        </div>
 
-@if (!Model.Any())
-{
-    <p>No participants found.</p>
-}
-else
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Participant</th>
-                <th>Email</th>
-                <th>Pickup Point</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model)
-            {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@p.ParticipantName @p.ParticipantSurname</td>
-                    <td>@p.ParticipantEmail</td>
-                    <td>@p.PickUpPoint</td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Seat</th>
+                    <th>Pickup Point</th>
+                    <th>Destination</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var participant in Model)
+                {
+                    <tr>
+                        <td>@participant.TripParticipantID</td>
+                        <td>@participant.ParticipantName</td>
+                        <td>@participant.ParticipantSurname</td>
+                        <td>@participant.ParticipantEmail</td>
+                        <td>@participant.PhoneNumber</td>
+                        <td>@participant.SeatNumber</td>
+                        <td>@participant.PickUpPoint</td>
+                        <td>@participant.DestinationName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No participants found for this trip.</p>
+    }
+</div>
