@@ -23,6 +23,7 @@
                     <th>Seat</th>
                     <th>Pickup Point</th>
                     <th>Destination</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,13 @@
                         <td>@participant.SeatNumber</td>
                         <td>@participant.PickUpPoint</td>
                         <td>@participant.DestinationName</td>
+                        <td>
+                            <form method="post" asp-action="DeleteTripParticipant" asp-controller="TripParticipant">
+                                <input type="hidden" name="tripParticipantID" value="@participant.TripParticipantID" />
+                                <input type="hidden" name="tripID" value="@participant.TripID" />
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
