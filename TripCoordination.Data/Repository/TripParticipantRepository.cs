@@ -68,5 +68,11 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
+
+        public async Task<IEnumerable<TripParticipant>> GetParticipantsByTripIDAsync(int tripID)
+        {
+            string query = "sp_Get_TripParticipants_By_Trip";
+            return await _db.GetData<TripParticipant, dynamic>(query, new { tripID});
+        }
     }
 }
