@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripParticipantViewModel>
+
+<h2>Trip Participants</h2>
+
+@if (!Model.Any())
+{
+    <p>No participants found.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Email</th>
+                <th>Pickup Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ParticipantName @p.ParticipantSurname</td>
+                    <td>@p.ParticipantEmail</td>
+                    <td>@p.PickUpPoint</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

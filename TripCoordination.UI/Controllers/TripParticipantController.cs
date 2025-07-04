@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TripCoordination.Data.Repository;
+using TripCoordination.ViewModel;
 
 namespace TripCoordination.Controllers
 {
