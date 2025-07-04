@@ -14,6 +14,6 @@ namespace TripCoordination.Common.ViewModel
         public int Seats { get; set; }
         public string CreatorName { get; set; }
         public string CreatorSurname { get; set; }
-        public int IsFull { get; set; }
+        public bool IsFull { get; set; }
     }
 }
