@@ -1,19 +1,21 @@
 ﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripParticipantViewModel>
 
-<div class="container mt-5">
-    <h2>Trip Participants</h2>
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Trip Participants</h3>
+</div>
+
+
     @if (Model.Any())
     {
-        <div class="card mb-4 p-3">
+    <div class="form-container p-3 label-control">
             <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
             <p><strong>Seats:</strong> @Model.First().Seats</p>
             <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>
         </div>
 
-        <table class="table table-striped">
+    <table class="table table-striped form-container p-3 label-control">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Email</th>
@@ -27,7 +29,6 @@
                 @foreach (var participant in Model)
                 {
                     <tr>
-                        <td>@participant.TripParticipantID</td>
                         <td>@participant.ParticipantName</td>
                         <td>@participant.ParticipantSurname</td>
                         <td>@participant.ParticipantEmail</td>
@@ -44,4 +45,3 @@
     {
         <p>No participants found for this trip.</p>
     }
-</div>
