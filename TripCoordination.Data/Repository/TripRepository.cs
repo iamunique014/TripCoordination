@@ -102,13 +102,13 @@ namespace TripCoordination.Data.Repository
                     IsFull = g.First().IsFull,
                     Seats = g.First().Seats,
                     Destinations = g
-                .Where(d => d.DestinationID != null)
-                    .Select(d => new TripDestinationViewModel
-                    {
-                        TripDestinationTownID = d.TripDestinationTownID,
-                        TownID = d.DestinationID ?? 0,
-                        DestinationName = d.DestinationName
-                    }).ToList()
+                        .Where(d => d.DestinationID != null)
+                            .Select(d => new TripDestinationViewModel
+                            {
+                                TripDestinationTownID = d.TripDestinationTownID,
+                                TownID = d.DestinationID ?? 0,
+                                DestinationName = d.DestinationName
+                            }).ToList()
                 }).ToList();
 
 
