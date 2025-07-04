@@ -16,5 +16,6 @@ namespace TripCoordination.Data.Repository
         Task<TripParticipant> GetByIdAsync(int id);
 
         Task<IEnumerable<TripParticipant>> GetAllAsync();
+        Task<IEnumerable<TripParticipant>> GetParticipantsByTripIDAsync(int tripID);
     }
 }
