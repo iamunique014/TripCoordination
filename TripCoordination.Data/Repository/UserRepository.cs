@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Domain;
 
@@ -44,10 +45,10 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<UserWithRoleViewModel>> GetAllAsync()
         {
             string query = "sp_Get_Users";
-            return await _db.GetData<User, dynamic>(query, new { });
+            return await _db.GetData<UserWithRoleViewModel, dynamic>(query, new { });
         }
 
         public async Task<User> GetByIdAsync(int id)
