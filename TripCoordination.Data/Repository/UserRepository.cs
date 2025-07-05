@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Domain;
 
@@ -23,13 +24,12 @@ namespace TripCoordination.Data.Repository
             {
 
                 await _db.SaveData("sp_Create_User", new { user.Email, user.PasswordHash });
-                Console.WriteLine("Siyazama ukufake luUser yakho");
                 return true;
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("haibo kwenzeke nton ?, Mhlawumbi ezincukaca zingakunceda: \n {0}", ex);
+                Console.WriteLine("haibo kwenzeke nton ?, Mhlawumbi ezincukraca zingakunceda: \n {0}", ex);
                 return false;
             }
         }
@@ -45,10 +45,10 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<UserWithRoleViewModel>> GetAllAsync()
         {
             string query = "sp_Get_Users";
-            return await _db.GetData<User, dynamic>(query, new { });
+            return await _db.GetData<UserWithRoleViewModel, dynamic>(query, new { });
         }
 
         public async Task<User> GetByIdAsync(int id)
