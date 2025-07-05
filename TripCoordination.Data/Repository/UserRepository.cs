@@ -23,13 +23,12 @@ namespace TripCoordination.Data.Repository
             {
 
                 await _db.SaveData("sp_Create_User", new { user.Email, user.PasswordHash });
-                Console.WriteLine("Siyazama ukufake luUser yakho");
                 return true;
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("haibo kwenzeke nton ?, Mhlawumbi ezincukaca zingakunceda: \n {0}", ex);
+                Console.WriteLine("haibo kwenzeke nton ?, Mhlawumbi ezincukraca zingakunceda: \n {0}", ex);
                 return false;
             }
         }
