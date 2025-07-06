@@ -35,5 +35,21 @@ namespace TripCoordination.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> MyTrips()
+        {
+            await _userRepository.GetUserJoinedTrips();
+            TempData["Success"] = "You’ve successfully joined the trip.";
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> LeaveTrip(int tripParticipantId)
+        //{
+        //    await _tripRepository.RemoveTripParticipantAsync(tripParticipantId);
+        //    TempData["Success"] = "You’ve successfully left the trip.";
+        //    return RedirectToAction("MyTrips");
+        //}
     }
 }
