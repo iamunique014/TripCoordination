@@ -17,5 +17,8 @@ namespace TripCoordination.Data.Repository
         Task<User> GetByIdAsync(int id);
 
         Task<IEnumerable<UserWithRoleViewModel>> GetAllAsync();
+
+        Task<IEnumerable<MyTripGroupedViewModel>> GetUserJoinedTrips();
+
     }
 }
