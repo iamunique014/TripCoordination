@@ -56,11 +56,15 @@
     <script>
         $(document).ready(function () {
             // Initialize Select2 on the multi-select element
-            $('#SelectedTownIds').select2({
+             $('#SelectedTownIds').select2({
                 placeholder: "Select drop-off locations",
-                allowClear: true
+                allowClear: true,
+                width: '100%'
             });
         });
+
+       
+
     </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
