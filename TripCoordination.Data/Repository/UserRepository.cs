@@ -69,5 +69,29 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
+        public async Task<IEnumerable<MyTripGroupedViewModel>> GetUserJoinedTrips(string userId)
+        {
+            var flatResult = await _db.GetData<MyTripFlatRow, dynamic>("sp_Get_JoinedTrips_By_User", new { UserID = userId });
+
+            var grouped = flatResult
+                .GroupBy(t => t.TripID)
+                .Select(g => new MyTripGroupedViewModel
+                {
+                    TripID = g.Key,
+                    TripParticipantID = g.First().TripParticipantID,
+                    DepartureDate = g.First().DepartureDate,
+                    OrganizerName = g.First().OrganizerName,
+                    OrganizerSurname = g.First().OrganizerSurname,
+                    PickUpPoint = g.First().PickUpPoint,
+                    SeatNumber = g.First().SeatNumber,
+                    Destinations = g.Select(d => new TripDestinationViewModel
+                    {
+                        TownID = d.TownID,
+                        DestinationName = d.DestinationName
+                    }).DistinctBy(x => x.TownID).ToList()
+                });
+
+            return grouped;
+        }
     }
 }
