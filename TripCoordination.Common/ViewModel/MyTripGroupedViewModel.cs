@@ -8,8 +8,8 @@ namespace TripCoordination.Common.ViewModel
 {
     public class MyTripGroupedViewModel
     {
-        public int TripParticipantID { get; set; }
         public int TripID { get; set; }
+        public int TripParticipantID { get; set; }
         public DateTime DepartureDate { get; set; }
         public string OrganizerName { get; set; }
         public string OrganizerSurname { get; set; }
