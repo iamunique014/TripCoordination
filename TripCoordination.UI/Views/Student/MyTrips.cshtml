@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.MyTripGroupedViewModel>
+
+@foreach (var trip in Model)
+{
+    <div class="form-container mb-3 p-3 label-control">
+        <p><strong>Date:</strong> @trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+        <p><strong>Organizer:</strong> @trip.OrganizerName @trip.OrganizerSurname</p>
+        <p><strong>PickUp:</strong> @trip.PickUpPoint</p>
+        <p><strong>Seat:</strong> @trip.SeatNumber</p>
+
+        <p><strong>Destinations:</strong></p>
+        <ul>
+            @foreach (var dest in trip.Destinations)
+            {
+                <li>@dest.DestinationName</li>
+            }
+        </ul>
+    </div>
+}
