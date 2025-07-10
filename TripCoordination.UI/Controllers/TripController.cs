@@ -160,16 +160,20 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> JoinTrip(TripDetailsViewModelUI model)
         {
-  
+
             var userData = new User
             {
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
+           
+            if (!await _tripRepository.JoinTrip(model, userData))
+            {
+                TempData["Info"] = "Something went wrong please try again!.";
+                return RedirectToAction("TripDetails","Trip",model);
+            }
 
-            var joinTrip = _tripRepository.JoinTrip(model, userData);
-
-            return View();
+            return RedirectToAction("MyTrips", "Student");
         }
 
         [Authorize(Roles = "Admin, Organizer")]

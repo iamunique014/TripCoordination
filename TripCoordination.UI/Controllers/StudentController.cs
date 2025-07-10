@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 
 namespace TripCoordination.Controllers
@@ -36,12 +38,14 @@ namespace TripCoordination.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> MyTrips()
         {
-            await _userRepository.GetUserJoinedTrips();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var myTrip = await _userRepository.GetUserJoinedTrips(userId);
             TempData["Success"] = "You’ve successfully joined the trip.";
-            return View();
+            return View(myTrip);
         }
 
         //[HttpPost]

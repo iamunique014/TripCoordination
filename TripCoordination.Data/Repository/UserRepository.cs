@@ -71,11 +71,11 @@ namespace TripCoordination.Data.Repository
         }
         public async Task<IEnumerable<MyTripGroupedViewModel>> GetUserJoinedTrips(string userId)
         {
-            var flatResult = await _db.GetData<MyTripFlatRow, dynamic>("sp_Get_JoinedTrips_By_User", new { UserID = userId });
+            try
+            {
+                var flatResult = await _db.GetData<MyTripFlatRow, dynamic>("sp_Get_JoinedTrips_By_User", new { UserID = userId });
 
-            var grouped = flatResult
-                .GroupBy(t => t.TripID)
-                .Select(g => new MyTripGroupedViewModel
+                var grouped = flatResult.GroupBy(t => t.TripID).Select(g => new MyTripGroupedViewModel
                 {
                     TripID = g.Key,
                     TripParticipantID = g.First().TripParticipantID,
@@ -91,7 +91,14 @@ namespace TripCoordination.Data.Repository
                     }).DistinctBy(x => x.TownID).ToList()
                 });
 
-            return grouped;
+                return grouped;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return Enumerable.Empty<MyTripGroupedViewModel>();
+            }           
         }
     }
 }
