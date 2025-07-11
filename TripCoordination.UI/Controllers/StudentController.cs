@@ -44,8 +44,7 @@ namespace TripCoordination.Controllers
             ViewData["ShowSideBar"] = true;
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var myTrip = await _userRepository.GetUserJoinedTrips(userId);
-            //TempData["Success"] = "You’ve successfully joined the trip.";
+            var myTrip = await _userRepository.GetUserJoinedTrips(userId);          
             return View(myTrip);
         }
 
