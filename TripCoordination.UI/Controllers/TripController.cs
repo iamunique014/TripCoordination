@@ -169,10 +169,11 @@ namespace TripCoordination.Controllers
            
             if (!await _tripRepository.JoinTrip(model, userData))
             {
-                TempData["Info"] = "Something went wrong please try again!.";
+                TempData["Error"] = "Something went wrong please try again!.";
                 return RedirectToAction("TripDetails","Trip",model);
             }
 
+            TempData["Success"] = "You have susccesfully joined a trip!";
             return RedirectToAction("MyTrips", "Student");
         }
 
