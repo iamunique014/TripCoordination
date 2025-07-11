@@ -1,0 +1,57 @@
+﻿@model TripCoordination.Common.ViewModel.TripRequestViewModel
+@{
+    ViewData["Title"] = "Create Trip Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Create New Trip Request</h3>
+</div>
+
+<div class="form-container p-3">
+
+    <form asp-action="Create" method="post">
+
+        <div class="mb-3">
+            <label asp-for="FromLocation" class="label-control">From</label>
+            <input asp-for="FromLocation" type="text" class="input-control" />
+            <span class="text-danger" asp-validation-for="FromLocation"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ToLocation" class="label-control">To</label>
+            <input asp-for="ToLocation" type="text" class="input-control" />
+            <span class="text-danger" asp-validation-for="ToLocation"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DesiredDate" class="label-control">Desired Date</label>
+            <input asp-for="DesiredDate" type="date" class="input-control" />
+            <span class="text-danger" asp-validation-for="DesiredDate"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Notes" class="label-control">Notes</label>
+            <textarea asp-for="Notes" class="input-control" rows="3"></textarea>
+            <span class="text-danger" asp-validation-for="Notes"></span>
+        </div>
+
+        @if (TempData["msg"] != null)
+        {
+            <div class="mb-3 text-center text-success">
+                @TempData["msg"]
+            </div>
+        }
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
