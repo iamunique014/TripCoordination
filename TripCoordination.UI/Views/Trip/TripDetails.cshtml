@@ -7,6 +7,17 @@
     <h3>Confirm Trip Details</h3>
 </div>
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger d-flex alert-conatiner-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+
 <div class="trip-details form-container">
     <p><strong>Date:</strong> @Model.DepartureDate</p>
     <p><strong>Destination:</strong> @Model.DestinationName</p>
