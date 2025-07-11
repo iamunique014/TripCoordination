@@ -11,11 +11,11 @@ namespace TripCoordination.Controllers
     public class TripRequestController : Controller
     {
         private readonly ITripRequestRepository _tripRequestRepository;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public TripRequestController(
             ITripRequestRepository tripRequestRepository,
-            UserManager<User> userManager)
+            UserManager<IdentityUser> userManager)
         {
             _tripRequestRepository = tripRequestRepository;
             _userManager = userManager;
@@ -24,6 +24,7 @@ namespace TripCoordination.Controllers
         // GET: /TripRequest
         public async Task<IActionResult> ViewRequest()
         {
+            ViewData["ShowSideBar"] = true;
             var requests = await _tripRequestRepository.GetAllAsync();
             return View(requests);
         }
@@ -31,6 +32,7 @@ namespace TripCoordination.Controllers
         // GET: /TripRequest/Create
         public IActionResult CreateRequest()
         {
+            ViewData["ShowSideBar"] = true;
             return View();
         }
 
@@ -39,6 +41,7 @@ namespace TripCoordination.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRequest(TripRequestViewModel model)
         {
+            ViewData["ShowSideBar"] = true;
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -49,17 +52,22 @@ namespace TripCoordination.Controllers
                 ToLocation = model.ToLocation,
                 DesiredDate = model.DesiredDate,
                 Notes = model.Notes,
-                UserID = user.UserID,
+                UserID = user.Id,
                 RequestedAt = DateTime.Now,
                 IsApproved = false,
                 IsDeleted = false
             };
 
             var success = await _tripRequestRepository.AddAsync(newRequest);
-            if (success)
-                return RedirectToAction("Index");
+            if (success) 
+            {
+                TempData["Success"] = "Request Created Successfully!";
+                return RedirectToAction("ViewRequest");
+            }
+                
 
             ModelState.AddModelError("", "Something went wrong while submitting your request.");
+            TempData["Error"] = "Something went wrong while submitting your request.";
             return View(model);
         }
 
@@ -68,6 +76,7 @@ namespace TripCoordination.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRequest(int id)
         {
+            ViewData["ShowSideBar"] = true;
             var result = await _tripRequestRepository.DeleteAsync(id);
             return RedirectToAction("Index");
         }
@@ -77,6 +86,7 @@ namespace TripCoordination.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveRequest(int id)
         {
+            ViewData["ShowSideBar"] = true;
             var result = await _tripRequestRepository.ApproveAsync(id);
             return RedirectToAction("Index");
         }
