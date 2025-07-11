@@ -9,10 +9,10 @@ namespace TripCoordination.Data.Repository
 {
     public interface ITripRequestRepository
     {
+        Task<bool> AddAsync(TripRequest request);
+        Task<bool> DeleteAsync(int tripRequestID);
         Task<IEnumerable<TripRequest>> GetAllAsync();
-        Task<TripRequest?> GetByIdAsync(int id);
-        Task AddAsync(TripRequest request);
-        Task DeleteAsync(int id);
-        Task ApproveAsync(int id); 
+        Task<TripRequest?> GetByIdAsync(int tripRequestID);
+        Task<bool> ApproveAsync(int tripRequestID);
     }
 }
