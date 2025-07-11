@@ -21,14 +21,30 @@
         <p><strong>Date:</strong> @trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
         <p><strong>Organizer:</strong> @trip.OrganizerName @trip.OrganizerSurname</p>
         <p><strong>PickUp:</strong> @trip.PickUpPoint</p>
-        <p><strong>Seat:</strong> @trip.SeatNumber</p>
-        <p><strong>Seat:</strong> @trip.Destinations</p>
-        <p><strong>Destinations:</strong></p>
-        <ul>
-            @foreach (var dest in trip.Destinations)
-            {
-                <li>@dest.DestinationName</li>
-            }
-        </ul>
+        <p><strong>Seat:</strong> @trip.SeatNumber</p>       
+       
+        <div class="accordion accordion-system" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-@trip.TripID" aria-expanded="false" aria-controls="flush-collapseOne">
+                        View Destinations
+                    </button>
+                </h2>
+                <div id="accordion-@trip.TripID" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <ul>
+                            @foreach (var dest in trip.Destinations)
+                            {
+                                <li>@dest.DestinationName</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+          
+       
     </div>
 }
+
