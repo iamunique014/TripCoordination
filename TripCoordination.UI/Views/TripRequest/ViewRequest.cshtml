@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TripCoordination.Data.Models.Domain.TripRequest>
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>Trip Requests</h3>
+</div>
+
+<div class="form-container p-3">
+
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-primary w-auto">Create New Request</a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Desired Date</th>
+                <th>Notes</th>
+                <th>Requested At</th>
+                <th>Approved</th>
+                <th style="width:120px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FromLocation</td>
+                    <td>@item.ToLocation</td>
+                    <td>@item.DesiredDate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Notes</td>
+                    <td>@item.RequestedAt.ToString("g")</td>
+                    <td>
+                        @if (item.IsApproved)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">No</span>
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@item.TripRequestID" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this request?');" title="Delete">
+                                Delete
+                            </button>
+                        </form>
+
+                        @if (User.IsInRole("Admin") && !item.IsApproved)
+                        {
+                            <form asp-action="Approve" method="post" class="d-inline ms-1">
+                                <input type="hidden" name="id" value="@item.TripRequestID" />
+                                <button type="submit" class="btn btn-success btn-sm" title="Approve">
+                                    Approve
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
