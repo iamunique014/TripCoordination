@@ -41,6 +41,7 @@ namespace TripCoordination.Controllers
         [HttpGet]
         public async Task<IActionResult> MyTrips()
         {
+            ViewData["ShowSideBar"] = true;
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var myTrip = await _userRepository.GetUserJoinedTrips(userId);

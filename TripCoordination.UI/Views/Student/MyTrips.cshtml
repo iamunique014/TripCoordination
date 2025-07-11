@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<TripCoordination.Common.ViewModel.MyTripGroupedViewModel>
 
+<div class="page-title p-3 mt-3 label-control">
+    <h3>My Trips</h3>
+</div>
+
 @foreach (var trip in Model)
 {
     <div class="form-container mb-3 p-3 label-control">
@@ -7,7 +11,7 @@
         <p><strong>Organizer:</strong> @trip.OrganizerName @trip.OrganizerSurname</p>
         <p><strong>PickUp:</strong> @trip.PickUpPoint</p>
         <p><strong>Seat:</strong> @trip.SeatNumber</p>
-
+        <p><strong>Seat:</strong> @trip.Destinations</p>
         <p><strong>Destinations:</strong></p>
         <ul>
             @foreach (var dest in trip.Destinations)
