@@ -44,7 +44,32 @@
     box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
 }
 
-.ColorOne{
+/*============================================*/
+/*              Accordion styles              */
+/*============================================*/
+
+
+.accordion-system, .accordion-item, .accordion-button, .accordion-body,.accordion-button:focus {
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    background: var(--dutch-white);
+    border-radius: 1rem;
+}
+
+.accordion-button {
+   
+}
+
+.accordion-button:focus {
+    box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
+}
+
+.accordion-button:not(.collapsed) {
+    --drab-dark-brown: #494331;
+    color: var(--drab-dark-brown)
+}
+
+.ColorOne {
     --black-olive: #3f3f37;
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
