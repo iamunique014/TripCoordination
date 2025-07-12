@@ -57,7 +57,7 @@ namespace TripCoordination.Data.Repository
 
         public async Task<IEnumerable<RouteRequest>> GetAllUserRouteRequestAsync(string userID)
         {
-            return await _db.GetData<RouteRequest, dynamic>("sp_Get_All_User_RouteRequest", new { });
+            return await _db.GetData<RouteRequest, dynamic>("sp_Get_All_User_RouteRequest", new { userID});
         }
 
         public async Task<RouteRequest?> GetByIdAsync(int routeRequestID)
