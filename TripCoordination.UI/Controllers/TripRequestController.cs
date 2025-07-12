@@ -25,6 +25,12 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> ViewRequest()
         {
             ViewData["ShowSideBar"] = true;
+            if (User.IsInRole("Student"))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var userRequests = await _tripRequestRepository.GetAllUserTripRequestAsync(user.Id);
+                return View(userRequests);
+            }
             var requests = await _tripRequestRepository.GetAllAsync();
             return View(requests);
         }

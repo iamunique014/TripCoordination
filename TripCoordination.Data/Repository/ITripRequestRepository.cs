@@ -13,6 +13,7 @@ namespace TripCoordination.Data.Repository
         Task<bool> DeleteAsync(int tripRequestID);
         Task<IEnumerable<TripRequest>> GetAllAsync();
         Task<TripRequest?> GetByIdAsync(int tripRequestID);
+        Task<IEnumerable<TripRequest>> GetAllUserTripRequestAsync(string userID);
         Task<bool> ApproveAsync(int tripRequestID);
     }
 }
