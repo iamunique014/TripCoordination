@@ -53,22 +53,34 @@
                             }
                         </td>
                         <td>
-                            <form asp-action="DeleteRequest" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@item.TripRequestID" />
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this request?');" title="Delete">
-                                    Delete
-                                </button>
-                            </form>
 
-                            @if (User.IsInRole("Admin") && !item.IsApproved)
-                            {
-                                <form asp-action="ApproveRequest" method="post" class="d-inline ms-1">
-                                    <input type="hidden" name="id" value="@item.TripRequestID" />
-                                    <button type="submit" class="btn btn-success btn-sm" title="Approve">
-                                        Approve
-                                    </button>
-                                </form>
-                            }
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu"> 
+                                    <li>
+                                        <form asp-action="DeleteRequest" method="post">
+                                            <input type="hidden" name="id" value="@item.TripRequestID" />
+                                            <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Delete this request?');" title="Delete">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        @if ((User.IsInRole("Admin") || (User.IsInRole("Organizer"))) && !item.IsApproved)
+                                        {
+                                            <form asp-action="ApproveRequest" method="post">
+                                                <input type="hidden" name="id" value="@item.TripRequestID" />
+                                                <button type="submit" class="dropdown-item text-success" title="Approve">
+                                                    Approve
+                                                </button>
+                                            </form>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                           
                         </td>
                     </tr>
                 }
