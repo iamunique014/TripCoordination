@@ -27,6 +27,22 @@
                     <a class="nav-link" asp-controller="Admin" asp-action="ManageTowns">Towns</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link collapsed" asp-controller="Home" asp-action="Index" data-bs-target="#requests-nav" data-bs-toggle="collapse">
+                        <span>Requests</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="requests-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a asp-controller="RouteRequest" asp-action="CreateRouteRequest">Request Route</a>
+                        </li>
+                        <li>
+                            <a asp-controller="TripRequest" asp-action="CreateRequest">Request Trip</a>
+                        </li>
+                        <li>
+                            <a asp-controller="TripRequest" asp-action="ViewRequest">My Trip Requests</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" asp-controller="User" asp-action="ViewUsers">Manage Users</a>
                 </li>
             }
@@ -41,6 +57,22 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Trip" asp-action="CreateTrip">Create Trip</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" asp-controller="Home" asp-action="Index" data-bs-target="#requests-nav" data-bs-toggle="collapse">
+                        <span>Requests</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="requests-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a asp-controller="RouteRequest" asp-action="CreateRouteRequest">Request Routes</a>
+                        </li>
+                        <li>
+                            <a asp-controller="TripRequest" asp-action="CreateRequest">Request Trip</a>
+                        </li>
+                        <li>
+                            <a asp-controller="TripRequest" asp-action="ViewRequest">My Trip Requests</a>
+                        </li>
+                    </ul>
+                </li>
             }
             else if (User.IsInRole("Student"))
             {
@@ -54,9 +86,6 @@
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Trips</a>
                 </li>
                 <li class="nav-item">
-                    @* <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a> *@
                     <a class="nav-link collapsed" asp-controller="Home" asp-action="Index" data-bs-target="#requests-nav" data-bs-toggle="collapse">
                         <span>Requests</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
