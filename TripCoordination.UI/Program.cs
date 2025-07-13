@@ -44,6 +44,8 @@ builder.Services.AddTransient<ITripDestinationTownRepository, TripDestinationTow
 builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+builder.Services.AddTransient<ITripRequestRepository, TripRequestRepository>();
+builder.Services.AddTransient<IRouteRequestRepository, RouteRequestRepository>();
 
 builder.Services.AddRazorPages();
 
