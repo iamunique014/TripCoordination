@@ -42,5 +42,30 @@ namespace TripCoordination.Controllers
 
             return RedirectToAction("ViewParticipants", "TripParticipant", new { tripID });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveTrip(int tripParticipantID)
+        {
+            try
+            {
+                bool success = await _tripParticipantRepository.LeaveTripAsync(tripParticipantID);
+
+                if (success)
+                {
+                    TempData["Success"] = "You have successfully left the trip.";
+                }
+                else
+                {
+                    TempData["Error"] = "Failed to leave the trip.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "An error occurred while trying to leave the trip.";
+                Console.WriteLine(ex);
+            }
+
+            return RedirectToAction("MyTrips", "Student");
+        }
     }
 }

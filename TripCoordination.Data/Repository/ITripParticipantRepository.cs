@@ -17,5 +17,6 @@ namespace TripCoordination.Data.Repository
         Task<TripParticipant> GetByIdAsync(int id);
         Task<IEnumerable<TripParticipant>> GetAllAsync();
         Task<IEnumerable<TripParticipantViewModel>> GetParticipantsByTripIDAsync(int tripID);
+        Task<bool> LeaveTripAsync(int tripParticipantID);
     }
 }
