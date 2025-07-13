@@ -48,6 +48,14 @@ namespace TripCoordination.Controllers
             return View(myTrip);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> StudentDashboard()
+        {
+            ViewData["ShowSideBar"] = true;
+           
+            return View();
+        }
+
         //[HttpPost]
         //public async Task<IActionResult> LeaveTrip(int tripParticipantId)
         //{

@@ -9,8 +9,8 @@
   
      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
                 @UserManager.GetUserName(User)
-                <i class="bi bi-person-circle"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
                 @if (User.IsInRole("Admin"))
@@ -21,6 +21,13 @@
                 {
                     <li><a id="manage" class="dropdown-item" asp-controller="TripCreator" asp-action="OrganizerDashboard" title="Dashboard">Dashboard</a></li>
                 }
+                else if(User.IsInRole("Student"))
+                {
+                    <li><a id="manage" class="dropdown-item" asp-controller="Student" asp-action="StudentDashboard" title="Dashboard">Dashboard</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a id="manage" class="dropdown-item" asp-controller="Student" asp-action="MyTrips" title="My Trips">My Trips</a></li>
+                }
+                <li><hr class="dropdown-divider"></li>
                 <li><a id="manage" class="dropdown-item" asp-controller="Profile" asp-action="ViewProfile" title="Manage">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
