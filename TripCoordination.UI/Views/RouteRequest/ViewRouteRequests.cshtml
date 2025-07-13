@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TripCoordination.Data.Models.Domain.RouteRequest>
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>All Route Requests</h3>
+</div>
+
+<div class="form-container p-3 ">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="">
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Reason</th>
+                    <th>Requested At</th>
+                    <th>Approved</th>
+                    <th style="width:100px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FromLocation</td>
+                        <td>@item.ToLocation</td>
+                        <td>@item.Reason</td>
+                        <td>@item.RequestedAt.ToString("g")</td>
+                        <td>
+                            @if (item.IsApproved)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">No</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    @if ((User.IsInRole("Admin") || (User.IsInRole("Organizer"))) && !item.IsApproved)
+                                    {
+                                        <li>
+                                            <form asp-action="ApproveRouteRequest" method="post" class="dropdown-item">
+                                                <input type="hidden" name="id" value="@item.RouteRequestID" />
+                                                <button type="submit" class="dropdown-item text-success">Approve</button>
+                                            </form>
+                                        </li>
+                                    }
+                                    <li>
+                                        <form asp-action="DeleteRouteRequest" method="post" class="dropdown-item">
+                                            <input type="hidden" name="id" value="@item.RouteRequestID" />
+                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</div>

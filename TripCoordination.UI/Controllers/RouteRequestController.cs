@@ -21,17 +21,17 @@ namespace TripCoordination.Controllers
 
         // ADMIN: View All Route Requests
         [Authorize(Roles = "Admin, Organizer")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ViewRouteRequests()
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             var requests = await _routeRequestRepository.GetAllAsync();
             return View(requests);
         }
 
-        // USER: View Their Own Requests
+        // USER: View Their Own Route Requests
         public async Task<IActionResult> MyRequests()
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             var user = await _userManager.GetUserAsync(User);
             var requests = await _routeRequestRepository.GetAllUserRouteRequestAsync(user.Id);
             return View(requests);
@@ -40,7 +40,7 @@ namespace TripCoordination.Controllers
         // GET: Create
         public IActionResult CreateRouteRequest()
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace TripCoordination.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRouteRequest(RouteRequestViewModel model)
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -75,7 +75,7 @@ namespace TripCoordination.Controllers
             }
 
             ModelState.AddModelError("", "Something went wrong while submitting your request.");
-            TempData["Success"] = "Something went wrong while submitting your request.";
+            TempData["Error"] = "Something went wrong while submitting your request.";
             return View(model);
         }
 
@@ -84,7 +84,7 @@ namespace TripCoordination.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRouteRequest(int id)
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             await _routeRequestRepository.DeleteAsync(id);
             return RedirectToAction(nameof(MyRequests));
         }
@@ -94,7 +94,7 @@ namespace TripCoordination.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveRouteRequest(int id)
         {
-            ViewData["ViewSidebar"] = true;
+            ViewData["ShowSideBar"] = true;
             await _routeRequestRepository.ApproveAsync(id);
             return RedirectToAction(nameof(Index));
         }

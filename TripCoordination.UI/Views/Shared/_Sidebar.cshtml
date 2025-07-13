@@ -83,7 +83,7 @@
                     <a class="nav-link" asp-controller="Student" asp-action="MyTrips">My Trips</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Trips</a>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Find Trips</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Home" asp-action="Index" data-bs-target="#requests-nav" data-bs-toggle="collapse">
@@ -91,13 +91,16 @@
                     </a>
                     <ul id="requests-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a asp-controller="Student" asp-action="Routes">Request Routes</a>
+                            <a asp-controller="RouteRequest" asp-action="CreateRouteRequest">Request Routes</a>
                         </li>
                         <li>
                             <a asp-controller="TripRequest" asp-action="CreateRequest">Request Trip</a>
                         </li>
                         <li>
                             <a asp-controller="TripRequest" asp-action="ViewRequest">My Trip Requests</a>
+                        </li>
+                        <li>
+                            <a asp-controller="RouteRequest" asp-action="MyRequests">My Route Requests</a>
                         </li>
                     </ul>
                 </li>
