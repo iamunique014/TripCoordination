@@ -59,7 +59,7 @@
                                     <li>
                                         <form asp-action="DeleteRouteRequest" method="post" class="">
                                             <input type="hidden" name="id" value="@item.RouteRequestID" />
-                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                            <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Delete this request?');">Delete</button>
                                         </form>
                                     </li>
                                 </ul>
