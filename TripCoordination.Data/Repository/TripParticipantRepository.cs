@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,6 +88,20 @@ namespace TripCoordination.Data.Repository
             {
                 Console.WriteLine("Entered Exception: ");
                 Console.WriteLine("Failed to remove participant: " + ex.ToString());
+                return false;
+            }
+        }
+        public async Task<bool> LeaveTripAsync(int tripParticipantID)
+        {
+            try
+            {
+                await _db.SaveData("sp_Leave_Trip", new { tripParticipantID });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception: ");
+                Console.WriteLine("Failed to Exit Trip: " + ex.ToString());
                 return false;
             }
         }
