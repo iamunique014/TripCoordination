@@ -24,7 +24,7 @@
     background: var(--dutch-white)
 }
 
-.notify-success, .alert-conatiner-win {
+.notify-success, .alert-container-win {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     background-color: var(--dutch-white);
@@ -34,7 +34,7 @@
     box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
 }
 
-.notify-Danger, .alert-conatiner-lose {
+.notify-Danger, .alert-container-lose {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     background-color: var(--dutch-white);
@@ -318,7 +318,7 @@
     box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
 }
 
-.notify-success, .alert-conatiner-win {
+.notify-success, .alert-container-win {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     background-color: var(--dutch-white);
@@ -328,7 +328,7 @@
     box-shadow: 2px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
 }
 
-.notify-Danger ,.alert-conatiner-lose {
+.notify-Danger ,.alert-container-lose {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     background-color: var(--dutch-white);
