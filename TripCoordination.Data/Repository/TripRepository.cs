@@ -57,6 +57,21 @@ namespace TripCoordination.Data.Repository
                 return false;
             }
         }
+
+        public async Task<bool> SoftDeleteTripAsync(int tripID)
+        {
+            try
+            {
+                await _db.SaveData("sp_SoftDelete_Trip", new { TripID = tripID });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error during soft delete: " + ex.Message);
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<TripViewModel>> GetAllAsync()
         {
             try
