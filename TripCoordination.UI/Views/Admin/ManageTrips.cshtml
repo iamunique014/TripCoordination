@@ -7,6 +7,26 @@
     <h3>All Trips</h3>
 </div>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success  d-flex alert-conatiner-win alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+else if(TempData["Error"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-conatiner-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
 @* 
 <div class="form-container p-3 label-control">
@@ -80,7 +100,7 @@
                                     </li>
                                     <li>
                                         <form method="post" action="/Trip/DeleteTrip" onsubmit="return confirm('Are you sure to delete this record?')">
-                                            <input type="hidden" name="id" value="@trip.TripID" />
+                                            <input type="hidden" name="tripID" value="@trip.TripID" />
                                             <button type="submit" class="dropdown-item text-danger">Delete</button>
                                         </form>
                                     </li>

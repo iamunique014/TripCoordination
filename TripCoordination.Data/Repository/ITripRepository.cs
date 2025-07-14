@@ -14,7 +14,7 @@ namespace TripCoordination.Data.Repository
         //Task<bool> CreateAsync(CreateTripViewModel createTripViewModel);
         Task<bool> UpdateAsync(Trip trip);
         Task<bool> DeleteAsync(int id);
-
+        Task<bool> SoftDeleteTripAsync(int tripID);
         Task<Trip> GetByIdAsync(int tripID);
 
         Task<IEnumerable<TripViewModel>> GetAllAsync();

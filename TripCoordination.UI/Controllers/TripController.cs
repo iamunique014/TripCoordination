@@ -303,29 +303,18 @@ namespace TripCoordination.Controllers
 
         }
         [Authorize(Roles = "Admin, Organizer")]
-        public async Task<IActionResult> DeleteTrip(int id)
+        public async Task<IActionResult> DeleteTrip(int tripID)
         {
             ViewData["ShowSidebar"] = true;
 
-            var towns = await _townRepository.GetAllAsync();
+            var result = await _tripRepository.SoftDeleteTripAsync(tripID);
 
-            ViewBag.Destination = towns;
+            if (result)
+                TempData["Success"] = "Trip deleted successfully.";
+            else
+                TempData["Error"] = "Failed to delete trip.";
 
-            var townSelectList = towns.Select(t => new SelectListItem
-            {
-                Value = t.TownID.ToString(),
-                Text = t.Name
-            }).ToList();
-
-
-
-            var viewModel = new CreateTripViewModelUI
-            {
-                AvailableTowns = townSelectList,
-                DepartureDate = DateTime.Now
-            };
-
-            return View(viewModel);
+            return RedirectToAction("ManageTrips", "Admin"); // or your actual view name
 
         }
 
