@@ -9,10 +9,10 @@ namespace TripCoordination.Data.Repository
 {
     public interface IRouteRepository
     {
-        Task<IEnumerable<Route>> GetAllAsync();
-        Task<Route?> GetByIDAsync(int routeID);
-        Task<bool> CreateAsync(Route route);
-        Task<bool> UpdateAsync(Route route);
+        Task<IEnumerable<TripRoute>> GetAllAsync();
+        Task<TripRoute?> GetByIDAsync(int routeID);
+        Task<bool> CreateAsync(TripRoute route);
+        Task<bool> UpdateAsync(TripRoute route);
         Task<bool> SoftDeleteAsync(int routeID);
     }
 }

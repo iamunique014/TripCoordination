@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripCoordination.Data.Models.Domain
 {
-    public class Route
+    public class TripRoute
     {
         public int RouteID { get; set; }
 
