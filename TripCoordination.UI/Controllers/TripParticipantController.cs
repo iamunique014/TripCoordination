@@ -25,11 +25,11 @@ namespace TripCoordination.Controllers
         }
 
         [Authorize(Roles = "Admin, Organizer")]
-        public async Task<IActionResult> DeleteTripParticipant(int tripParticipatID, int tripID)
+        public async Task<IActionResult> DeleteTripParticipant(int tripParticipantID, int tripID)
         {
             ViewData["ShowSidebar"] = true;
 
-            var result = await _tripParticipantRepository.DeleteTripParticipantAsync(tripParticipatID, tripID);
+            var result = await _tripParticipantRepository.DeleteTripParticipantAsync(tripParticipantID, tripID);
 
             if (!result)
             {
