@@ -3,26 +3,27 @@
     ViewData["Title"] = "My Trips";
 }
 
-<div class="container ">
-    <div class="page-title p-3 label-control">
-        <h3>My Trips</h3>
+<div class="page-title p-3 label-control">
+    <h3>My Trips</h3>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success  d-flex alert-conatiner-win alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+    
+<div class="form-container p-3 label-control">
+    <div class="text-end">
+        <a asp-action="CreateTrip" asp-controller="Trip" class="btn btn-primary my-2">Create Trip</a>
     </div>
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success  d-flex alert-conatiner-win alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i>
-            <div>
-                @TempData["Success"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-    }
-
-    <div class="my-2">
-
-        <a asp-action="CreateTrip" asp-controller="Trip" class="btn btn-info my-2">Add more</a>
-
+    <div class="table-responsive">
         <table class="table table-stripped">
             <thead>
                 <tr>
@@ -37,23 +38,42 @@
                 @foreach (var trip in Model)
                 {
                     <tr>
-                         @* <td>@trip.TripID</td>  *@
+                        @* <td>@trip.TripID</td>  *@
                         <td>@trip.CreatorName @trip.CreatorSurname</td>
                         <td>@trip.DepartureDate</td>
                         <td>@trip.Seats</td>
                         <td>@trip.IsFull</td>
+
                         <td>
-                            <a href="/Admin/TripWithDestinations?tripID=@trip.TripID" class="btn btn-info">Details</a>
-                            <a href="/TripParticipant/ViewParticipants?tripID=@trip.TripID" class="btn btn-warning">View Participants</a>
-                            <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/Admin/TripWithDestinations?tripID=@trip.TripID" class="btn btn-info dropdown-item">Details</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="/TripParticipant/ViewParticipants?tripID=@trip.TripID" class="btn btn-warning dropdown-item">View Participants</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger text-danger dropdown-item" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
+
+
                     </tr>
                 }
             </tbody>
         </table>
-
     </div>
 </div>
+
+
 
 
 
