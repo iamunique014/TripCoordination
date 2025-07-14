@@ -6,7 +6,7 @@
 
 @if (TempData["Info"] != null)
 {
-    <div class="alert alert-info alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+    <div class="alert alert-info alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i>
         <div>
             @TempData["Info"]
@@ -17,7 +17,7 @@
 
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger d-flex alert-conatiner-win alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger d-flex alert-container-win alert-dismissible fade show" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
         <div>
             @TempData["Error"]
@@ -27,7 +27,7 @@
 }
 else if (TempData["Success"] != null)
 {
-    <div class="alert alert-success alert-conatiner-win d-flex align-items-center alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i>
         <div>
             @TempData["Success"]
