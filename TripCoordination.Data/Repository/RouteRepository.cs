@@ -18,24 +18,24 @@ namespace TripCoordination.Data.Repository
             _db = db;
         }
 
-        public async Task<IEnumerable<Route>> GetAllAsync()
+        public async Task<IEnumerable<TripRoute>> GetAllAsync()
         {
             try
             {
-                return await _db.GetData<Route, dynamic>("sp_Get_Routes", new { });
+                return await _db.GetData<TripRoute, dynamic>("sp_Get_Routes", new { });
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in GetAllAsync: {ex.Message}");
-                return Enumerable.Empty<Route>();
+                return Enumerable.Empty<TripRoute>();
             }
         }
 
-        public async Task<Route?> GetByIDAsync(int routeID)
+        public async Task<TripRoute?> GetByIDAsync(int routeID)
         {
             try
             {
-                var result = await _db.GetData<Route, dynamic>("sp_Get_Route_By_ID", new { routeID });
+                var result = await _db.GetData<TripRoute, dynamic>("sp_Get_Route_By_ID", new { routeID });
                 return result.FirstOrDefault();
             }
             catch (Exception ex)
@@ -45,7 +45,7 @@ namespace TripCoordination.Data.Repository
             }
         }
 
-        public async Task<bool> CreateAsync(Route route)
+        public async Task<bool> CreateAsync(TripRoute route)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace TripCoordination.Data.Repository
             }
         }
 
-        public async Task<bool> UpdateAsync(Route route)
+        public async Task<bool> UpdateAsync(TripRoute route)
         {
             try
             {
