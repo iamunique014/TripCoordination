@@ -1,39 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 
 namespace TripCoordination.Controllers
 {
+    [Authorize]
     public class RouteController : Controller
     {
         private readonly IRouteRepository _routeRepository;
 
-        public RouteController(IRouteRepository routeRepo)
+        public RouteController(IRouteRepository routeRepository)
         {
-            _routeRepository = routeRepo;
+            _routeRepository = routeRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ViewRoutes()
         {
             ViewData["ShowSidebar"] = true;
             var routes = await _routeRepository.GetAllAsync();
             return View(routes);
         }
 
-        public async Task<IActionResult> Details(int routeID)
+        public async Task<IActionResult> RouteDetails(int routeID)
         {
             ViewData["ShowSidebar"] = true;
             var route = await _routeRepository.GetByIDAsync(routeID);
             if (route == null)
             {
                 TempData["Error"] = "Route not found.";
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewRoutes");
             }
             return View(route);
         }
-
-        public IActionResult Create()
+        [Authorize(Roles = "Admin, Organizer")]
+        public IActionResult CreateRoute()
         {
             ViewData["ShowSidebar"] = true;
             return View();
@@ -41,7 +43,7 @@ namespace TripCoordination.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateRouteViewModel model)
+        public async Task<IActionResult> CreateRoute(CreateRouteViewModel model)
         {
             ViewData["ShowSidebar"] = true;
             if (ModelState.IsValid)
@@ -57,28 +59,28 @@ namespace TripCoordination.Controllers
                 if (success)
                 {
                     TempData["Success"] = "Route created successfully.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ViewRoutes");
                 }
                 TempData["Error"] = "Failed to create route.";
             }
             return View(model);
         }
-
-        public async Task<IActionResult> Edit(int routeID)
+        [Authorize(Roles = "Admin, Organizer")]
+        public async Task<IActionResult> EditRoute(int routeID)
         {
             ViewData["ShowSidebar"] = true;
             var route = await _routeRepository.GetByIDAsync(routeID);
             if (route == null)
             {
                 TempData["Error"] = "Route not found.";
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewRoutes");
             }
             return View(route);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(CreateRouteViewModel model)
+        public async Task<IActionResult> EditRoute(CreateRouteViewModel model)
         {
             ViewData["ShowSidebar"] = true;
             if (ModelState.IsValid)
@@ -94,16 +96,16 @@ namespace TripCoordination.Controllers
                 if (success)
                 {
                     TempData["Success"] = "Route updated successfully.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ViewRoutes");
                 }
                 TempData["Error"] = "Failed to update route.";
             }
             return View(model);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int routeID)
+        public async Task<IActionResult> DeleteRoute(int routeID)
         {
             ViewData["ShowSidebar"] = true;
             var success = await _routeRepository.SoftDeleteAsync(routeID);
@@ -115,7 +117,7 @@ namespace TripCoordination.Controllers
             {
                 TempData["Error"] = "Failed to delete route.";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewRoutes");
         }
     }
 }
