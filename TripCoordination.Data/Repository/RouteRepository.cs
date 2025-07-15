@@ -22,7 +22,7 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                return await _db.GetData<TripRoute, dynamic>("sp_Get_Routes", new { });
+                return await _db.GetData<TripRoute, dynamic>("sp_Get_All_Routes", new { });
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                var result = await _db.GetData<TripRoute, dynamic>("sp_Get_Route_By_ID", new { routeID });
+                var result = await _db.GetData<TripRoute, dynamic>("sp_Get_Route_ByID", new { routeID });
                 return result.FirstOrDefault();
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                await _db.SaveData("sp_Soft_Delete_Route", new { routeID });
+                await _db.SaveData("sp_Delete_Route", new { routeID });
                 return true;
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ namespace TripCoordination.Data.Models.Domain
 {
     public class TripRoute
     {
-        public int RouteID { get; set; }
+        public int? RouteID { get; set; }
 
         public string Description { get; set; } = string.Empty;
 
