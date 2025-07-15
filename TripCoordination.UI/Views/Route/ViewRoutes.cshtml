@@ -1,5 +1,86 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<TripCoordination.Data.Models.Domain.TripRoute>
+
+<div class="page-title p-3 mt-3 label-control">
+    <h3>All Routes</h3>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-container-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+
+<div class="form-container p-3">
+    <div class="mb-3 text-end">
+           <a asp-action="CreateRoute" class="btn btn-primary w-auto">Create New Route</a>
+    </div>                
+    
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table">
+                    <tr>
+                        <th>Description</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th style="width:120px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var route in Model)
+                    {
+                        <tr>
+                            <td>@route.Description</td>
+                            <td>@route.FromLocation</td>
+                            <td>@route.ToLocation</td>
+                            <td>
+                                <div class="dropdown text-center">
+                                    <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/Route/EditRoute?routeID=@route.RouteID" class="dropdown-item">Edit</a>
+                                        </li>
+                                        <li>
+                                            <form asp-action="DeleteRoute" method="post">
+                                                <input type="hidden" name="routeID" value="@route.RouteID" />
+                                                <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Are you sure you want to delete this route?');">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            <i class="bi bi-info-circle me-2"></i>
+            No routes found.
+        </div>
+    }
+</div>

@@ -65,17 +65,27 @@ namespace TripCoordination.Controllers
             }
             return View(model);
         }
+        [HttpGet]
         [Authorize(Roles = "Admin, Organizer")]
         public async Task<IActionResult> EditRoute(int routeID)
         {
             ViewData["ShowSidebar"] = true;
             var route = await _routeRepository.GetByIDAsync(routeID);
+
+            var model = new CreateRouteViewModel
+            {
+                Description = route.Description,
+                FromLocation = route.FromLocation,
+                ToLocation = route.ToLocation,
+                RouteID = route.RouteID
+            };
+
             if (route == null)
             {
                 TempData["Error"] = "Route not found.";
                 return RedirectToAction("ViewRoutes");
             }
-            return View(route);
+            return View(model);
         }
 
         [HttpPost]
@@ -87,6 +97,7 @@ namespace TripCoordination.Controllers
             {
                 var route = new TripRoute
                 {
+                    RouteID = model.RouteID,
                     Description = model.Description,
                     FromLocation = model.FromLocation,
                     ToLocation = model.ToLocation
@@ -102,6 +113,7 @@ namespace TripCoordination.Controllers
             }
             return View(model);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
