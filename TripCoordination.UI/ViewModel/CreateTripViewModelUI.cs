@@ -9,5 +9,7 @@ namespace TripCoordination.ViewModel
     {
         [ValidateNever]
         public IEnumerable<SelectListItem> AvailableTowns { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> AvailableRoutes { get; set; }
     }
 }
