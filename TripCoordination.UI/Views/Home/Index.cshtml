@@ -11,29 +11,33 @@
 
         <!-- Search Form -->
         <form class="row g-3 justify-content-center align-items-end" method="post" asp-controller="Trip" asp-action="TripListing">
-            
-                <div class="col-md-3">
-                    <label class="label-control">Pickup Location</label>
-                    <input asp-for="PickUpLocation" type="text" class="input-control" placeholder="Pickup Location" />
-                </div>
+            <div class="col-md-3">
+                <label class="label-control">From</label>
+                <select asp-for="FromLocation" class="input-control" placeholder="City or town">
+                    @foreach (var town in Model.AvailableTowns)
+                    {
+                        <option value="@town.Text">@town.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="FromLocation" class="text-danger"></span>
+            </div>
 
-                <div class="col-md-3">
-                    <label class="label-control">Destination</label>
-                    <select asp-for="DestinationID" class="input-control">
-                        @foreach (var town in Model.AvailableTowns)
-                        {
-                            <option value="@town.Value">@town.Text</option>
-                        }
-                    </select>
-                    <span class="text-danger"></span>
-                </div>
+            <div class="col-md-3">
+                <label class="label-control">Destination</label>
+                <select asp-for="DestinationID" class="input-control">
+                    @foreach (var town in Model.AvailableTowns)
+                    {
+                        <option value="@town.Value">@town.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="DestinationID" class="text-danger"></span>
+            </div>
 
-                <div class="col-md-3">
-                    <label class="label-control">Departure Date</label>
-                    <input asp-for="DepartureDate" type="date" class="input-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" />          
-                </div>
-            
-           
+            <div class="col-md-3">
+                <label class="label-control">Departure Date</label>
+                <input asp-for="DepartureDate" type="date" class="input-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+                         
             <div class="col-12 mt-3">
                 <button type="submit" class="btn btn-primary w-50">Find a Trip</button>
             </div>

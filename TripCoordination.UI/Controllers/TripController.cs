@@ -64,7 +64,6 @@ namespace TripCoordination.Controllers
                         TownID = model.DestinationID
                     };
 
-
                     // Find the Trip using repository pattern
                     var availableTrips = await _tripRepository.FindTripsAsync(model, trip);
 
