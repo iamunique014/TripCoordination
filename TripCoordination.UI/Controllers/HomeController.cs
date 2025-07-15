@@ -37,15 +37,13 @@ namespace TripCoordination.UI.Controllers
             ViewData["HideSidebarToggle"] = true;
             var towns = await _townRepository.GetAllAsync();
 
-            ViewBag.Destination = towns;
+            ViewBag.Towns = towns;
 
             var townSelectList = towns.Select(t => new SelectListItem
             {
                 Value = t.TownID.ToString(),
                 Text = t.Name
             }).ToList();
-
-
 
             var viewModel = new TripListingViewModelUI
             {
