@@ -28,10 +28,11 @@ namespace TripCoordination.Controllers
         private readonly IProfileRepository _profileRepository;
         private readonly IUserRoleRepository _UserRoleRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IRouteRepository _routeRepository;
         private readonly ApplicationDbContext _context;
        
 
-        public TripController(ILogger<TripController> logger, ApplicationDbContext context, IProfileService profileService,ITripRepository tripRepository, ITownRepository townRepository, ITripDestinationTownRepository tripDestinationTownRepository)
+        public TripController(ILogger<TripController> logger, ApplicationDbContext context, IProfileService profileService,ITripRepository tripRepository, ITownRepository townRepository, ITripDestinationTownRepository tripDestinationTownRepository, IRouteRepository routeRepository)
         {
             _logger = logger;
             _profileService = profileService;
@@ -39,6 +40,7 @@ namespace TripCoordination.Controllers
             _townRepository = townRepository;
             _tripDestinationTownRepository = tripDestinationTownRepository;
             _context = context;
+            _routeRepository = routeRepository;
 
         }
 
@@ -222,16 +224,18 @@ namespace TripCoordination.Controllers
                 var storedProc = "[dbo].[sp_Create_Trip_With_Destinations]";
                 var parameters = new[]
                 {
-                        new SqlParameter("@CreatorUserID", userId),
-                        new SqlParameter("@DepartureDate", model.DepartureDate),
-                        new SqlParameter("@IsFull", false),
-                        new SqlParameter("@Seats", model.Seats),
-                        new SqlParameter("@TownIDs", townIds)
-                    };
+                    new SqlParameter("@CreatorUserID", userId),
+                    new SqlParameter("@DepartureDate", model.DepartureDate),
+                    new SqlParameter("@RouteID", model.RouteID),
+                    new SqlParameter("@IsFull", false),
+                    new SqlParameter("@Seats", model.Seats),
+                    new SqlParameter("@TownIDs", townIds)
+
+                };
 
                 // Execute the stored procedure
                 var result = await _context.Database.ExecuteSqlRawAsync(
-                    $"EXEC {storedProc} @CreatorUserID, @DepartureDate, @IsFull, @Seats, @TownIDs",
+                    $"EXEC {storedProc} @CreatorUserID, @DepartureDate, @RouteID, @IsFull, @Seats, @TownIDs",
                     parameters
                 );
 
@@ -268,10 +272,18 @@ namespace TripCoordination.Controllers
         private async Task PopulateCreateTripViewModelAsync(CreateTripViewModelUI model)
         {
             var towns = await _townRepository.GetAllAsync();
+            var routes = await _routeRepository.GetAllAsync();
+
             model.AvailableTowns = towns.Select(t => new SelectListItem
             {
                 Value = t.TownID.ToString(),
                 Text = t.Name
+            }).ToList();
+
+            model.AvailableRoutes = routes.Select(r => new SelectListItem
+            {
+                Text = $"{r.FromLocation} to {r.ToLocation}",
+                Value = r.RouteID.ToString()
             }).ToList();
         }
 
