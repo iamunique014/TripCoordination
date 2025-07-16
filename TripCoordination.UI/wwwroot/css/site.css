@@ -161,13 +161,14 @@
     --black-olive: #3f3f37;
     background: var(--black-olive);
     width: 250px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .side-menu {
     --black-olive: #3f3f37;
     background: var(--black-olive);
-    height: 100vh;
+    min-height: 100vh;
+    /*position: fixed;*/
 }
 
      .side-menu .nav-item .nav-link{
@@ -255,8 +256,6 @@
             color: var(--flame)
         }
 
-
-
 /*============================================*/
 /*                Form styles                 */
 /*============================================*/
@@ -269,7 +268,6 @@
     border-radius: 1rem;
     box-shadow: 4px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
     padding: 2rem;
-    margin-bottom: 2rem;
 }                
 
 .input-control{
