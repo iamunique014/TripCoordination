@@ -8,8 +8,9 @@ namespace TripCoordination.Common.ViewModel
         public int TripID { get; set; }
         [Required(ErrorMessage = "Please select a destination")]
         public int DestinationID { get; set; }
+        [Required(ErrorMessage = "Please select a Departure City eg. Gqeberha")]
+        public string FromLocation { get; set; }
         [Required(ErrorMessage = "Please Enter a pickUpPoint eg. Res Address")]
-        public string PickUpLocation { get; set; }
         public DateTime DepartureDate { get; set; }
         public string? CreatorName { get; set; }
         public string? CreatorSurname { get; set; }

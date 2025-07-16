@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create Trip";
 }
 
-<div class="page-title p-3 mt-3 label-control">
+<div class="page-title p-3 label-control">
     <h3>Create New Trip</h3>
 </div>
 
@@ -20,6 +20,18 @@
 
 <div class="form-container p-3">
     <form asp-action="CreateTrip" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label asp-for="RouteID" class="label-control">Route</label>
+            <select asp-for="RouteID" asp-items="Model.AvailableRoutes" class="input-control">
+                <option disabled selected value="">Select Route </option>
+                @foreach (var route in Model.AvailableRoutes)
+                {
+                    <option value="@route.Value">@route.Text</option>
+                }
+            </select>
+            <span asp-validation-for="RouteID" class="text-danger"></span>
+        </div>
+
         <div class="mb-3">
             <label asp-for="DepartureDate" class="label-control">Departure Date</label>
             <input asp-for="DepartureDate" class="input-control" type="datetime-local" step="60" />
@@ -48,8 +60,6 @@
         </div>
     </form>
 </div>
-
-
 
 
 @section Scripts {

@@ -60,23 +60,27 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateResidence(Residence residence)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)
                     return View(residence);
+
                 bool addResidence = await _residenceRepository.AddAsync(residence);
                 if (addResidence)
                 {
-                    TempData["msg"] = "Sucessfully Added";
+                    TempData["Success"] = "New Residence created successfully!";
+                    return RedirectToAction(nameof(ManageResidences));
                 }
                 else
                 {
-                    TempData["msg"] = "Could not add";
+                    TempData["Error"] = "Failed to created new residence";
+                    return View(residence);
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageResidences));
         }
@@ -101,14 +105,21 @@ namespace TripCoordination.Controllers
                 bool updateRecord = await _residenceRepository.UpdateAsync(residence);
 
                 if (updateRecord)
-                    TempData["msg"] = "Successfully Added";
+                {
+                    TempData["Success"] = "Residence updated successfully!";
+                    return RedirectToAction(nameof(ManageResidences));
+                }
                 else
-                    TempData["msg"] = "Oh Hell Nah";
+                {
+                    TempData["Error"] = "Failed to update residence";
+                    return View(residence);
+                }
+                    
             }
 
             catch (Exception ex)
             {
-                TempData["msg"] = "Seriously!!!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageResidences));
         }
@@ -117,6 +128,14 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> DeleteResidence(int residenceID)
         {
             var deleteResult = await _residenceRepository.DeleteAsync(residenceID);
+            if (deleteResult)
+            {
+                TempData["Success"] = "Residence Deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to Delete residence";
+            }
             return RedirectToAction(nameof(ManageResidences));
         }
 
@@ -145,23 +164,29 @@ namespace TripCoordination.Controllers
             try
             {
                 if (!ModelState.IsValid)
+                {
+                    TempData["Error"] = "Failed to add new town, Please check all fields!";
                     return View(town);
+                }
+                   
 
                 bool addTown = await _townRepository.AddAsync(town);
                 if (addTown)
                 {
-                    TempData["msg"] = "Sucessfully Added";
+                    TempData["Success"] = "New town created successfully";
+                    return RedirectToAction(nameof(ManageTowns));
                 }
                 else
                 {
-                    TempData["msg"] = "Could not add";
+                    TempData["Error"] = "Failed to add new town";
+                    return View(town);
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
+                TempData["Error"] = "Something went wrong Please try again later!!!";
+                return View(town);
             }
-            return RedirectToAction(nameof(ManageTowns));
         }
 
         public async Task<IActionResult> EditTown(int townID)
@@ -184,14 +209,20 @@ namespace TripCoordination.Controllers
                 bool updateRecord = await _townRepository.UpdateAsync(town);
 
                 if (updateRecord)
-                    TempData["msg"] = "Successfully Added";
+                {
+                    TempData["Success"] = "Town updated successfully";
+                    return RedirectToAction(nameof(ManageTowns));
+                }
                 else
-                    TempData["msg"] = "Oh Hell Nah";
+                {
+                    TempData["Error"] = "Failed to update record";
+                    return View(town);
+                }
             }
 
             catch (Exception ex)
             {
-                TempData["msg"] = "Seriously!!!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageTowns));
         }
@@ -199,29 +230,16 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> DeleteTown(int townID)
         {
             var deleteResult = await _townRepository.DeleteAsync(townID);
+            if (deleteResult)
+            {
+                TempData["Success"] = "Town Deleted successfully";
+            }
+            else
+            {
+                TempData["Error"] = "Something went wrong, Please try again later!";
+            }
             return RedirectToAction(nameof(ManageTowns));
         }
-
-        //=================================================//
-        //                TRIP MANAGEMENT                  //
-        //=================================================//
-        //[HttpGet]
-        //public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
-        //{
-        //    string date = "1/2/1754";
-
-        //    ViewData["ShowSidebar"] = true;
-        //    var trip = new Trip
-        //    { 
-
-        //        //CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
-        //        DepartureDate = DateTime.Parse(date)
-        //        //TownID = model.DestinationID
-        //    };
-
-        //    var trips = await _tripRepository.FindTripsAsync(model, trip);
-        //    return View(trips.ToList());
-        //}
 
         [HttpGet]
         public async Task<IActionResult> ManageTrips()
@@ -240,109 +258,10 @@ namespace TripCoordination.Controllers
             return View(trip);  // this returns a single TripWithDestinationsViewModel
         }
 
-
-        //[HttpGet]
-        //public async Task<IActionResult> ManageTrips(TripListingViewModelUI model)
-        //{
-        //    //This is important so that the query doesn't return null.
-        //    string date = "1/2/1754";
-        //    ViewData["ShowSidebar"] = true;
-        //    //if (ModelState.IsValid)
-        //    //{
-
-        //    try
-        //    {
-        //        // map a new Trip to find
-        //        var trip = new Trip
-        //        {
-        //            //CreatorUserId = 6,  //CreatorUser = User.Identity.Name, use when authentication is setup
-        //            DepartureDate = DateTime.Parse(date)
-        //            //TownID = model.DestinationID
-        //        };
-
-
-        //        // Find the Trip using repository pattern
-        //        var availableTrips = await _tripRepository.FindTripsAsync(model, trip);
-
-        //        var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
-        //        {
-        //            TripID = tripListing.TripID,
-        //            DestinationID = tripListing.DestinationID,
-        //            Name = tripListing.Surname + " " + tripListing.Name,
-        //            Surname = tripListing.Surname,
-        //            DestinationName = tripListing.DestinationName,
-        //            DepartureDate = tripListing.DepartureDate,
-        //            Seats = tripListing.Seats
-        //            // Map additional properties here
-        //        }).ToList();
-
-        //        //return RedirectToAction("TripListing");
-        //        return View(viewModel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception details for debugging purposes.
-        //        //_logger.LogError(ex, "Error occurred while creating trip.");
-        //        // Add a generic error message to the ModelState.
-        //        ModelState.AddModelError("", "An error occurred while creating the trip. Please try again.");
-        //        Console.WriteLine(ex.ToString());
-        //    }
-
-        //    //}
-
-
-        //    ////log ModelState errors for additional debugging
-        //    //foreach (var state in ModelState)
-        //    //{
-        //    //    foreach (var error in state.Value.Errors)
-        //    //    {
-        //    //        //_logger.LogDebug($"ModelState error in '{state.Key}': {error.ErrorMessage}");
-        //    //        Console.WriteLine("{0}", error.ErrorMessage);
-        //    //    }
-        //    //}
-
-        //    //// Reloading available towns if the model state is invalid
-        //    //var towns = await _townRepository.GetAllAsync();
-        //    //model.AvailableTowns = towns.Select(t => new SelectListItem
-        //    //{
-        //    //    Value = t.TownID.ToString(),
-        //    //    Text = t.Name
-        //    //}).ToList();
-
-        //    return View(new List<TripListingViewModelUI>());
-        //}
-
-
-
-
         public async Task<IActionResult> CreateTrip()
         {
             ViewData["ShowSidebar"] = true;
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateTrip(Trip trip)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return View(trip);
-                bool addTrip = await _tripRepository.AddAsync(trip);
-                if (addTrip)
-                {
-                    TempData["msg"] = "Sucessfully Added";
-                }
-                else
-                {
-                    TempData["msg"] = "Could not add";
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
-            }
-            return RedirectToAction(nameof(ManageResidences));
         }
     }
 }

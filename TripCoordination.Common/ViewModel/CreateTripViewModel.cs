@@ -8,9 +8,8 @@ namespace TripCoordination.Common.ViewModel
         [Display(Name = "Departure Date and Time")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public DateTime DepartureDate { get; set; }
-
-        //[Required(ErrorMessage = "Please select trip destination.")]
-        //public int? DestinationID { get; set; }
+        [Required(ErrorMessage = "Please select a route.")]
+        public int RouteID { get; set; }
         [Required(ErrorMessage = "Please enter number of seats.")]
         public int? Seats { get; set; }
 

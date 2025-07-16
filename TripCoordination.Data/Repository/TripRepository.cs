@@ -101,7 +101,6 @@ namespace TripCoordination.Data.Repository
                 return Enumerable.Empty<TripViewModel>();
             }
         }
-
         public async Task<IEnumerable<TripWithDestinationsViewModel>> GetTripWithDestinations(int tripID)
         {
             try
@@ -145,10 +144,10 @@ namespace TripCoordination.Data.Repository
                 string query = "sp_Find_Trips";
 
                 return await _db.GetData<TripListingViewModel, dynamic>(query, new 
-                { 
+                {   
+                    tripListing.FromLocation,
                     trip.TownID, 
                     trip.DepartureDate 
-
                 });
             }
             catch (Exception ex)

@@ -3,37 +3,85 @@
     ViewData["Title"] = "DisplayAll";
 }
 
-<div class="container">
-    <h1>List of Residences</h1>
+<div class="page-title p-3 label-control">
+    <h3>All Residences</h3>
+</div>
 
-
-    <div class="my-2">
-        @* <a href="/Person/Add" class="btn btn-info my-2">Add more</a> *@
-
-        <a asp-action="CreateResidence" class="btn btn-info my-2">Add more</a>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var residence in Model)
-                {
-                    <tr>
-                        <td>@residence.Name</td>
-                        <td>@residence.Address</td>
-                        <td>
-                            <a href="/Admin/EditResidence?residenceID=@residence.ResidenceID" class="btn btn-success">Edit</a>
-                            <a href="/Admin/DeleteResidence?residenceID=@residence.ResidenceID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+}
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-container-lose d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="form-container p-3 label-control">
+    <div class="text-end">
+        <a asp-action="CreateResidence" class="btn btn-primary my-2">Create new Residence</a>
+    </div>
+    @if(Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var residence in Model)
+                    {
+                        <tr>
+                            <td>@residence.Name</td>
+                            <td>@residence.Address</td>
+                            
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="/Admin/EditResidence?residenceID=@residence.ResidenceID">
+                                                Edit
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <form method="post" action="/Admin/DeleteResidence" onsubmit="return confirm('Are you sure to delete this record?')">
+                                                <input type="hidden" name="residenceID" value="@residence.ResidenceID" />
+                                                <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            <i class="bi bi-info-circle me-2"></i>
+            No Residences found
+        </div>
+    }
 </div>
