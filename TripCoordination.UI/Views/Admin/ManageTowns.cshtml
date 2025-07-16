@@ -7,6 +7,27 @@
     <h3>All Towns</h3>
 </div>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-container-lose d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <div class="form-container p-3 label-control">
     <div class="text-end">
         <a asp-action="CreateTown" class="btn btn-primary my-2">Create new town</a>
