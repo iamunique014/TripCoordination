@@ -145,23 +145,29 @@ namespace TripCoordination.Controllers
             try
             {
                 if (!ModelState.IsValid)
+                {
+                    TempData["Error"] = "Failed to add new town, Please check all fields!";
                     return View(town);
+                }
+                   
 
                 bool addTown = await _townRepository.AddAsync(town);
                 if (addTown)
                 {
-                    TempData["msg"] = "Sucessfully Added";
+                    TempData["Success"] = "New town created successfully";
+                    return RedirectToAction(nameof(ManageTowns));
                 }
                 else
                 {
-                    TempData["msg"] = "Could not add";
+                    TempData["Error"] = "Failed to add new town";
+                    return View(town);
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
+                TempData["Error"] = "Something went wrong Please try again later!!!";
+                return View(town);
             }
-            return RedirectToAction(nameof(ManageTowns));
         }
 
         public async Task<IActionResult> EditTown(int townID)
@@ -184,14 +190,20 @@ namespace TripCoordination.Controllers
                 bool updateRecord = await _townRepository.UpdateAsync(town);
 
                 if (updateRecord)
-                    TempData["msg"] = "Successfully Added";
+                {
+                    TempData["Success"] = "Town updated successfully";
+                    return RedirectToAction(nameof(ManageTowns));
+                }
                 else
-                    TempData["msg"] = "Oh Hell Nah";
+                {
+                    TempData["Error"] = "Failed to update record";
+                    return View(town);
+                }
             }
 
             catch (Exception ex)
             {
-                TempData["msg"] = "Seriously!!!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageTowns));
         }
@@ -199,6 +211,14 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> DeleteTown(int townID)
         {
             var deleteResult = await _townRepository.DeleteAsync(townID);
+            if (deleteResult)
+            {
+                TempData["Success"] = "Town Deleted successfully";
+            }
+            else
+            {
+                TempData["Error"] = "Something went wrong, Please try again later!";
+            }
             return RedirectToAction(nameof(ManageTowns));
         }
 

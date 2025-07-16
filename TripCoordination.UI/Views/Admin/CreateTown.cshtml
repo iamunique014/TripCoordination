@@ -6,9 +6,17 @@
 <div class="page-title p-3 mt-3 label-control">
     <h3>Create New Town</h3>
 </div>
-
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-container-lose d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 <div class="form-container p-3">
-    @* <a href="/Admin/ManageTowns" class="my-2 btn btn-primary">Display All</a> *@
 
     <form asp-action="CreateTown" method="post">
 
@@ -34,12 +42,7 @@
             <span class="text-danger" asp-validation-for="Price"></span>
         </div>
 
-        @if (TempData["msg"] != null)
-        {
-            <div class="mb-3">
-                @TempData["msg"]
-            </div>
-        }
+        
 
         <div class="text-center">
             <button type="submit" class="btn btn-primary w-50">Save</button>
