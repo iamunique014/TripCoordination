@@ -57,9 +57,14 @@
                                     <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                         Actions
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
+                                    <ul class="dropdown-menu">
                                         <li>
-                                            <form asp-action="DeleteRouteRequest" method="post" class="">
+                                            <a class="dropdown-item" href="/Admin/EditTown?townID=@item.Reason">
+                                                Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form asp-action="DeleteRouteRequest" method="post">
                                                 <input type="hidden" name="id" value="@item.RouteRequestID" />
                                                 <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Delete this request?');">Delete</button>
                                             </form>
