@@ -168,6 +168,7 @@
     --black-olive: #3f3f37;
     background: var(--black-olive);
     min-height: 100vh;
+    /*position: fixed;*/
 }
 
      .side-menu .nav-item .nav-link{
@@ -254,8 +255,6 @@
         .sidebar-nav .nav-content a.active {
             color: var(--flame)
         }
-
-
 
 /*============================================*/
 /*                Form styles                 */
