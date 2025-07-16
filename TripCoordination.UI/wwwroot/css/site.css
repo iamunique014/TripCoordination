@@ -161,13 +161,13 @@
     --black-olive: #3f3f37;
     background: var(--black-olive);
     width: 250px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .side-menu {
     --black-olive: #3f3f37;
     background: var(--black-olive);
-    height: 100vh;
+    min-height: 100vh;
 }
 
      .side-menu .nav-item .nav-link{
