@@ -23,11 +23,6 @@ namespace TripCoordination.Controllers
         private readonly ITripRepository _tripRepository;
         private readonly ITownRepository _townRepository;
         private readonly ITripDestinationTownRepository _tripDestinationTownRepository;
-        private readonly IResidenceRepository _residenceRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IProfileRepository _profileRepository;
-        private readonly IUserRoleRepository _UserRoleRepository;
-        private readonly IRoleRepository _roleRepository;
         private readonly IRouteRepository _routeRepository;
         private readonly ApplicationDbContext _context;
        
