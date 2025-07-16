@@ -28,40 +28,6 @@ else if(TempData["Error"] != null)
     </div>
 }
 
-@* 
-<div class="form-container p-3 label-control">
-
-    <table class="table table-stripped">
-        <thead>
-            <tr>
-                <th>Creator</th>
-                <th>Depature Date</th>
-                <th>Seats</th>
-                <th>IsFull</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var trip in Model)
-            {
-                <tr>
-                    @* <td>@trip.TripID</td>  
-                    <td>@trip.CreatorName @trip.CreatorSurname</td>
-                    <td>@trip.DepartureDate</td>
-                    <td>@trip.Seats</td>
-                    <td>@(trip.IsFull ? "Yes" : "No")</td>
-                    <td>
-                        <a href="/Admin/TripWithDestinations?tripID=@trip.TripID" class="btn btn-success">Edit</a>
-                        <a href="/TripParticipant/ViewParticipants?tripID=@trip.TripID" class="btn btn-warning">View Participants</a>
-                        <a href="/Trip/DeleteTrip?id=@trip.TripID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-</div> *@
-
 <div class="form-container p-3 label-control">
     <div class="table-responsive">
         <table class="table table-hover align-middle text-nowrap">
