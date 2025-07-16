@@ -21,9 +21,9 @@
                 @if (SignInManager.IsSignedIn(User) && (ViewData["HideSidebarToggle"] as bool? != true))
                 {
                     <!-- Sidebar Toggle -->
-                    <button class="btn btn-sm btn-flame d-md-none p-0 me-1 fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+                    <button class="btn btn-sm btn-flame d-md-none p-0 me-1 fs-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                         aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle sidebar">
-                        <i class="bi bi-list"></i>
+                        <i class="navbar-toggler-icon"></i>
                     </button>
                 }
                 <!-- Brand -->
@@ -31,16 +31,14 @@
                     <span class="fw-bold">UniTrips</span>
                 </a>
             </div>
-           
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="bi bi-list"></span>
             </button>
+          
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    @* <li class="nav-item">
-                        <a class="nav-link" asp-controller="Trip" asp-action="AllTrips">Trips</a>
-                    </li> *@
+                   
                     
                 </ul>
                 <partial name="_LoginPartial" /> 
