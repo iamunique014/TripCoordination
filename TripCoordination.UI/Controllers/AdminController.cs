@@ -60,23 +60,27 @@ namespace TripCoordination.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateResidence(Residence residence)
         {
+            ViewData["ShowSidebar"] = true;
             try
             {
                 if (!ModelState.IsValid)
                     return View(residence);
+
                 bool addResidence = await _residenceRepository.AddAsync(residence);
                 if (addResidence)
                 {
-                    TempData["msg"] = "Sucessfully Added";
+                    TempData["Success"] = "New Residence created successfully!";
+                    return RedirectToAction(nameof(ManageResidences));
                 }
                 else
                 {
-                    TempData["msg"] = "Could not add";
+                    TempData["Error"] = "Failed to created new residence";
+                    return View(residence);
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageResidences));
         }
@@ -101,14 +105,21 @@ namespace TripCoordination.Controllers
                 bool updateRecord = await _residenceRepository.UpdateAsync(residence);
 
                 if (updateRecord)
-                    TempData["msg"] = "Successfully Added";
+                {
+                    TempData["Success"] = "Residence updated successfully!";
+                    return RedirectToAction(nameof(ManageResidences));
+                }
                 else
-                    TempData["msg"] = "Oh Hell Nah";
+                {
+                    TempData["Error"] = "Failed to update residence";
+                    return View(residence);
+                }
+                    
             }
 
             catch (Exception ex)
             {
-                TempData["msg"] = "Seriously!!!!!";
+                TempData["Error"] = "Something went wrong, Please try again later!";
             }
             return RedirectToAction(nameof(ManageResidences));
         }
@@ -117,6 +128,14 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> DeleteResidence(int residenceID)
         {
             var deleteResult = await _residenceRepository.DeleteAsync(residenceID);
+            if (deleteResult)
+            {
+                TempData["Success"] = "Residence Deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to Delete residence";
+            }
             return RedirectToAction(nameof(ManageResidences));
         }
 
