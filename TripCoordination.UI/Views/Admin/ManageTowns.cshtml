@@ -13,32 +13,31 @@
             <a asp-action="CreateTown" class="btn btn-primary my-2">Create new town</a>
        </div>
        
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Region</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var town in Model)
-                {
+       <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                       @*  <td>@town.TownID</td> *@
-                        <td>@town.Name</td>
-                        <td>@town.Region</td>
-                        <td>@town.Price</td>
-                        <td>
-                            <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a>
-                            <a href="/Admin/DeleteTown?townID=@town.TownID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
-                        </td>
+                        <th>Name</th>
+                        <th>Region</th>
+                        <th>Price</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    @foreach (var town in Model)
+                    {
+                        <tr>
+                            <td>@town.Name</td>
+                            <td>@town.Region</td>
+                            <td>@town.Price</td>
+                            <td>
+                                <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a>
+                                <a href="/Admin/DeleteTown?townID=@town.TownID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+       </div>
     </div>
 </div> 
