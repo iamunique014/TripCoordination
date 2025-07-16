@@ -15,7 +15,7 @@
        </div>
        
        <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -31,10 +31,31 @@
                             <td>@town.Name</td>
                             <td>@town.Region</td>
                             <td>@town.Price</td>
-                            <td>
+                           @*  <td>
                                 <a href="/Admin/EditTown?townID=@town.TownID" class="btn btn-success">Edit</a>
                                 <a href="/Admin/DeleteTown?townID=@town.TownID" class="btn btn-danger" onclick="return window.confirm('Are you sure to delete this record?')">Delete</a>
-                            </td>
+                            </td> *@
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="/Admin/EditTown?townID=@town.TownID">
+                                            Edit
+                                        </a>
+                                    </li>
+                                   
+                                    <li>
+                                        <form method="post" action="/Admin/DeleteTown" onsubmit="return confirm('Are you sure to delete this record?')">
+                                            <input type="hidden" name="townID" value="@town.TownID" />
+                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
                         </tr>
                     }
                 </tbody>
