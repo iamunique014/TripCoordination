@@ -24,10 +24,6 @@
             <label asp-for="RouteID" class="label-control">Route</label>
             <select asp-for="RouteID" asp-items="Model.AvailableRoutes" class="input-control">
                 <option disabled selected value="">Select Route </option>
-                @foreach (var route in Model.AvailableRoutes)
-                {
-                    <option value="@route.Value">@route.Text</option>
-                }
             </select>
             <span asp-validation-for="RouteID" class="text-danger"></span>
         </div>
