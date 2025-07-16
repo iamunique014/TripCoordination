@@ -51,15 +51,15 @@
     <!-- Main Content -->
     @if (ViewData["ShowSidebar"] != null && (bool)ViewData["ShowSidebar"] && SignInManager.IsSignedIn(User))
     {
-        <div class="row">
+        <div class="d-flex flex-row min-vh-100">
          
-             <div class="p-0 collapse collapse-horizontal sidebar-wrapper d-md-block sidebar" id="sidebarMenu">
+             <div class="collapse collapse-horizontal sidebar-wrapper d-md-block sidebar" id="sidebarMenu">
                <div>
                    @await Html.PartialAsync("_Sidebar")
                </div>
             </div>
 
-            <main class="col-md-8">
+            <main class="flex-grow-1 p-3">
                 @RenderBody()
             </main>
             
