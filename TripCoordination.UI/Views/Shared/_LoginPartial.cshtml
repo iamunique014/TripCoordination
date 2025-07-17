@@ -4,24 +4,24 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-  
-     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle"></i>
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
                 @UserManager.GetUserName(User)
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
                 @if (User.IsInRole("Admin"))
                 {
                     <li><a id="manage" class="dropdown-item" asp-controller="Admin" asp-action="AdminDashboard" title="Dashboard">Dashboard</a></li>
                 }
-                else if(User.IsInRole("Organizer"))
+                else if (User.IsInRole("Organizer"))
                 {
                     <li><a id="manage" class="dropdown-item" asp-controller="TripCreator" asp-action="OrganizerDashboard" title="Dashboard">Dashboard</a></li>
                 }
-                else if(User.IsInRole("Student"))
+                else if (User.IsInRole("Student"))
                 {
                     <li><a id="manage" class="dropdown-item" asp-controller="Student" asp-action="StudentDashboard" title="Dashboard">Dashboard</a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -35,17 +35,41 @@
                         <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
                     </form>
                 </li>
-          </ul>
-     </li>
-
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+            </ul>
+        </li>
+    }
+    else
+    {
+        
+        <li class="nav-item">
+            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown">
+                <a class="nav-link w-100 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Demos
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <form asp-controller="DemoLogin" asp-action="LoginAs" method="post" class="m-2">
+                            <button type="submit" name="role" value="admin" class="dropdown-item text-danger">Login as Admin</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form asp-controller="DemoLogin" asp-action="LoginAs" method="post" class="m-2">
+                            <button type="submit" name="role" value="organizer" class="dropdown-item">Login as Organizer</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form asp-controller="DemoLogin" asp-action="LoginAs" method="post" class="m-2">
+                            <button type="submit" name="role" value="student" class="dropdown-item">Login as Student</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    }
 </ul>

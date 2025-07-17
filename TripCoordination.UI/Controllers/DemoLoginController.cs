@@ -20,7 +20,7 @@ namespace TripCoordination.Controllers
         {
             string email = role.ToLower() switch
             {
-                "admin" => "mradmin@gmail.com",
+                "admin" => "admin@demo.com",
                 "student" => "student@demo.com",
                 "organizer" => "organizer@demo.com",
                 _ => null
@@ -50,7 +50,7 @@ namespace TripCoordination.Controllers
                         return RedirectToAction("MyTrips", "TripCreator");
 
                     if (await _userManager.IsInRoleAsync(user, "Student"))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("MyTrips", "Student");
 
                     // Default fallback
                     return RedirectToAction("Index", "Home");
