@@ -14,14 +14,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-
-@if (Model.Any())
-{
-    <div class="form-container p-3">
-
-        <div class="mb-3 text-end">
+ <div class="form-container p-3">
+            <div class="mb-3 text-end">
             <a asp-action="CreateRequest" class="btn btn-primary w-auto">Create New Request</a>
         </div>
+@if (Model.Any())
+{
+   
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
@@ -90,7 +89,7 @@
             </table>
         </div>
 
-    </div>
+    
 }
 else
 {
@@ -99,3 +98,4 @@ else
        No Trip Requests found
     </div>
 }
+</div>
