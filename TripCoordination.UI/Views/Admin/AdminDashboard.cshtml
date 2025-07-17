@@ -1,4 +1,16 @@
-﻿<div class="alert alert-info">
+﻿@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="alert alert-info">
     <i class="bi bi-info-circle me-2"></i>
     Coming soon: user management stats and system-wide trip analytics.
 </div>
