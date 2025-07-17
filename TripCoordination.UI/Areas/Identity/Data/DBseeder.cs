@@ -18,8 +18,8 @@ namespace TripCoordination.Areas.Identity.Data
             // === DEMO: Admin ===
             var admin = new IdentityUser
             {
-                UserName = "mradmin@gmail.com",
-                Email = "mradmin@gmail.com",
+                UserName = "admin@demo.com",
+                Email = "admin@demo.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
