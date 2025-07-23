@@ -30,14 +30,14 @@ else if(TempData["Error"] != null)
 
 <div class="form-container p-3 label-control">
     <div class="table-responsive">
-        <table class="table table-hover align-middle text-nowrap">
+        <table class="table table-hover align-middle text-nowrap" id="tripTable">
             <thead>
                 <tr>
                     <th>Creator</th>
                     <th>Departure Date</th>
                     <th>Seats</th>
                     <th>Is Full</th>
-                    <th>Actions</th>
+                    <th class="noExport">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,3 +79,58 @@ else if(TempData["Error"] != null)
         </table>
     </div>
 </div>
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tripTable').DataTable({
+                pageLength: 5, //  Set default to 5
+                lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ], // Add 5 and "All" to the dropdown
+                   dom: '<"row mb-2"' +
+                            '<"col-md-6 d-flex align-items-center"l>' + // Left: Length menu
+                            '<"col-md-6 text-md-end mt-2 mt-0"B>' +  // Right: Buttons, aligned end on md+
+                         '>'+
+                     '<"row mb-2"<"col-sm-12"f>>' +
+                     '<"row"<"col-sm-12"tr>>' +
+                     '<"row mt-2"<"col-sm-5"i><"col-sm-7"p>>',
+                buttons: [
+                    //Excell button
+                    { extend: 'excel',
+                        text: 'Export to Excel',
+                        title: 'Trips_List_' + new Date().toLocaleDateString(),
+                        className: 'btn btn-sm btn-outline-info',
+                        exportOptions:
+                        {
+                            columns: ':not(.noExport)'
+                        }
+                    },
+
+                    //PDF Button
+                    { extend: 'pdf',
+                        text: 'Export to PDF',
+                        title: 'Trips_List_' + new Date().toLocaleDateString(),
+                        //orientation: 'landscape',
+                        //pageSize: 'A4'
+                        className: 'btn btn-sm btn-outline-danger',
+                        exportOptions:
+                        {
+                            columns: ':not(.noExport)'
+                        }
+                    },
+
+                ],
+                responsive: true,
+                language: {
+                    search: "Search:",
+                    lengthMenu: "Show _MENU_ trips per page",
+                    zeroRecords: "No matching records found",
+                    info: "Showing _START_ to _END_ of _TOTAL_ trips",
+                    infoEmpty: "No records to show",
+                    infoFiltered: "(filtered from _MAX_ total records)"
+                }
+            });
+        });
+    </script>
+}

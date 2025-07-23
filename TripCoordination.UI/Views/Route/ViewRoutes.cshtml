@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<TripCoordination.Data.Models.Domain.TripRoute>
 
+@{
+    ViewData["Title"] = "All Routes";
+}
+
 <div class="page-title p-3 mt-3 label-control">
     <h3>All Routes</h3>
 </div>
@@ -33,7 +37,7 @@ else if (TempData["Error"] != null)
     @if (Model.Any())
     {
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="routesTable">
                 <thead class="table">
                     <tr>
                         <th>Description</th>
@@ -84,3 +88,9 @@ else if (TempData["Error"] != null)
         </div>
     }
 </div>
+
+@section Scripts{
+    <script>
+        setupDataTable('#routesTable');
+    </script>
+}

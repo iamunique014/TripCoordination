@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<TripCoordination.Data.Models.Domain.RouteRequest>
 
+@{
+    ViewData["Title"] = "My Route Requests";
+}
+
 <div class="page-title p-3 label-control">
     <h3>My Route Requests</h3>
 </div>
@@ -23,7 +27,7 @@
     @if (Model.Any())
     {
         <div class="table-responsive">
-            <table class="table table-striped table-hover align-middle">
+            <table class="table table-striped table-hover align-middle" id="routeRequestsTable">
                 <thead class="">
                     <tr>
                         <th>From</th>
@@ -88,3 +92,9 @@
    
     
 </div>
+
+@section Scripts {
+    <script>
+        setupDataTable('#routeRequestsTable');
+    </script>
+}
