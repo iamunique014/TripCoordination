@@ -90,47 +90,6 @@ else if (TempData["Error"] != null)
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $('#residenceTable').DataTable({
-                 dom: '<"row mb-2"<"col-sm-6"l><"col-sm-6 text-end"B>>' + // Length + Buttons
-                      '<"row"<"col-sm-12"tr>>' +
-                      '<"row mt-2"<"col-sm-5"i><"col-sm-7"p>>',
-                buttons: [
-                    //Excell button
-                    { extend: 'excel',
-                        text: 'Export to Excel',
-                        //title: 'Residence_List_' + new Date().toLocaleDateString(),
-                        className: 'btn btn-sm btn-outline-info',
-                        exportOptions:
-                        {
-                            columns: ':not(.noExport)'
-                        }
-                    },
-
-                    //PDF Button
-                    { extend: 'pdf',
-                        text: 'Export to PDF',
-                        //title: 'Residence_List_' + new Date().toLocaleDateString(),
-                        //orientation: 'landscape',
-                        //pageSize: 'A4'
-                        className: 'btn btn-sm btn-outline-danger',
-                        exportOptions:
-                        {
-                            columns: ':not(.noExport)'
-                        }
-                    },
-
-                ],
-                responsive: true,
-                language: {
-                    search: "Search:",
-                    lengthMenu: "Show _MENU_ towns per page",
-                    zeroRecords: "No matching records found",
-                    info: "Showing _START_ to _END_ of _TOTAL_ residences",
-                    infoEmpty: "No records to show",
-                    infoFiltered: "(filtered from _MAX_ total records)"
-                }
-            });
-        });
+        setupDataTable('#residenceTable');
     </script>
 }

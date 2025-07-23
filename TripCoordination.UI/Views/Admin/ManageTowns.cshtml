@@ -40,7 +40,7 @@ else if (TempData["Error"] != null)
     </div>
     @if (Model.Any())
     {
-        <div class="table-responsive">
+        <div class="">
             <table class="table table-striped table-hover" id="townTable">
                 <thead>
                     <tr>
@@ -96,45 +96,5 @@ else if (TempData["Error"] != null)
 @section Scripts {
     <script>
         setupDataTable('#townTable');
-        // $(document).ready(function () {
-        //     $('#townTable').DataTable({
-        //         dom: 'Bfrtip',
-        //         buttons: [
-        //             //Excell button
-        //             { extend: 'excel',
-        //                 text: 'Export to Excel',
-        //                 title: 'Towns_List_' + new Date().toLocaleDateString(),
-        //                 className: 'btn btn-sm btn-outline-info',
-        //                 exportOptions:
-        //                 {
-        //                     columns: ':not(.noExport)'
-        //                 }
-        //             },
-
-        //             //PDF Button
-        //             { extend: 'pdf', 
-        //                 text: 'Export to PDF',
-        //                 title: 'Towns_List_' + new Date().toLocaleDateString(),
-        //                 //orientation: 'landscape', 
-        //                 //pageSize: 'A4'
-        //                 className: 'btn btn-sm btn-outline-danger',
-        //                 exportOptions: 
-        //                 {
-        //                     columns: ':not(.noExport)'
-        //                 }
-        //             },
-                    
-        //         ],
-        //         responsive: true,
-        //         language: {
-        //             search: "Search:",
-        //             // lengthMenu: "Show _MENU_ towns per page",
-        //             zeroRecords: "No matching towns found",
-        //             info: "Showing _START_ to _END_ of _TOTAL_ towns",
-        //             infoEmpty: "No towns to show",
-        //             infoFiltered: "(filtered from _MAX_ total towns)"
-        //         }
-        //     });
-        // });
     </script>
 }
