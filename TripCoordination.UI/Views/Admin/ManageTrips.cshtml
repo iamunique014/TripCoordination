@@ -29,55 +29,65 @@ else if(TempData["Error"] != null)
 }
 
 <div class="form-container p-3 label-control">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle text-nowrap" id="tripTable">
-            <thead>
-                <tr>
-                    <th>Creator</th>
-                    <th>Departure Date</th>
-                    <th>Seats</th>
-                    <th>Is Full</th>
-                    <th class="noExport">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var trip in Model)
-                {
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap" id="tripTable">
+                <thead>
                     <tr>
-                        <td>@trip.CreatorName @trip.CreatorSurname</td>
-                        <td>@trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</td>
-                        <td>@trip.Seats</td>
-                        <td>@(trip.IsFull ? "Yes" : "No")</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    Actions
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="/Admin/TripWithDestinations?tripID=@trip.TripID">
-                                            Details
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/TripParticipant/ViewParticipants?tripID=@trip.TripID">
-                                            Participants
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <form method="post" action="/Trip/DeleteTrip" onsubmit="return confirm('Are you sure to delete this record?')">
-                                            <input type="hidden" name="tripID" value="@trip.TripID" />
-                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
+                        <th>Creator</th>
+                        <th>Departure Date</th>
+                        <th>Seats</th>
+                        <th>Is Full</th>
+                        <th class="noExport">Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var trip in Model)
+                    {
+                        <tr>
+                            <td>@trip.CreatorName @trip.CreatorSurname</td>
+                            <td>@trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</td>
+                            <td>@trip.Seats</td>
+                            <td>@(trip.IsFull ? "Yes" : "No")</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="/Admin/TripWithDestinations?tripID=@trip.TripID">
+                                                Details
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/TripParticipant/ViewParticipants?tripID=@trip.TripID">
+                                                Participants
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form method="post" action="/Trip/DeleteTrip" onsubmit="return confirm('Are you sure to delete this record?')">
+                                                <input type="hidden" name="tripID" value="@trip.TripID" />
+                                                <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            <i class="bi bi-info-circle me-2"></i>
+            No records found
+        </div>
+    }
 </div>
 
 
