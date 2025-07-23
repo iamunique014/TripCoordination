@@ -1,0 +1,247 @@
+[33m6053314[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mFeature/DataTables[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m UI:Alert messages for admin demo login
+[33ma77c359[m UI: Added alert Message when no record in model
+[33mfbd0c81[m UI:Added Alert message and trip search button
+[33me174c25[m UI:Added Demo login dropdown
+[33mb96e231[m Added a Demo Admin
+[33mb932533[m Feature: Added demo login controller
+[33maff8613[m Add: seed data for demo login
+[33m95f2719[m UI: Apply padding on login and registration forms
+[33me69655d[m UI: Alert confirm before deleting destinationTown
+[33m61d3d74[m UI: Centered validation messages in login and register pages
+[33m102b90a[m Fix/Duplicate values and routes dropdown
+[33me94d40b[m Merge pull request #43 from iamunique014/Enhancement/Table-responsive-ui-clean-up
+[33mec5e697[m[33m ([m[1;31morigin/Enhancement/Table-responsive-ui-clean-up[m[33m, [m[1;32mEnhancement/Table-responsive-ui-clean-up[m[33m)[m UI:Complete ui clean-up
+[33mc781330[m Feature: Collapse sidebar onclick outside
+[33mbd6210f[m UI: Padding and margin clean-up
+[33m544aac3[m UI:min-height 100vh
+[33mdf9d593[m UI: Added alert for no records for in model
+[33m57792f0[m Complete: Manage residence ui clean-up done
+[33m51a78e8[m UI:Added alerts for failed and successfull crud
+[33m4c9a695[m UI: Added alert if no record in towns table
+[33m67b41f2[m UI: Add dropdown for actions in twons table
+[33mad12c58[m UI:System layout with page title and form-container
+[33me2d212f[m UI: Responsive table for list of towns
+[33mcd3e578[m UI: text-end create new town button
+[33m8c21633[m[33m ([m[1;31morigin/Feature/New-trip-search-Logic[m[33m, [m[1;32mFeature/New-trip-search-Logic[m[33m)[m Feature: Added select rout to createTrip
+[33m0205e9d[m Enhancement: Added disabled default value in selects
+[33md3352f5[m Fix/Changed PickUpLocation to FromLocation
+[33md86947a[m[33m ([m[1;32mEnhancement/Dashboards-clean-up[m[33m)[m Enhancement: Created Route view for crud
+[33m33ee5e7[m UI: Centered all text in dropdown buttons
+[33mbac0591[m UI: Added Routes link to the sidebar for viewRoutes
+[33m3ec4d95[m Feature: Added and implemented route crud in routeController
+[33ma635e88[m Feature: Added and implemented routes in repositories
+[33mdb95eb9[m Enhancement; Disabled selecting past dates in departuredate
+[33mb2b4b71[m Feature: Added soft delete functionality for trips in trip controller
+[33m73a47e7[m Enhancement: Added a dropdown to display trip actions on MyTrips page
+[33m4ff7f78[m Enhancement: Added coming soon alerts on all daashboards
+[33md3d0cc4[m Merge pull request #42 from iamunique014/Feature/Implement-Trip-Exit-for-participants-#16
+[33m361003c[m[33m ([m[1;31morigin/Feature/Implement-Trip-Exit-for-participants-#16[m[33m, [m[1;32mFeature/Implement-Trip-Exit-for-participants-#16[m[33m)[m Feature: Implemted leaveTrip Method and added leave trip button
+[33mcf115c3[m Feature: Added and implemented LeaveTripAsync in repository
+[33m129ca6e[m Merge pull request #41 from iamunique014/Enhancement/Add-more-user-actions
+[33m8f34fe5[m Feature: Added view Route requests for admin in sidebar
+[33mafd7f50[m Enhancement: Added the views for route Requests
+[33md82c61e[m Feature: Added implemented RouteRequestController
+[33m2ba85d4[m  Added and implemented IRouteRequestRepository
+[33m6e1e8d8[m Add: Created a RouteRequest Model and  VIewModel
+[33m284677a[m Feature: Added and Implemented GetAllUserTripRequestAsync
+[33m95433ae[m Enhancement: Added a dropdown to display actions in viewRequests
+[33med35810[m Enhancement: Added nav-links to sidebar for requests
+[33mfd77ac4[m Enhancement:  Requests clean up
+[33m08eecb2[m Enhancement: Added the viewRequests View
+[33mc6b8535[m Enhancement: Added CreateRequest view
+[33ma0e2e3c[m Add: Added the TripRequestViewModel and ccontroller
+[33m28179c1[m Add: Implemented the TripRequest repo
+[33mfcc857f[m Add: New Interface ITripRequestRepository
+[33m0ca1568[m Add: New model TripRequest
+[33md95ac94[m UI: Added backgroud on nav-links hover
+[33m6005c53[m Enhancement: A student Dashboard view
+[33m7a2f77e[m Merge pull request #40 from iamunique014/Fix/Display-MyTrips-view-after-user-joins-a-trip-#28
+[33m226128c[m Enhancement: Added an accordiong to display trip destinations
+[33m50b45af[m Add: Alert Messages
+[33m02b8bd9[m Add: Sidebar and page header to MyTrips student view
+[33m5545af2[m Fix/Changes to make work
+[33mfd17b71[m Added the mytrips view
+[33med5b608[m Feature: Added a MyTrips Method in controller
+[33mada00ba[m Feature: Implemmented GetUserJoinedTrips in repository
+[33mb78293b[m Feature; MyTripGroupedViewModel
+[33m5386ef4[m Feature: Added MyTripFlatRow class
+[33m2e0f5d1[m Merge pull request #39 from iamunique014/Fix/Match-Select2-with-system-form-controls-#3
+[33m18f97a1[m UI:Added  input-control styles to the select2 wrapper
+[33m89df905[m Merge pull request #32 from iamunique014/Feature/Implement-view-users-for-admin
+[33m243dcfd[m UI:Link Manage User button to ViewUsers
+[33mc3c9a7b[m Enhancement: Added the viewUsers razor view
+[33m8d2a4f7[m Feature:Added UserController and viewUsers method
+[33m7e7e1f5[m Feature: Added GetAllAsync method in repository
+[33mdfcb829[m Add: Created UserWithRoleViewModel
+[33mf0d97f3[m Merge pull request #30 from iamunique014/Fix/Sidebar-Clean-up#26
+[33me23761b[m Enhancement:Changed  Sidebar height to full
+[33m602fa42[m Fix:Removed sidebar profile and logout buttons
+[33me94cfaa[m Merge pull request #29 from iamunique014/Feature/Allow-viewing-trip-participants-#18
+[33m2ebac35[m Enhancement: Added alerts for failed and succesful participant removal
+[33m1fa0566[m Feature: Added DeleteTripParticipant Method in the controller
+[33m5a861b5[m Feature: Implemented DeleteTripParticipantAsync in the repository
+[33mf4dbe6e[m Enhancement:Add Delete button for tripParticipant
+[33m1bfa1f8[m Enhancement: Added a dropdown for actions in manageTrips view
+[33m1b53e92[m Enhancment: Added system styling to the Manage trips view
+[33m3c9e209[m Feature: Added an alert for no participants found
+[33mf26cc34[m Updated ViewParticipants to match system ui
+[33m9d111f3[m Updated the viewmodel and view to include ne fields
+[33md084b51[m Added a ViewParticipant page in views
+[33mbbfa0fa[m Used the TripPartcipantViewModel in repository
+[33m436f67c[m Added A TripParticipantViewModel
+[33mfc66a9f[m Added ViewParticipants controller method
+[33m03654a3[m Feature: Added and implemented GetParticipantsByTripIDAsync
+[33m4d1ec08[m Added View TripParticipants button
+[33mcdb9d00[m Merge pull request #25 from iamunique014/Enhancement/Redesign-Profile-Page-#22
+[33m79ea1b5[m Redirect to viewProfile after creating a profile
+[33mefdae85[m Redirect to CompleteProfile is profile is missing
+[33m4898f1c[m Updated editProfile form to post to Editprofile method
+[33mea083e9[m Added ShowSidebar to all profileCrontroller methods
+[33mce72546[m Added a viewprofile view
+[33ma637f83[m Added view profile method in the controller
+[33m0348173[m Added a header for profile information
+[33mb2b46ae[m Updated the form layout for profile
+[33mc2ebdd1[m Changes all form-labels to label-control to match system ui
+[33m3c0a942[m Added a sidebar to the completeProfile page
+[33m12d260c[m Removed the background image
+[33ma283813[m Merge pull request #24 from iamunique014/Fix/Missing-Sidebar-After-Invalid-form-submission-#4
+[33mae58a0a[m[33m ([m[1;31morigin/Fix/Missing-Sidebar-After-Invalid-form-submission-#4[m[33m)[m Fix: Ensured all validations work
+[33m4a187b3[m Fix; Added ShowSide bar in CreateTrip Method
+[33mf9b8ca4[m Merge pull request #23 from iamunique014/Fix/No-Web-Page-Found-Trip-Error
+[33m77fa264[m[33m ([m[1;31morigin/Fix/No-Web-Page-Found-Trip-Error[m[33m)[m Feature: Added Alerts In MyTrips and CreateTrip views
+[33mc686c84[m Added MyTrips view for TripCreator
+[33md7d3ffd[m Feature: Implemented GetAllUserTripsAsync Method in the tripRepository
+[33m1b59f5c[m Feature: Added MyTrips Method in tripCreator controller
+[33m37eef00[m Added Conditional redirect based on user role
+[33mea31387[m Added the create trip nav link in organizer sidebar
+[33mf6d32e4[m Merge pull request #21 from iamunique014/Fix/Enforce-profile-creation-during-onboarding-#9
+[33me8b4d8f[m Added alert for profile creation before joining trip
+[33m6732162[m Feature: Implement profile check on join trip method
+[33mdeb473e[m Feature: Add Profile check in CreateTrip Method
+[33m73d3531[m Register Service
+[33m4928832[m Added and implemented GetUserProfile Method
+[33mb76dc8b[m Added and implemted profile Service
+[33m508e3c1[m Merge pull request #20 from iamunique014/feature/Remove-Trip-Destination-towns-14
+[33m697a083[m Feature:Added system colors to alerts
+[33m0538d4b[m Feature: Added Alerts for succes and Error Deleting
+[33mc00041a[m Fix: update ID's so that they match
+[33m7a9dbe5[m Feature: Added Delete DestinationTown button in view
+[33ma96dda4[m Feature: Add DeleteTripDestinationTown in AdminController
+[33meb702f0[m Feature: Implemented DeleteDestinationTwonAsync Method in repository
+[33m05e72df[m Merge pull request #13 from iamunique014/Add/Edit-trip-funtionality
+[33m6690c72[m Updated all fields that require matching with sql allias colums
+[33m25320f6[m Changed text-color to drab-dark-brown
+[33m2ceabcd[m Separated trip details and Destinations container
+[33mbf813b0[m Added styling for the page
+[33md5446c2[m Display both Name and surname
+[33m4b097bf[m Added correct variable to pass to the controller
+[33m54394d0[m Added TripFlatRowUI
+[33m5a1fd81[m Added a delete method for testing
+[33m8c87b21[m Made sure sidebar is displayed in view
+[33m7b3ccec[m Added grouby to the query and used the Tripflatrow class
+[33m4b773c9[m Added a tripflatrow Class
+[33m8dc01f8[m Matched feilds to sp As columns
+[33mdb01ab2[m Linked edit button to tripWithDestinations view
+[33me1477d8[m Added view TripWithDestinations
+[33m6ca4cf3[m Added implemetation of GetTripWithDestinations
+[33me18df85[m Added ViewModels TripWithDestinations
+[33m05c225a[m Added an action method to get Trip and destinations
+[33m6c4fd95[m TripViewModelUI
+[33m2e29399[m Added isFull column
+[33m446d0c0[m Updated view to use TripViewModel
+[33mdb4a554[m updated the GetAllasync method to use TripViewModel
+[33m47e8a7c[m Added a tripViewModel
+[33mf3c7a93[m Updated Managetrips view
+[33mcc70de7[m Added ManageTrips Get Method
+[33mad703cd[m Added ManageTrips Get Method
+[33mff7d5e1[m added a comment for a date varaible
+[33mdf87a70[m Merge pull request #12 from iamunique014/fix/Add-Dashboard-link-to-user-dropdown-menu
+[33m9d8cf84[m Added nav links to various user dashboards
+[33m211b838[m Merge pull request #11 from iamunique014/fix/nav-bar-&-sidebar-structure-Clean-Up
+[33ma82e81e[m container fluid for navbar
+[33m14f021a[m Hide sidebar toggler on index page
+[33m30c8274[m Added button to open sidebar
+[33m6767cc4[m Removed unnecessary nav-items
+[33m9ddc2c4[m added navbar id on data-bs-target
+[33m6412f6b[m Removed TownID in TripDetails page
+[33mbc947cc[m Removed Ids in triplisting page
+[33m57aa9f6[m Merge branch 'master' of https://github.com/iamunique014/TripCoordination
+[33m7aa697a[m Create LICENSE
+[33m5b0bb9c[m oher strings conn
+[33m59220e6[m updated sidebarwrapper height and background
+[33m38537c3[m New tripdeatais layout
+[33m87ea584[m Only show sidebar for logged in users
+[33m3b5b239[m Added user and student nav items
+[33m488533d[m Display sidebar for user and student
+[33me510802[m added trip-details container inside
+[33m6e5aee5[m updated input controls
+[33me3bfcc4[m Centered submit button
+[33m211a3e6[m Added input form for join trip
+[33m6ed08ce[m Added styled paged title
+[33m0de9971[m updated Triplisting container styles
+[33mbead645[m placed trip button below inputs
+[33m8312eea[m Updated homepage styling
+[33ma6d459b[m Updated Create Trip from styling
+[33m76ded61[m Updated Edit Town form styling
+[33ma364afd[m Updated Create Town form stylings
+[33m20a5a74[m Added towns nav-item in navbar
+[33m6ab2dd0[m Updated create residence page styling
+[33mfebbac1[m updated label control colour
+[33madedbd1[m Save button width 50%
+[33m2d10eb0[m input-controls colors
+[33mbd87293[m added form background colour
+[33m3d2f949[m Added footer colours
+[33m189661e[m added main content color dutch white
+[33m41cb92e[m updated Sidebar colors
+[33m1bfb6cd[m Updated Navbar Colors
+[33maa91f6c[m Removed old sidebar nav items
+[33m5e4b74b[m Added Organizer Nav-items
+[33mfaf4693[m sidebar ease-in-out
+[33m5e39476[m decreased sidebar height and returned footer
+[33mc90b4b3[m Removed footer
+[33m354fb08[m Added Profile and LogOut in Sidebar
+[33madc1bfa[m Removed commented code
+[33m4df7623[m Added Admin Nav-items
+[33m392cb1c[m add sidebar expand-md
+[33m8f70cfc[m Added side and styles
+[33mfe332c8[m right-alined the dropdown menu
+[33mc630238[m Added dropdown to loginPartial Nav
+[33m7717a54[m Cleaned all ui
+[33mf33571d[m Removed unused code in layout
+[33mc880340[m addded background picture in editprofile page
+[33ma107872[m Change the form controls layout
+[33ma8eed96[m change no account to secondary btns
+[33md84d79d[m Register page styles
+[33m3d91c42[m Login page styles
+[33mb704756[m Added Create Profile Logic
+[33mbd93a28[m Mapped TripDetailsViewModel to the TripDetailsViewModelUI
+[33mfca0655[m Changed  FindTripDetails from retruning an IEnumerable to returning a single item only
+[33m0ef7be4[m Removed unused comented code
+[33md51d5a1[m Added added and implemented join trip method
+[33mbe277b4[m Added Join Trip Action Method and logic
+[33mf2340ca[m fixed-top navbar
+[33m2252b8f[m position fixed sidebar
+[33meca7f77[m added margins and Removed unused lines
+[33m08eb904[m changed menu styles
+[33mc831483[m Disaled TripID From Displaying on the view and updated variables
+[33mff7aeef[m Disabled townID from Displaying on the view
+[33m161fb0e[m Added new uging statement
+[33m0e45623[m Changed Admin to AdminController
+[33m8691e3d[m Added TripID property
+[33mffe0ece[m Fetched TripDetails and Displayed on the tripDetails view
+[33m81811c2[m Updated Manage Residences CRUD
+[33m6c09742[m Additional soft DELETE FOR Towns
+[33md6fb989[m Added Soft Delete for towns
+[33m9545632[m Added Create Town
+[33ma3aa983[m Added read and update towns as part of Manage towns
+[33m13b01fe[m Added Role selection during user Registration
+[33m5b44c79[m Added Dashboards
+[33m787c7ff[m Authorize Organicer to CreateTrip Action
+[33m1b1e9f1[m Removed old layout files
+[33m7764869[m updated Create Trip Action
+[33m0b7af78[m Change all UserIDs to string type
+[33m3dc825d[m Rolebased auth
+[33mf5aaefc[m fix register url issue
+[33m5810d8e[m removed unnecessary code block
+[33maf5e2e3[m Add project files.
+[33mf39c5c5[m Add .gitattributes and .gitignore.

@@ -9,7 +9,7 @@
 
 <div class="form-container p-3 label-control">
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="userTable">
             <thead>
                 <tr>
                     <th>UserName</th>
@@ -36,3 +36,9 @@
         </table>
     </div>  
 </div>
+
+@section Scripts{
+    <script>
+        setupDataTable('#userTable');
+    </script>
+}

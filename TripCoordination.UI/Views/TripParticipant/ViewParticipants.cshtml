@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripParticipantViewModel>
 
+@{
+    ViewData["Title"] = "Trip Participants";
+}
+
 <div class="page-title p-3 mt-3 label-control">
     <h3>Trip Participants</h3>
 </div>
@@ -32,7 +36,8 @@ else if (TempData["Succes"] != null)
     </div>
 
     <div class="form-container p-3 label-control">
-        <table class="table table-striped ">
+        <div class="table-responsive">
+            <table class="table table-striped " id="tripParticipantsTable">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -67,6 +72,8 @@ else if (TempData["Succes"] != null)
                 }
             </tbody>
         </table>
+        </div>
+        
     </div>
    
 }
@@ -81,3 +88,8 @@ else
     </div>
 }
 
+@section Scripts {
+    <script>
+        setupDataTable('#tripParticipantsTable');
+    </script>
+}
