@@ -141,14 +141,37 @@ namespace TripCoordination.Data.Repository
         {
             try
             {
-                string query = "sp_Find_Trips";
+                string query = "sp_Find_Trips_With_Destinations";
 
-                return await _db.GetData<TripListingViewModel, dynamic>(query, new 
-                {   
-                    tripListing.FromLocation,
-                    trip.TownID, 
-                    trip.DepartureDate 
-                });
+                var result = await _db.GetData<TripFlatRow, dynamic>(query, new 
+                             {   
+                                tripListing.FromLocation,
+                                trip.TownID, 
+                                trip.DepartureDate 
+                             });
+
+                var trips = result.GroupBy(r => r.TripID).Select(g => new TripListingViewModel
+                {
+                    TripID = g.Key,
+                    DepartureDate = g.First().DepartureDate,
+                    CreatorName = $"{g.First().CreatorName} {g.First().CreatorSurname}",
+                    DestinationID = (int)g.First().DestinationID,
+                    DestinationName = g.First().DestinationName,
+                    Seats = g.First().Seats,
+                    Destinations = g
+                        .Where(d => d.DestinationID != null)
+                            .Select(d => new TripDestinationViewModel
+                            {
+                                TripDestinationTownID = d.TripDestinationTownID,
+                                TownID = d.DestinationID ?? 0,
+                                DestinationName = d.DestinationName
+                            }).ToList()
+                }).ToList();
+
+
+                return trips;
+
+
             }
             catch (Exception ex)
             {

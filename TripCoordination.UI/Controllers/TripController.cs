@@ -64,20 +64,20 @@ namespace TripCoordination.Controllers
                     // Find the Trip using repository pattern
                     var availableTrips = await _tripRepository.FindTripsAsync(model, trip);
 
-                    var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
-                    {
-                        TripID = tripListing.TripID,
-                        DestinationID = tripListing.DestinationID,
-                        CreatorName = tripListing.CreatorSurname + " " + tripListing.CreatorName,
-                        CreatorSurname = tripListing.CreatorSurname,
-                        DestinationName = tripListing.DestinationName,
-                        DepartureDate = tripListing.DepartureDate,
-                        Seats = tripListing.Seats
-                        // Map additional properties here
-                    }).ToList();
+                    //var viewModel = availableTrips.Select(tripListing => new TripListingViewModelUI
+                    //{
+                    //    TripID = tripListing.TripID,
+                    //    DestinationID = tripListing.DestinationID,
+                    //    CreatorName = tripListing.CreatorSurname + " " + tripListing.CreatorName,
+                    //    CreatorSurname = tripListing.CreatorSurname,
+                    //    DestinationName = tripListing.DestinationName,
+                    //    DepartureDate = tripListing.DepartureDate,
+                    //    Seats = tripListing.Seats
+                    //    // Map additional properties here
+                    //}).ToList();
 
                     //return RedirectToAction("TripListing");
-                    return View(viewModel);
+                    return View(availableTrips);
                 }
                 catch (Exception ex)
                 {

@@ -67,12 +67,36 @@ table.dataTable th {
     white-space: nowrap;
 }
 
+.destination-label {
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 2px 4px 2px 0;
+    background-color: #de541e42;
+    color: #494331;
+    border: 1px solid #de541e;
+    border-radius: 2em;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.card-footer .btn{
+    border-radius: 0 0 14px 14px;
+}
+
+/*.destinations p {
+    background-color: #de541e42;
+    border-color: #de541e;
+    color: #de541e;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 0.075rem;
+    font-weight: 400;
+}*/
+
 /*============================================*/
 /*              Accordion styles              */
 /*============================================*/
-
-
-.accordion-system, .accordion-item, .accordion-button, .accordion-body,.accordion-button:focus {
+.accordion-system, .accordion-item, .accordion-button, .accordion-body, .accordion-button:focus {
     --dutch-white: #d6d6b1;
     --drab-dark-brown: #494331;
     background: var(--dutch-white);

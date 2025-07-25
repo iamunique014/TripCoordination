@@ -16,6 +16,10 @@ namespace TripCoordination.Common.ViewModel
         public string? CreatorSurname { get; set; }
         public string? DestinationName { get; set; }
         public int Seats { get; set; }
-              
+        public int TripDestinationTownID { get; set; }
+
+        public List<TripDestinationViewModel> Destinations { get; set; } = new();
+        
+
     }
 }
