@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TripCoordination.ViewModel.TripListingViewModelUI>
+﻿@model IEnumerable<TripCoordination.Common.ViewModel.TripListingViewModel>
 @{
     ViewData["Title"] = "Available Trips";
 }
@@ -24,6 +24,14 @@ else
                             <strong>Destination: </strong>@tripListing.DestinationName<br />
                             <strong>Seats Available: @tripListing.Seats</strong>
                         </p>
+                        <div class="destinations">
+                            @foreach(var dest in tripListing.Destinations)
+                            {
+                                <span class="destination-label">
+                                    @dest.DestinationName
+                                </span>
+                            }
+                        </div>
                     </div>
                     <div class="card-footer text-center">    
                         <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-25">Join Trip</a>
