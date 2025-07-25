@@ -2,42 +2,43 @@
 @{
     ViewData["Title"] = "Available Trips";
 }
+<div class="container">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mt-3">
+            No trips available at the moment. Please check back later.
+        </div>
+    }
+    else
+    {
 
-@if (!Model.Any())
-{
-    <div class="alert alert-info mt-3">
-        No trips available at the moment. Please check back later.
-    </div>
-}
-else
-{
-
-    <div class="row justify-content-center mt-3">
-        @foreach (var tripListing in Model)
-        {
-            <div class="col-md-8 mb-4">
-                <div class="card-container">
-                    <div class="card-body">
-                        <h5 class="card-title">Organizer: @tripListing.CreatorName </h5>
-                        <p class="card-text">
-                            <strong>Date: </strong>@tripListing.DepartureDate.ToLongDateString()<br />
-                            <strong>Destination: </strong>@tripListing.DestinationName<br />
-                            <strong>Seats Available: @tripListing.Seats</strong>
-                        </p>
-                        <div class="destinations">
-                            @foreach(var dest in tripListing.Destinations)
-                            {
-                                <span class="destination-label">
-                                    @dest.DestinationName
-                                </span>
-                            }
+        <div class="row justify-content-center mt-3">
+            @foreach (var tripListing in Model)
+            {
+                <div class="col-md-12 mb-4">
+                    <div class="card-container">
+                        <div class="card-body">
+                            <h5 class="card-title">Organizer: @tripListing.CreatorName </h5>
+                            <p class="card-text">
+                                <strong>Date: </strong>@tripListing.DepartureDate.ToLongDateString()<br />
+                                <strong>Destination: </strong>@tripListing.DestinationName<br />
+                                <strong>Seats Available: @tripListing.Seats</strong>
+                            </p>
+                            <div class="destinations d-flex flex-wrap">
+                                @foreach (var dest in tripListing.Destinations)
+                                {
+                                    <span class="destination-label">
+                                        @dest.DestinationName
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-100">Join Trip</a>
                         </div>
                     </div>
-                    <div class="card-footer text-center">    
-                        <a href="/Trip/TripDetails?tripID=@tripListing.TripID&townID=@tripListing.DestinationID" class=" btn btn-primary w-25">Join Trip</a>
-                    </div>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>

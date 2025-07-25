@@ -72,10 +72,15 @@ table.dataTable th {
     padding: 4px 10px;
     margin: 2px 4px 2px 0;
     background-color: #de541e42;
-    color: #0366d6;
+    color: #494331;
+    border: 1px solid #d0d7de;
     border-radius: 2em;
     font-size: 0.85rem;
     font-weight: 500;
+}
+
+.card-footer .btn{
+    border-radius: 0 0 14px 14px;
 }
 
 /*.destinations p {
