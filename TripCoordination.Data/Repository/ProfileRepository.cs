@@ -93,11 +93,11 @@ namespace TripCoordination.Data.Repository
             }
         }
 
-        public async Task<Profile> GetUserProfileAsync(string userID)
+        public async Task<CreateProfileViewModel> GetUserProfileAsync(string userID)
         {
             try
             {
-                IEnumerable<Profile> userProfile = await _db.GetData<Profile, dynamic>("sp_Get_User_Profile", new { userID });
+                IEnumerable<CreateProfileViewModel> userProfile = await _db.GetData<CreateProfileViewModel, dynamic>("sp_Get_User_Profile", new { userID });
                 return userProfile.FirstOrDefault();
             }
             catch(Exception ex) 
