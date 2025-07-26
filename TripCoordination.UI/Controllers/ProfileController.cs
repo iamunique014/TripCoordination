@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using System.Security.Policy;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
+using TripCoordination.ViewModel;
 
 namespace TripCoordination.Controllers
 {
     public class ProfileController : Controller
     {
         private readonly IProfileRepository _profileRepository;
-
-        public ProfileController(IProfileRepository profileRepository)
+        private readonly IResidenceRepository _residenceRepository;
+        public ProfileController(IProfileRepository profileRepository, IResidenceRepository residenceRepository)
         {
             _profileRepository = profileRepository;
+            _residenceRepository = residenceRepository;
         }
 
         [HttpGet]
@@ -35,82 +40,158 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> CompleteProfile()
         {
             ViewData["ShowSidebar"] = true;
-            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+ 
+            var residence = await _residenceRepository.GetAllAsync();
 
-            var profile = await _profileRepository.GetUserProfileAsync(userID);
+            var model = new CreateProfileViewModel
+            {
+                AvailableResidences = residence.Select(r => new SelectListItem
+                {
+                    Value = r.ResidenceID.ToString(),
+                    Text = r.Name
+                }).ToList(),
 
-            return View(profile);
+                DateOfBirth = DateTime.Now
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteProfile(Profile profile)
+        public async Task<IActionResult> CompleteProfile(CreateProfileViewModel profile)
         {
             ViewData["ShowSidebar"] = true;
+
+            if (!ModelState.IsValid)
+            {
+                var residences = await _residenceRepository.GetAllAsync();
+                profile.AvailableResidences = residences.Select(r => new SelectListItem
+                {
+                    Value = r.ResidenceID.ToString(),
+                    Text = r.Name
+                }).ToList();
+
+                return View(profile); // Return the same model with validation errors
+            }
+
             try
             {
-                if (!ModelState.IsValid)
-                    return View(profile);
-
                 profile.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 bool addProfile = await _profileRepository.AddAsync(profile);
+
                 if (addProfile)
                 {
                     TempData["Success"] = "Profile created successfully";
                     return RedirectToAction(nameof(ViewProfile));
                 }
-                else
-                {
-                    TempData["Error"] = "Failed to create profile";
-                }
+
+                TempData["Error"] = "Failed to create profile";
             }
             catch (Exception ex)
             {
-                TempData["msg"] = "Hebana!! Something went wrong!!!";
+                TempData["msg"] = "Something went wrong. Please try again later.";
+                Console.WriteLine(ex);
             }
-            return RedirectToAction(nameof(CompleteProfile));
+
+            // Rebuild the dropdown and return view
+            var residenceList = await _residenceRepository.GetAllAsync();
+            profile.AvailableResidences = residenceList.Select(r => new SelectListItem
+            {
+                Value = r.ResidenceID.ToString(),
+                Text = r.Name
+            }).ToList();
+
+            return View(profile);
         }
 
         public async Task<IActionResult> EditProfile()
         {
             ViewData["ShowSidebar"] = true;
-            string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var profile = await _profileRepository.GetUserProfileAsync(UserID);
-            return View(profile);
+            var profile = await _profileRepository.GetUserProfileAsync(userID);
+            var residences = await _residenceRepository.GetAllAsync();
+
+            var model = new CreateProfileViewModel
+            {
+                Title = profile.Title,
+                Name = profile.Name,
+                Surname = profile.Surname,
+                Email = profile.Email,
+                PhoneNumber = profile.PhoneNumber,
+                Address = profile?.Address,
+                DateOfBirth = profile?.DateOfBirth ?? DateTime.Now,
+                ResidenceID = profile?.ResidenceID ?? 0,
+                UserID = userID,
+                AvailableResidences = residences.Select(r => new SelectListItem
+                {
+                    Value = r.ResidenceID.ToString(),
+                    Text = r.Name
+                }).ToList()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProfile(Profile profile)
+        public async Task<IActionResult> EditProfile(CreateProfileViewModel model)
         {
             ViewData["ShowSidebar"] = true;
+
+            if (!ModelState.IsValid)
+            {
+                var residences = await _residenceRepository.GetAllAsync();
+                model.AvailableResidences = residences.Select(r => new SelectListItem
+                {
+                    Value = r.ResidenceID.ToString(),
+                    Text = r.Name
+                }).ToList();
+
+                return View(model);
+            }
+
             try
             {
-                if (!ModelState.IsValid)
-                    return View(profile);
+                model.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                profile.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-                bool updateRecord = await _profileRepository.UpdateAsync(profile);
-
-                if (updateRecord)
+                var profile = new Profile
                 {
-                    TempData["Success"] = "Profile update Successfully";
+                    UserID = model.UserID,
+                    Title = model.Title,
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = model.Address,
+                    DateOfBirth = model.DateOfBirth,
+                    ResidenceID = model.ResidenceID
+                };
+
+                var success = await _profileRepository.UpdateAsync(profile);
+
+                if (success)
+                {
+                    TempData["Success"] = "Profile updated successfully";
                     return RedirectToAction("ViewProfile");
                 }
-                else
-                {
-                    TempData["Error"] = "Failed to update profile";
-                }
-                    
-            }
 
+                TempData["Error"] = "Failed to update profile";
+            }
             catch (Exception ex)
             {
-                TempData["message"] = "Something went wrong please try again !!";
-                Console.WriteLine(ex.ToString());
+                TempData["message"] = "Something went wrong. Please try again!";
+                Console.WriteLine(ex);
             }
-            return View(profile);
+
+            var residencesList = await _residenceRepository.GetAllAsync();
+            model.AvailableResidences = residencesList.Select(r => new SelectListItem
+            {
+                Value = r.ResidenceID.ToString(),
+                Text = r.Name
+            }).ToList();
+
+            return View(model);
         }
     }
 }
