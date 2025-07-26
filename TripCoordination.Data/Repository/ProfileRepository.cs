@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Domain;
 
@@ -17,7 +18,7 @@ namespace TripCoordination.Data.Repository
             _db = db;
         }
 
-        public async Task<bool> AddAsync(Profile profile)
+        public async Task<bool> AddAsync(CreateProfileViewModel profile)
         {
             try
             {
