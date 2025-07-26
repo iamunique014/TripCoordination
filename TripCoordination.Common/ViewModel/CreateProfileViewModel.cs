@@ -14,6 +14,8 @@ namespace TripCoordination.Common.ViewModel
         public string Surname { get; set; }
         [Required]
         public string Email { get; set; }
+
+        [RegularExpression(@"^(?:\+27|0)[6-8][0-9]{8}$", ErrorMessage = "Please enter a valid South African phone number.")]
         public string PhoneNumber { get; set; }
         public string? Address { get; set; }
         public DateTime DateOfBirth { get; set; }
