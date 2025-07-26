@@ -1,4 +1,4 @@
-﻿@model TripCoordination.Data.Models.Domain.Profile
+﻿@model TripCoordination.Common.ViewModel.CreateProfileViewModel
 
 <div class="page-title p-3 label-control">
     <h3>Add Profile Information</h3>
@@ -83,13 +83,8 @@ else if (TempData["Success"] != null)
 
             <div class="col-md-4 mb-3">
                 <label asp-for="ResidenceID" class="label-control">Residence</label>
-                <select asp-for="ResidenceID" class="input-control">
-                    <option value="1">Metro rez Southern Life</option>
-                    <option value="2">South Point 85</option>
-                    <option value="3">Metro Rez Tebro</option>
-                    <option value="4">Metro Rez FNB</option>
-                    <option value="6">Metro Rez Mr Price</option>
-
+                <select asp-for="ResidenceID" asp-items="@Model.AvailableResidences" class="input-control">
+                    <option disabled selected value="">-- Select Residence --</option>
                 </select>
                 <span class="text-danger" asp-validation-for="ResidenceID"></span>
             </div>
@@ -104,10 +99,6 @@ else if (TempData["Success"] != null)
 
         </div>
        
-        
-
-       
-
         <div class="text-center">
             <button type="submit" class="btn btn-primary w-50">Save</button>
         </div>
