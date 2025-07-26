@@ -1,4 +1,4 @@
-﻿@model TripCoordination.Data.Models.Domain.Profile
+﻿@model TripCoordination.Common.ViewModel.CreateProfileViewModel
 
 <div class="page-title p-3 label-control">
     <h3>Profile Information</h3>
@@ -20,7 +20,7 @@
         <a asp-controller="Profile" asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
     </div>
     <hr />
-    <form class="row" action="CompleteProfile" method="post">
+    <form class="row">
 
         <div class="col-8 mb-3">
             <label asp-for="Title" class="label-control">Title</label>
@@ -30,13 +30,12 @@
                 <option value="Ms">Miss</option>
                 <option value="Dr">Doctor</option>
             </select>
-            <span class="text-danger" asp-validation-for="Title"></span>
         </div>
         <div class="row names">
             <div class="col-md-6 mb-3">
                 <label asp-for="Name" class="label-control">First Name</label>
                 <input asp-for="Name" type="text" class="input-control" disabled />
-                <span class="text-danger" asp-validation-for="Name"></span>
+               
             </div>
 
             <div class="col-md-6 mb-3">
@@ -44,7 +43,7 @@
                     Last Name
                 </label>
                 <input asp-for="Surname" type="text" class="input-control" disabled>
-                <span class="text-danger" asp-validation-for="Surname"></span>
+               
             </div>
 
             <div class="col-md-12 mb-3">
@@ -52,28 +51,22 @@
                     Email
                 </label>
                 <input asp-for="Email" type="email" class="input-control" disabled>
-                <span class="text-danger" asp-validation-for="Email"></span>
+               
             </div>
 
             <div class="col-md-4 mb-3">
                 <label asp-for="PhoneNumber" class="label-control">
                     Cell Phone
                 </label>
-                <input asp-for="PhoneNumber" type="number" class="input-control" disabled>
-                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                <input asp-for="PhoneNumber" class="input-control" disabled>
+               
             </div>
 
             <div class="col-md-4 mb-3">
                 <label asp-for="ResidenceID" class="label-control">Residence</label>
-                <select asp-for="ResidenceID" class="input-control" disabled>
-                    <option value="1">Metro rez Southern Life</option>
-                    <option value="2">South Point 85</option>
-                    <option value="3">Metro Rez Tebro</option>
-                    <option value="4">Metro Rez FNB</option>
-                    <option value="6">Metro Rez Mr Price</option>
-
+                <select asp-for="ResidenceID" asp-items="@Model.AvailableResidences" class="input-control" disabled>
                 </select>
-                <span class="text-danger" asp-validation-for="ResidenceID"></span>
+            
             </div>
 
             <div class="col-md-4 mb-3">
@@ -81,7 +74,7 @@
                     Date Of Birth
                 </label>
                 <input asp-for="DateOfBirth" type="date" class="input-control" disabled>
-                <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+               
             </div>
 
         </div>
