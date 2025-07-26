@@ -23,17 +23,36 @@ namespace TripCoordination.Controllers
         public async Task<IActionResult> ViewProfile()
         {
             ViewData["ShowSidebar"] = true;
-            string UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var profile = await _profileRepository.GetUserProfileAsync(UserID);
-            if (profile != null)
-            {
-                return View(profile);
-            }
-            else
+            var profile = await _profileRepository.GetUserProfileAsync(userID);
+
+            if (profile == null)
             {
                 return RedirectToAction("CompleteProfile");
             }
+
+            var residences = await _residenceRepository.GetAllAsync();
+
+            var model = new CreateProfileViewModel
+            {
+                Title = profile.Title,
+                Name = profile.Name,
+                Surname = profile.Surname,
+                Email = profile.Email,
+                PhoneNumber = profile.PhoneNumber,
+                Address = profile.Address,
+                DateOfBirth = profile.DateOfBirth,
+                ResidenceID = profile.ResidenceID,
+                UserID = profile.UserID,
+                AvailableResidences = residences.Select(r => new SelectListItem
+                {
+                    Value = r.ResidenceID.ToString(),
+                    Text = r.Name
+                }).ToList()
+            };
+
+            return View(model);
         } 
 
 
