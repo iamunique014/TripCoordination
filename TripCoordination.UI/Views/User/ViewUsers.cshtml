@@ -27,6 +27,16 @@ else if (TempData["Error"] != null)
         </div>
     </div>
 }
+else if (TempData["Failure"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-container-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Failure"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
 <div class="form-container p-3 label-control">
 
