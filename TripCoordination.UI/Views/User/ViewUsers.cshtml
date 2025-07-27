@@ -80,8 +80,8 @@ else if (TempData["Failure"] != null)
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item text-danger" href="/User/BlockUser?UserID=@user.Id">
-                                        Block
+                                    <a class="dropdown-item" href="/User/EditUserRole?UserID=@user.Id">
+                                        Roles
                                     </a>
                                 </li>
                                 <li>
@@ -89,9 +89,10 @@ else if (TempData["Failure"] != null)
                                         Unblock
                                     </a>
                                 </li>
+                               
                                 <li>
-                                    <a class="dropdown-item" href="/User/RoleManagement?UserID=@user.Id">
-                                        Roles
+                                    <a class="dropdown-item text-danger" href="/User/BlockUser?UserID=@user.Id">
+                                        Block
                                     </a>
                                 </li>
                             </ul>
