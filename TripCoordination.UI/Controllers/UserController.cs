@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using TripCoordination.Data.Repository;
 
 namespace TripCoordination.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -16,7 +19,7 @@ namespace TripCoordination.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ViewUsers()
         {
@@ -24,12 +27,18 @@ namespace TripCoordination.Controllers
             var users = await _userRepository.GetAllAsync();
             return View(users);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BlockUser(string UserID)
         {
+            if (UserID == /*User.FindFirstValue(ClaimTypes.NameIdentifier)*/ /*User.Identity.Name*/ _userManager.GetUserId(User))
+            {
+                TempData["Failure"] = "Failure, You cannot block yourself!";
+                return RedirectToAction("ViewUsers");
+            }
             try
             {
                 var user = await _userManager.FindByIdAsync(UserID);
+
                 if (user != null)
                 {
                     await _userManager.SetLockoutEnabledAsync(user, true);
@@ -40,14 +49,16 @@ namespace TripCoordination.Controllers
                 {
                     TempData["Error"] = "User Not Found!";
                 }
+
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 TempData["Failure"] = "An Error While blocking the user";
             }
-            
+
             return RedirectToAction("ViewUsers");
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnblockUser(string UserID)
         {
             try
@@ -63,7 +74,7 @@ namespace TripCoordination.Controllers
                     TempData["Error"] = "User not found!.";
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 TempData["Failure"] = "An Error occured while unblocking the user!";
             }
