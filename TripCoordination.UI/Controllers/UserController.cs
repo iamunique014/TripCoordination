@@ -27,12 +27,25 @@ namespace TripCoordination.Controllers
 
         public async Task<IActionResult> BlockUser(string UserID)
         {
-            var user = await _userManager.FindByIdAsync(UserID);
-            if(user != null)
+            try
             {
-                await _userManager.SetLockoutEnabledAsync(user, true);
-                await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+                var user = await _userManager.FindByIdAsync(UserID);
+                if (user != null)
+                {
+                    await _userManager.SetLockoutEnabledAsync(user, true);
+                    await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+                    TempData["Success"] = "User blocked successfully.";
+                }
+                else
+                {
+                    TempData["Error"] = "User Not Found!";
+                }
             }
+            catch(Exception ex)
+            {
+                TempData["Failure"] = "An Error While blocking the user";
+            }
+            
             return RedirectToAction("ViewUsers");
         }
     }

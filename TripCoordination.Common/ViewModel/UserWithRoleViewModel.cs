@@ -15,5 +15,6 @@ namespace TripCoordination.Common.ViewModel
         public string FirstName { get; set; }       // Profiles.Name
         public string LastName { get; set; }        // Profiles.Surname
         public string PhoneNumber { get; set; }     // Profiles.PhoneNumber
+        public DateTimeOffset Status { get; set; }  // AspNetRoles.LockOutEnabled
     }
 }
