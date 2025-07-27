@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using TripCoordination.Common.ViewModel;
+using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 
 namespace TripCoordination.Controllers
@@ -78,6 +83,58 @@ namespace TripCoordination.Controllers
             {
                 TempData["Failure"] = "An Error occured while unblocking the user!";
             }
+            return RedirectToAction("ViewUsers");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditUserRole(string UserID)
+        {
+            ViewData["ShowSidebar"] = true;
+            
+            var user = await _userRepository.GetUserWithRole(UserID);
+            if (user == null)
+            {
+                TempData["Error"] = "User not found!";
+                return RedirectToAction("ViewUsers");
+            }
+            // This pre-selects the current role in the dropdown
+            var allRoles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
+            ViewBag.AvailableRoles = new SelectList(allRoles, user.RoleName); // user.RoleName is pre-selected
+            return View(user);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditUserRole(UserWithRoleViewModel model)
+        {
+            ViewData["ShowSidebar"] = true;
+            if (model.Id == _userManager.GetUserId(User))
+            {
+                TempData["Failure"] = "Failure, You cannot change your role!";
+                return RedirectToAction("ViewUsers");
+            }
+            try
+            {
+                var user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    await _userManager.RemoveFromRolesAsync(user, roles);
+                    await _userManager.AddToRoleAsync(user, model.RoleID);
+
+                    TempData["Success"] = "User role updated successfully.";
+                }
+                else
+                {
+                    TempData["Error"] = "User not found!";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Failure"] = $"Something went wrong: {ex.Message}";
+            }
+
             return RedirectToAction("ViewUsers");
         }
     }
