@@ -100,5 +100,11 @@ namespace TripCoordination.Data.Repository
                 return Enumerable.Empty<MyTripGroupedViewModel>();
             }           
         }
+
+        public async Task<UserWithRoleViewModel> GetUserWithRole(string id)
+        {
+            IEnumerable<UserWithRoleViewModel> result = await _db.GetData<UserWithRoleViewModel, dynamic>("sp_Get_User_with_Role", new { UserID = id });
+            return result.FirstOrDefault();
+        }
     }
 }
