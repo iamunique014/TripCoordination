@@ -8,33 +8,58 @@
 </div>
 
 <div class="form-container p-3 label-control">
-    <div class="table-responsive">
-        <table class="table table-striped" id="userTable">
-            <thead>
+
+    <table class="table table-striped" id="userTable">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
                 <tr>
-                    <th>UserName</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Phone Number</th>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.RoleName</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item text-danger" href="/User/BlockUser?UserID=@user.Id">
+                                        Block
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-success" href="/User/UnblockUser?UserID=@user.Id">
+                                        Unblock
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/User/RoleManagement?UserID=@user.Id">
+                                        Roles
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Model)
-                {
-                    <tr>
-                        <td>@user.UserName</td>
-                        <td>@user.Email</td>
-                        <td>@user.RoleName</td>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.PhoneNumber</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>  
+            }
+        </tbody>
+    </table>
+
 </div>
 
 @section Scripts{
