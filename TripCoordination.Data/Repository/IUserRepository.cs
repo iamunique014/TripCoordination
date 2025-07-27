@@ -15,6 +15,7 @@ namespace TripCoordination.Data.Repository
         Task<bool> DeleteAsync(int id);
 
         Task<User> GetByIdAsync(int id);
+        Task<UserWithRoleViewModel> GetUserWithRole(string id);
 
         Task<IEnumerable<UserWithRoleViewModel>> GetAllAsync();
 
