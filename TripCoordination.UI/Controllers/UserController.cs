@@ -48,5 +48,26 @@ namespace TripCoordination.Controllers
             
             return RedirectToAction("ViewUsers");
         }
+        public async Task<IActionResult> UnblockUser(string UserID)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(UserID);
+                if(user != null)
+                {
+                    await _userManager.SetLockoutEndDateAsync(user, null);
+                    TempData["Success"] = "User unblocked successfully.";
+                }
+                else
+                {
+                    TempData["Error"] = "User not found!.";
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["Failure"] = "An Error occured while unblocking the user!";
+            }
+            return RedirectToAction("ViewUsers");
+        }
     }
 }
