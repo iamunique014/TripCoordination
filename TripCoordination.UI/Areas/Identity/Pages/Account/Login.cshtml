@@ -11,6 +11,11 @@
     <div class="row min-vh-100 justify-content-center align-items-center">
         <div class="col-lg-4 bg-light rounded-3">
             <div class="form-box login p-3">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                }
+
                 <form class="text-center" id="account" method="post">
                     <h1>Login</h1>
                     <div asp-validation-summary="ModelOnly" class="text-danger text-start" role="alert"></div>
