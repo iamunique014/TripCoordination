@@ -37,9 +37,9 @@ namespace TripCoordination.Controllers
         //    _tripDestinationTownRepository = tripDestinationTownRepository;
         //}
 
-        public StudentController(IStudentDashboardRepository studentDashboardRepository /*IUserRepository userRepository*/)
+        public StudentController(IStudentDashboardRepository studentDashboardRepository, IUserRepository userRepository)
         {
-           // _userRepository = userRepository;
+            _userRepository = userRepository;
             _studentDashboardRepository = studentDashboardRepository;
         }
             
@@ -62,17 +62,36 @@ namespace TripCoordination.Controllers
         [Authorize(Roles = "Student, User")]
         public async Task<IActionResult> StudentDashboard()
         {
-            ViewData["ShowSideBar"] = true;
-
-            string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-
-            var model = new StudentDashboardViewModel
+            try
             {
-                UpcomingTrip = await _studentDashboardRepository.GetNextUpcomingTrip(userID),
-                RecentTripRequests = await _studentDashboardRepository.GetRecentTripRequests(userID)
-            };
+                ViewData["ShowSideBar"] = true;
 
-            return View(model);
+                string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+
+                if (string.IsNullOrEmpty(userID))
+                {
+                    TempData["ErrorMessage"] = "You are not authorized to access this page. Please log in to continue.";
+                    return RedirectToPage("/Account/Login");
+                }
+                else
+                {
+                    var model = new StudentDashboardViewModel
+                    {
+                        UpcomingTrip = await _studentDashboardRepository.GetNextUpcomingTrip(userID),
+                        RecentTripRequests = await _studentDashboardRepository.GetRecentTripRequests(userID)
+
+                    };
+
+                    return View(model);
+                }
+            }
+            catch(Exception ex)
+            {
+                // Log the exception (not implemented here)
+                return View("Error", new { message = "An error occurred while loading the dashboard." });
+            }
+           
+   
         }
     }
 }
