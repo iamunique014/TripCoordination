@@ -92,7 +92,43 @@ public class StudentControllerTests
         Assert.Equal("/Account/Login", result.PageName);
         Assert.Equal("You are not authorized to access this page. Please log in to continue.", controller.TempData["ErrorMessage"]);
     }
+    [Fact]
+    public async Task StudentDashboard_ExceptionThrown_ReturnsErrorView()
+    {
+        // Arrange
+        var studentDashboardRepository = new Mock<IStudentDashboardRepository>();
+        var userRepository = new Mock<IUserRepository>();
+        var fakeUserId = "user123";
 
+        // Setup repo to throw exception
+        studentDashboardRepository
+            .Setup(r => r.GetNextUpcomingTrip(It.IsAny<string>()))
+            .ThrowsAsync(new Exception("Simulated failure"));
+
+        var controller = new StudentController(studentDashboardRepository.Object, userRepository.Object);
+
+        // Setup fake authenticated user
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, fakeUserId),
+            new Claim(ClaimTypes.Role, "Student")
+        };
+
+        controller.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext
+            {
+                User = new ClaimsPrincipal(new ClaimsIdentity(claims, "mock"))
+            }
+        };
+
+        // Act
+        var result = await controller.StudentDashboard();
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.Equal("Error", viewResult.ViewName);
+    }
 
 
 }
