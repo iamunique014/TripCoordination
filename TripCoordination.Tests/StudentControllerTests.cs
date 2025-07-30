@@ -1,16 +1,16 @@
-﻿using Xunit;
-using Moq;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
+using Moq;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
-
-
-using TripCoordination.Data.Repository;
 using TripCoordination.Common.ViewModel;
 using TripCoordination.Controllers;
+using TripCoordination.Data.Repository;
+using Xunit;
 
 public class StudentControllerTests
 {
@@ -19,6 +19,7 @@ public class StudentControllerTests
     {
         // Arrange
         var mockRepo = new Mock<IStudentDashboardRepository>();
+        var userRepository = new Mock<IUserRepository>();
         var fakeUserId = "user123";
 
         var expectedTrip = new UpcomingTripViewModel
@@ -37,7 +38,7 @@ public class StudentControllerTests
         mockRepo.Setup(r => r.GetRecentTripRequests(fakeUserId))
                 .ReturnsAsync(expectedRequests);
 
-        var controller = new StudentController(mockRepo.Object);
+        var controller = new StudentController(mockRepo.Object, userRepository.Object);
 
         // Simulate authenticated user
         var claims = new List<Claim>
@@ -64,4 +65,34 @@ public class StudentControllerTests
         model.UpcomingTrip.Should().BeEquivalentTo(expectedTrip);
         model.RecentTripRequests.Should().BeEquivalentTo(expectedRequests);
     }
+    [Fact]
+    public async Task StudentDashboard_NullUserId_RedirectsToLoginWithErrorMessage()
+    {
+        var studentDashboardRepository = new Mock<IStudentDashboardRepository>();
+        var userRepository = new Mock<IUserRepository>();
+
+        // Arrange
+        var controller = new StudentController(studentDashboardRepository.Object, userRepository.Object);
+        controller.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext
+            {
+                User = new ClaimsPrincipal(new ClaimsIdentity())
+            }
+        };
+
+        var tempData = new TempDataDictionary(controller.ControllerContext.HttpContext, Mock.Of<ITempDataProvider>());
+        controller.TempData = tempData;
+
+        // Act
+        var result = await controller.StudentDashboard() as RedirectToPageResult;
+
+        // Assert
+        var redirect = Assert.IsType<RedirectToPageResult>(result);
+        Assert.Equal("/Account/Login", result.PageName);
+        Assert.Equal("You are not authorized to access this page. Please log in to continue.", controller.TempData["ErrorMessage"]);
+    }
+
+
+
 }
