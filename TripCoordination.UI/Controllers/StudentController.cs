@@ -71,7 +71,7 @@ namespace TripCoordination.Controllers
                 if (string.IsNullOrEmpty(userID))
                 {
                     TempData["ErrorMessage"] = "You are not authorized to access this page. Please log in to continue.";
-                    return RedirectToPage("/Account/Login");
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
                 }
                 else
                 {
