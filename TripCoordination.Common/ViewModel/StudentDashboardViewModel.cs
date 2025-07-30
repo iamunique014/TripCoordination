@@ -15,6 +15,6 @@ namespace TripCoordination.Common.ViewModel
         public int TotalRequestsMade { get; set; }
         public int TripsJoinedThisMonth { get; set; }
 
-        public List<TripRequestSummaryViewModel> RecentTripRequests { get; set; } = new();
+        public IEnumerable<TripRequestSummaryViewModel> RecentTripRequests { get; set; } 
     }
 }

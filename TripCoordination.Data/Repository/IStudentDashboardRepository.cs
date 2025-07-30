@@ -10,6 +10,6 @@ namespace TripCoordination.Data.Repository
     public interface IStudentDashboardRepository
     {
         Task<UpcomingTripViewModel?> GetNextUpcomingTrip(string userID);
-        Task<IEnumerable<TripRequestViewModel>> GetRecentTripRequests(string userID);
+        Task<IEnumerable<TripRequestSummaryViewModel>> GetRecentTripRequests(string userID);
     }
 }
