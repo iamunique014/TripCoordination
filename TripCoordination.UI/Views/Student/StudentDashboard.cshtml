@@ -1,7 +1,220 @@
-﻿<div class="alert alert-info">
-    <i class="bi bi-info-circle me-2"></i>
-    Coming soon: your joined trips, upcoming departures, and trip history.
+﻿@* @model TripCoordination.Common.ViewModel.StudentDashboardViewModel
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="page-title p-3 label-control">
+    <h3>Student Dashboard</h3>
 </div>
 
+@if(TempData["Error"] != null)
+{
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle me-2"></i>
+        Coming soon: your joined trips, upcoming departures, and trip history.
+    </div>
+}
+else
+{
+   @*  @if (Model.UpcomingTrip != null)
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">Your Upcoming Trip</div>
+            <div class="card-body">
+                <p><strong>Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation → @Model.UpcomingTrip.ToLocation</p>
+                <p><strong>Pickup Point:</strong> @Model.UpcomingTrip.PickupPoint</p>
+                <p><strong>Destination:</strong> @Model.UpcomingTrip.DestinationName</p>
+                <p><strong>Organizer:</strong> @Model.UpcomingTrip.OrganizerName @Model.UpcomingTrip.OrganizerSurname</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            You haven't joined any upcoming trips. <a href="/FindTrip">Find a trip</a> now.
+        </div>
+    } *@
 
-@* Future feature: dashboard statistics (e.g., number of trips joined etc.) *@
+   @*  <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Trips Joined</h5>
+                    <p class="display-6">@Model.TotalTripsJoined</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Requests Made</h5>
+                    <p class="display-6">@Model.TotalRequestsMade</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Trips Joined This Month</h5>
+                    <p class="display-6">@Model.TripsJoinedThisMonth</p>
+                </div>
+            </div>
+        </div>
+    </div> *@
+
+    @* <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Recent Trip Requests</div>
+        <div class="card-body">
+            @if (Model.RecentTripRequests?.Any() == true)
+            {
+                <ul class="list-group">
+                    @foreach (var request in Model.RecentTripRequests)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>@request.FromLocation → @request.ToLocation</strong><br />
+                                <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+                            </div>
+                            <span class="badge rounded-pill
+                                        @(request.IsApproved == true ? "bg-success" :
+                                                                request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                @(request.IsApproved == true ? "Accepted" :
+                                                    request.IsApproved == false ? "Declined" : "Pending")
+                </span>
+            </li>
+                        }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">No recent requests found.</p>
+            }
+        </div>
+    </div> *@
+
+    @* <div class="row mb-4">
+        <div class="col-md-4">
+            <a href="/FindTrip" class="btn btn-outline-primary w-100">Find a Trip</a>
+        </div>
+        <div class="col-md-4">
+            <a href="/MyTrips" class="btn btn-outline-secondary w-100">My Trips</a>
+        </div>
+        <div class="col-md-4">
+            <a href="/TripRequests/Create" class="btn btn-outline-success w-100">Make a Request</a>
+        </div>
+    </div> 
+} 
+*@
+
+@model TripCoordination.Common.ViewModel.StudentDashboardViewModel
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Welcome to Your Dashboard</h2>
+
+    <!-- Quick Action Buttons -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-2">
+            <a href="/FindTrip" class="btn btn-outline-primary w-100">
+                <i class="bi bi-search"></i> Find a Trip
+            </a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/MyTrips" class="btn btn-outline-secondary w-100">
+                <i class="bi bi-list-check"></i> My Trips
+            </a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="/TripRequests/Create" class="btn btn-outline-success w-100">
+                <i class="bi bi-plus-circle"></i> Make a Request
+            </a>
+        </div>
+    </div>
+
+    <!-- Upcoming Trip -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <i class="bi bi-calendar-event"></i> Upcoming Trip
+        </div>
+        <div class="card-body">
+            @if (Model.UpcomingTrip != null)
+            {
+                <p><strong>Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation → @Model.UpcomingTrip.ToLocation</p>
+                <p><strong>Pickup Point:</strong> @Model.UpcomingTrip.PickupPoint</p>
+                <p><strong>Destination:</strong> @Model.UpcomingTrip.DestinationName</p>
+                <p><strong>Organizer:</strong> @Model.UpcomingTrip.OrganizerName @Model.UpcomingTrip.OrganizerSurname</p>
+            }
+            else
+            {
+                <div class="text-muted">You haven't joined any upcoming trips. <a href="/FindTrip">Find one now</a>.</div>
+            }
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card text-center border-info">
+                <div class="card-body">
+                    <h5 class="card-title">Total Trips Joined</h5>
+                    <p class="display-6">@Model.TripStats.TotalTripsJoined</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center border-success">
+                <div class="card-body">
+                    <h5 class="card-title">Total Requests Made</h5>
+                    <p class="display-6">@Model.TripStats.TotalRequestsMade</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center border-warning">
+                <div class="card-body">
+                    <h5 class="card-title">This Month's Trips</h5>
+                    <p class="display-6">@Model.TripStats.TripsJoinedThisMonth</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Trip Requests -->
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            <i class="bi bi-clock-history"></i> Recent Trip Requests
+        </div>
+        <div class="card-body">
+            @if (Model.RecentTripRequests?.Any() == true)
+            {
+                <ul class="list-group">
+                    @foreach (var request in Model.RecentTripRequests)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>@request.FromLocation → @request.ToLocation</strong><br />
+                                <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+                            </div>
+                            <span class="badge rounded-pill
+                                        @(request.IsApproved == true ? "bg-success" :
+                                                                    request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                @(request.IsApproved == true ? "Approved" :
+                                                        request.IsApproved == false ? "Declined" : "Pending")
+                    </span>
+                </li>
+                                }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">You haven’t made any trip requests yet.</p>
+            }
+        </div>
+    </div>
+</div>
+
