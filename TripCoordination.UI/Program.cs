@@ -47,6 +47,7 @@ builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ITripRequestRepository, TripRequestRepository>();
 builder.Services.AddTransient<IRouteRequestRepository, RouteRequestRepository>();
 builder.Services.AddTransient<IRouteRepository, RouteRepository>();
+builder.Services.AddTransient<IStudentDashboardRepository, StudentDashboardRepository>();
 
 builder.Services.AddRazorPages();
 

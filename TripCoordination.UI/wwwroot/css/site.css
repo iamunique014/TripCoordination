@@ -18,6 +18,15 @@
     --gradient-left: linear-gradient(270deg, var(--black-olive), var(--dutch-white), var(--drab-dark-brown), var(--battleship-gray), var(--flame));
     /* You can define additional gradient variables as needed */
 }
+/*.text-default {
+    --flame: #de541e;
+    color: var(--flame)
+}
+
+.btn-primary, .bg-primary {
+    --flame: #de541e;
+    background: var(--flame)
+}*/
 
 .body {
     --dutch-white: #d6d6b1;
@@ -466,6 +475,58 @@ table.dataTable th {
 
 
 
-.bg-container .bg-light{
+.bg-container .bg-light {
+    --dutch-white: #d6d6b1;
     background: var(--dutch-white);
+}
+
+
+/*============================================================*/
+/*                       STUDENT DASHBOARD                    */
+/*============================================================*/
+.page-title{
+    color: var(--drab-dark-brown);
+}
+
+.container-content {
+    --black-olive: #3f3f37;
+    --dutch-white: #d6d6b1;
+    --drab-dark-brown: #494331;
+    --battleship-gray: #878472;
+    background-color: var(--dutch-white);
+    border-radius: 1rem;
+    box-shadow: 4px 8px 16px rgba(63, 63, 55, 0.15); /* subtle shadow using black-olive tone */
+    padding: 1rem;
+    color: var(--drab-dark-brown);
+}
+
+.container-header {
+    background: var(--flame);
+    color: #fff;
+    border-radius: 0.3rem;
+    padding: 0.3rem 1rem;
+}
+
+.btn-outline-primary{
+    border-color: var(--flame);
+    color: var(--flame);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--flame);
+        color: #fff;
+        border-color: var(--flame);
+    }
+
+.content-wrapper {
+    --dutch-white-rgba: rgba(214, 214, 177, var(--opacity));
+    border: solid 0.02rem;
+    border-color: var(--flame);
+    border-radius: 0.5rem;
+    color: var(--drab-dark-brown);
+    background: #e6e6b9ce;
+}
+
+.list-group-item {
+    background: #d6d6b1c5;
 }

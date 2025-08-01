@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripCoordination.UI", "Trip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripCoordination.Common", "TripCoordination.Common\TripCoordination.Common.csproj", "{514995B7-1FA7-4BD9-B28C-37C926AF9804}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripCoordination.Tests", "TripCoordination.Tests\TripCoordination.Tests.csproj", "{5803A721-ECA3-4E44-B034-FD2F76F0358E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{514995B7-1FA7-4BD9-B28C-37C926AF9804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514995B7-1FA7-4BD9-B28C-37C926AF9804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{514995B7-1FA7-4BD9-B28C-37C926AF9804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5803A721-ECA3-4E44-B034-FD2F76F0358E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5803A721-ECA3-4E44-B034-FD2F76F0358E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5803A721-ECA3-4E44-B034-FD2F76F0358E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5803A721-ECA3-4E44-B034-FD2F76F0358E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
