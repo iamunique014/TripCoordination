@@ -25,12 +25,22 @@ namespace TripCoordination.Data.Repository
 
             return results.FirstOrDefault();
         }
-        public async Task<IEnumerable<TripRequestSummaryViewModel>> GetRecentTripRequests(string userId)
+        public async Task<IEnumerable<TripRequestSummaryViewModel>> GetRecentTripRequests(string userID)
         {
             return await _db.GetData<TripRequestSummaryViewModel, dynamic>(
                 "sp_GetRecentTripRequests",
-                new { UserID = userId }
+                new { UserID = userID }
             );
+        }
+
+        public async Task<StudentTripStatsViewModel?> GetStudentTripStats(string userID)
+        {
+            var result = await _db.GetData<StudentTripStatsViewModel, dynamic>(
+                "sp_GetStudentTripStats", 
+                new { UserID = userID }
+            );
+
+            return result.FirstOrDefault();
         }
     }
 }

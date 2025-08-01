@@ -78,16 +78,16 @@ namespace TripCoordination.Controllers
                     var model = new StudentDashboardViewModel
                     {
                         UpcomingTrip = await _studentDashboardRepository.GetNextUpcomingTrip(userID),
-                        RecentTripRequests = await _studentDashboardRepository.GetRecentTripRequests(userID)
-
+                        RecentTripRequests = await _studentDashboardRepository.GetRecentTripRequests(userID),
+                        TripStats = await _studentDashboardRepository.GetStudentTripStats(userID)
                     };
 
                     return View(model);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                // Log the exception (not implemented here)
+                // must Log the exception before returning an error view (not yet implemented)
                 return View("Error", new { message = "An error occurred while loading the dashboard." });
             }
            
