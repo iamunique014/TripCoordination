@@ -9,12 +9,7 @@ namespace TripCoordination.Common.ViewModel
     public class StudentDashboardViewModel
     {
         public UpcomingTripViewModel? UpcomingTrip { get; set; }
-
-        // Quick stats
-        public int TotalTripsJoined { get; set; }
-        public int TotalRequestsMade { get; set; }
-        public int TripsJoinedThisMonth { get; set; }
-
+        public StudentTripStatsViewModel? TripStats { get; set; }
         public IEnumerable<TripRequestSummaryViewModel> RecentTripRequests { get; set; } 
     }
 }
