@@ -160,6 +160,10 @@ namespace TripCoordination.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("OrganizerDashboard", "TripCreator");
                     }
+                    else if(userRoles.Contains("Student"))
+                    {
+                        return RedirectToAction("StudentDashboard", "Student");
+                    }
                     else
                     {
                         return LocalRedirect(returnUrl);
