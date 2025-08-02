@@ -28,7 +28,7 @@ namespace TripCoordination.Data.Repository
         public async Task<IEnumerable<TripRequestSummaryViewModel>> GetRecentTripRequests(string userID)
         {
             return await _db.GetData<TripRequestSummaryViewModel, dynamic>(
-                "sp_GetRecentTripRequests",
+                "sp_GetUsersRecentTripRequests",
                 new { UserID = userID }
             );
         }
