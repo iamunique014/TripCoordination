@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TripCoordination.Common.ViewModel
 {
-    public class StudentDashboardViewModel
+    public class OrganizerDashboardViewModel
     {
         public UpcomingTripViewModel? UpcomingTrip { get; set; }
-        public StudentTripStatsViewModel? TripStats { get; set; }
-        public IEnumerable<TripRequestSummaryViewModel>? RecentTripRequests { get; set; } 
+        public OrganizerTripStatsViewModel? TripStats { get; set; }
+        public IEnumerable<TripRequestSummaryViewModel>? RecentTripRequests { get; set; }
     }
 }
