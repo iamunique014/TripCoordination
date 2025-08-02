@@ -54,7 +54,7 @@ namespace TripCoordination.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<TripRequestSummaryViewModel>>? GetRecentTripRequests()
+        public async Task<IEnumerable<TripRequestSummaryViewModel>?> GetRecentTripRequests()
         {
             try
             {
