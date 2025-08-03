@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 using TripCoordination.UI.Controllers;
+using System.Threading.Tasks;
 
 namespace TripCoordination.Controllers
 {
@@ -10,38 +14,52 @@ namespace TripCoordination.Controllers
     {
         private readonly ILogger<TripCreatorController> _logger;
 
-        private readonly IResidenceRepository _residenceRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IProfileRepository _profileRepository;
-        private readonly IUserRoleRepository _UserRoleRepository;
-        private readonly IRoleRepository _roleRepository;
+        private readonly IOrganizerDashboardRepository _organizerDashboardRepository;
         private readonly ITripRepository _tripRepository;
 
-        public TripCreatorController(ILogger<TripCreatorController> logger, ITripRepository tripRepository, IResidenceRepository residenceRepository, IUserRepository userRepository, IProfileRepository profileRepository, IUserRoleRepository userRoleRepository, IRoleRepository roleRepository)
+        public TripCreatorController(ILogger<TripCreatorController> logger, ITripRepository tripRepository, IOrganizerDashboardRepository organizerDashboardRepository)
         {
             _logger = logger;
+            _organizerDashboardRepository = organizerDashboardRepository;
             _tripRepository = tripRepository;
-            _residenceRepository = residenceRepository;
-            _userRepository = userRepository;
-            _profileRepository = profileRepository;
-            _UserRoleRepository = userRoleRepository;
-            _roleRepository = roleRepository;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        [Authorize(Roles = "Organizer")]
+        public async Task<IActionResult> OrganizerDashboard()
         {
-            return View();
-        }
+            try
+            {
+                ViewData["ShowSidebar"] = true;
 
-        public IActionResult CreateTrip()
-        {
-            return View();
-        }
+                string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public IActionResult OrganizerDashboard()
-        {
-            ViewData["ShowSidebar"] = true;
-            return View();
+                if(string.IsNullOrEmpty(userID))
+                {
+                    TempData["ErrorMessage"] = "You are not authorized to access this page. Please log in to continue.";
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
+                }
+                else
+                {
+                    var model = new OrganizerDashboardViewModel
+                    {
+                        UpcomingTrip = await _organizerDashboardRepository.GetUpcomingTrip(userID),
+                        TripStats = await _organizerDashboardRepository.GetOrganizerTripStats(userID),
+                        RecentTripRequests = await _organizerDashboardRepository.GetRecentTripRequests()
+                    };
+
+                    return View(model);
+                }
+                  
+                
+            }
+            catch (Exception)
+            {
+                // must Log the exception before returning an error view (not yet implemented)
+                TempData["Info"] = "An error occurred while loading the dashboard.";
+                var model = new OrganizerDashboardViewModel();
+                return View(model);
+            }
+           
         }
 
         [HttpGet]
