@@ -8,7 +8,7 @@ namespace TripCoordination.Common.ViewModel
 {
     public class OrganizerTripStatsViewModel
     {
-        public int TotalTripCreated { get; set; }
+        public int TotalTripsCreated { get; set; }
         public int TripsThisMonth { get; set; }
         public int PendingTripRequests { get; set; }
     }
