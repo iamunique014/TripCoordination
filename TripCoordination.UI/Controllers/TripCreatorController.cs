@@ -49,7 +49,7 @@ namespace TripCoordination.Controllers
 
                     return View(model);
                 }
-
+                  
                 
             }
             catch (Exception)
