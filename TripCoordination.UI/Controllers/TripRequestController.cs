@@ -11,11 +11,11 @@ namespace TripCoordination.Controllers
     public class TripRequestController : Controller
     {
         private readonly ITripRequestRepository _tripRequestRepository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public TripRequestController(
             ITripRequestRepository tripRequestRepository,
-            UserManager<IdentityUser> userManager)
+            UserManager<ApplicationUser> userManager)
         {
             _tripRequestRepository = tripRequestRepository;
             _userManager = userManager;

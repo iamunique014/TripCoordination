@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TripCoordination.Data.Models.Domain;
 using TripCoordination.Helpers.Extensions;
 
 namespace TripCoordination.Controllers
 {
     public class DemoLoginController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DemoLoginController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public DemoLoginController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
