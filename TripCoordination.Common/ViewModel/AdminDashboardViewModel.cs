@@ -10,7 +10,7 @@ namespace TripCoordination.Common.ViewModel
     {
         public UserStatsViewModel UserStats { get; set; }
         public TripStatsViewModel TripStats { get; set; }
-        public List<RecentActivityViewModel> RecentActivities { get; set; } = new();
+        public IEnumerable<RecentActivityViewModel> RecentActivities { get; set; } 
     }
 
 }
