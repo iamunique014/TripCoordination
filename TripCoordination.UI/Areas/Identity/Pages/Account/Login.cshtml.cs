@@ -19,25 +19,26 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text.Encodings.Web;
 using System.Text;
+using TripCoordination.Data.Models.Domain;
 
 namespace TripCoordination.Areas.Identity.Pages.Account
 {
     public class AuthenticationModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AuthenticationModel> _logger;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly IEmailSender _emailSender;
 
         public AuthenticationModel(
             RoleManager<IdentityRole> roleManager,
-            SignInManager<IdentityUser> signInManager, 
-            UserManager<IdentityUser> userManager,
+            SignInManager<ApplicationUser> signInManager, 
+            UserManager<ApplicationUser> userManager,
             ILogger<AuthenticationModel> logger,
-            IUserStore<IdentityUser> userStore,
+            IUserStore<ApplicationUser> userStore,
             IEmailSender emailSender
             )
         {

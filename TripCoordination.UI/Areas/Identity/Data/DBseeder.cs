@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TripCoordination.Constants;
+using TripCoordination.Data.Models.Domain;
 
 namespace TripCoordination.Areas.Identity.Data
 {
@@ -8,20 +9,20 @@ namespace TripCoordination.Areas.Identity.Data
         public static async Task SeedRolesAndAdminAsync(IServiceProvider service)
         {
             //seed roles
-            var userManager = service.GetService<UserManager<IdentityUser>>();
+            var userManager = service.GetService<UserManager<ApplicationUser>>();
             var roleManager = service.GetService<RoleManager<IdentityRole>>();
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin.ToString()));
-            await roleManager.CreateAsync(new IdentityRole(Roles.User.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Roles.Student.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Roles.Organizer.ToString()));
 
             // === DEMO: Admin ===
-            var admin = new IdentityUser
+            var admin = new ApplicationUser
             {
                 UserName = "admin@demo.com",
                 Email = "admin@demo.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                CreatedAt = DateTime.UtcNow // Explicit here if needed
             };
             var adminInDb = await userManager.FindByEmailAsync(admin.Email);
             if (adminInDb == null)
@@ -31,12 +32,13 @@ namespace TripCoordination.Areas.Identity.Data
             }
 
             // === DEMO: Student ===
-            var student = new IdentityUser
+            var student = new ApplicationUser
             {
                 UserName = "student@demo.com",
                 Email = "student@demo.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                CreatedAt = DateTime.UtcNow
             };
             var studentInDb = await userManager.FindByEmailAsync(student.Email);
             if (studentInDb == null)
@@ -46,12 +48,13 @@ namespace TripCoordination.Areas.Identity.Data
             }
 
             // === DEMO: Organizer ===
-            var organizer = new IdentityUser
+            var organizer = new ApplicationUser
             {
                 UserName = "organizer@demo.com",
                 Email = "organizer@demo.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                CreatedAt = DateTime.UtcNow
             };
             var organizerInDb = await userManager.FindByEmailAsync(organizer.Email);
             if (organizerInDb == null)
@@ -61,12 +64,13 @@ namespace TripCoordination.Areas.Identity.Data
             }
 
 
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 UserName = "mradmin@gmail.com",
                 Email = "mradmin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
+                CreatedAt = DateTime.UtcNow
             };
             var userInDb = await userManager.FindByEmailAsync(user.Email);
 
