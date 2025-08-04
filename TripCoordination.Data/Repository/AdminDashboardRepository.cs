@@ -22,8 +22,8 @@ namespace TripCoordination.Data.Repository
             {
                 var result = await _db.GetData<RecentActivityViewModel, dynamic>(
                    "sp_Admin_GetRecentActivity",
-                   new { },
-                   "Default"
+                   new { }
+                 
                 );
 
                 return result;
@@ -39,9 +39,8 @@ namespace TripCoordination.Data.Repository
             try
             {
                 var result = await _db.GetData<TripStatsViewModel, dynamic>(
-                     "sp_Admin_GetTripStats",
-                     new { },
-                     "Default"
+                     "sp_Admin_GetTripOverview",
+                     new { }
                 );
 
                 return result.FirstOrDefault() ?? new TripStatsViewModel();
@@ -57,9 +56,8 @@ namespace TripCoordination.Data.Repository
             try
             {
                 var result = await _db.GetData<UserStatsViewModel, dynamic>(
-                    "sp_Admin_GetUserStats",
-                    new { },
-                    "Default"
+                    "sp_Admin_GetUserSummary",
+                    new { }
                 );
 
                 return result.FirstOrDefault() ?? new UserStatsViewModel();
