@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TripCoordination.Areas.Identity.Data;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Data;
+using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
 using TripCoordination.Data.Services;
 
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 // Add ASP.NET Core Identity with default options and role support
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false; // Set to true if email confirmation is needed
     // Configure password requirements if desired:
@@ -49,6 +50,7 @@ builder.Services.AddTransient<IRouteRequestRepository, RouteRequestRepository>()
 builder.Services.AddTransient<IRouteRepository, RouteRepository>();
 builder.Services.AddTransient<IStudentDashboardRepository, StudentDashboardRepository>();
 builder.Services.AddTransient<IOrganizerDashboardRepository, OrganizerDashboardRepository>();
+builder.Services.AddTransient<IAdminDashboardRepository, AdminDashboardRepository>();
 
 builder.Services.AddRazorPages();
 

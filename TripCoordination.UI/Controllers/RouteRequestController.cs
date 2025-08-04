@@ -11,9 +11,9 @@ namespace TripCoordination.Controllers
     public class RouteRequestController : Controller
     {
         private readonly IRouteRequestRepository _routeRequestRepository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RouteRequestController(IRouteRequestRepository routeRequestRepo, UserManager<IdentityUser> userManager)
+        public RouteRequestController(IRouteRequestRepository routeRequestRepo, UserManager<ApplicationUser> userManager)
         {
             _routeRequestRepository = routeRequestRepo;
             _userManager = userManager;

@@ -9,15 +9,20 @@ using TripCoordination.Data.Models.Domain;
 
 namespace TripCoordination.Data.Models.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        // Add DbSet for your domain-specific tables
-        //public DbSet<Trip> Trips { get; set; }
-        //// Other DbSets for your custom tables (if needed)...
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>()
+                   .Property(u => u.CreatedAt)
+                   .HasDefaultValueSql("GETUTCDATE()");
+        }
     }
 }
