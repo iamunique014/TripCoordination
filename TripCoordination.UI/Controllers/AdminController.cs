@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Authorization;
+using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
-using TripCoordination.ViewModel;
 
 namespace TripCoordination.Controllers
 {
@@ -12,34 +11,55 @@ namespace TripCoordination.Controllers
         //private readonly ILogger<AdminController> _logger;
 
         private readonly ITownRepository _townRepository;        
-        private readonly IUserRepository _userRepository;
-        private readonly IRoleRepository _roleRepository;
+        //private readonly IUserRepository _userRepository;
+        //private readonly IRoleRepository _roleRepository;
         private readonly ITripRepository _tripRepository;
-        private readonly IProfileRepository _profileRepository;
-        private readonly IUserRoleRepository _UserRoleRepository;
+        //private readonly IProfileRepository _profileRepository;
+        //private readonly IUserRoleRepository _UserRoleRepository;
         private readonly IResidenceRepository _residenceRepository;
-        private readonly ITripParticipantRepository _tripParticipantRepository;
-        private readonly ITripDestinationTownRepository _tripDestinationTownRepository;
+        //private readonly ITripParticipantRepository _tripParticipantRepository;
+        //private readonly ITripDestinationTownRepository _tripDestinationTownRepository;
+        private readonly IAdminDashboardRepository _adminDashboardRepository;
         
 
-        public AdminController(/*Logger<AdminController> logger*/ ITownRepository townRepository, IResidenceRepository residenceRepository, IUserRepository userRepository, IProfileRepository profileRepository, IUserRoleRepository userRoleRepository, IRoleRepository roleRepository, ITripRepository tripRepository, ITripParticipantRepository tripParticipantRepository, ITripDestinationTownRepository tripDestinationTownRepository)
+        public AdminController(ITownRepository townRepository, IResidenceRepository residenceRepository, ITripRepository tripRepository, IAdminDashboardRepository adminDashboardRepository)
         {
             //_logger = logger;
             _townRepository = townRepository;
             _residenceRepository = residenceRepository;
-            _userRepository = userRepository;
-            _profileRepository = profileRepository;
-            _UserRoleRepository = userRoleRepository;
-            _roleRepository = roleRepository;
+            //_userRepository = userRepository;
+           // _profileRepository = profileRepository;
+            //_UserRoleRepository = userRoleRepository;
+            //_roleRepository = roleRepository;
             _tripRepository = tripRepository;
-            _tripParticipantRepository = tripParticipantRepository;
-            _tripDestinationTownRepository = tripDestinationTownRepository;
+           //_tripParticipantRepository = tripParticipantRepository;
+            //_tripDestinationTownRepository = tripDestinationTownRepository;
+            _adminDashboardRepository = adminDashboardRepository;
         }
-
-        public IActionResult AdminDashboard()
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminDashboard()
         {
-            ViewData["ShowSidebar"] = true;
-            return View();
+            try
+            {
+                ViewData["ShowSidebar"] = true;
+
+                var viewModel = new AdminDashboardViewModel
+                {
+                    UserStats = await _adminDashboardRepository.GetUserStats(),
+                    TripStats = await _adminDashboardRepository.GetTripStats(),
+                    RecentActivities = await _adminDashboardRepository.GetRecentActivityViewModels()
+                };
+
+                return View(viewModel);
+            }
+            catch(Exception)
+            {
+                // must Log the exception before returning an error view (not yet implemented)
+                TempData["Info"] = "An error occurred while loading the dashboard.";
+                var model = new AdminDashboardViewModel();
+                return View(model);
+            }         
         }
 
         //---------------RESIDENCE MANAGEMENT-------------------//
