@@ -41,43 +41,91 @@
 }
 else
 {
-    @* User Stats *@
-    <div class="container-content mb-4">
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-2">
-                <div class="content-wrapper p-3 border-primary">
-                    <div class="">
-                        <h5 class="card-title">Total Users</h5>
-                        <p class="card-text fs-4">@Model.UserStats.TotalUsers</p>
+    <div class="row">
+
+        <!--Left Column-->
+        <div class="col-lg-8">
+
+            @* User Stats *@
+            <div class="row">
+
+                <div class="col-xl-6 col-sm-6 mb-2">
+
+                    <div class="container-content">
+                        <div class="content-wrapper p-3 border-primary">
+                            <div class="">
+                                <h5 class="card-title">Total Users</h5>
+                                <p class="card-text fs-4">@Model.UserStats.TotalUsers</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col-xl-6 col-sm-6 mb-2">
+
+                    <div class="container-content">
+                        <div class="content-wrapper p-3 border-success">
+                            <div class="content-body">
+                                <h5 class="card-title">Active Organizers</h5>
+                                <p class="card-text fs-4">@Model.UserStats.ActiveOrganizers</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+
+                <div class="col-xl-6 col-sm-6 mb-2">
+
+                    <div class="container-content">
+                        <div class="content-wrapper p-3 border-danger">
+                            <div class="">
+                                <h5 class="card-title">Blocked Users</h5>
+                                <p class="card-text fs-4">@Model.UserStats.BlockedUsers</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="col-xl-6 col-sm-6 mb-2">
+
+                    <div class="container-content">
+                        <div class="content-wrapper p-3 border-info">
+                            <div class="">
+                                <h5 class="card-title">New This Month</h5>
+                                <p class="card-text fs-4">@Model.UserStats.NewUsersThisMonth</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Trips Created This Year
+                    </div>
+                    <div class="card-body">
+                        @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart")
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-2">
-                <div class="content-wrapper p-3 border-success">
-                    <div class="content-body">
-                        <h5 class="card-title">Active Organizers</h5>
-                        <p class="card-text fs-4">@Model.UserStats.ActiveOrganizers</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-2">
-                <div class="content-wrapper p-3 border-danger">
-                    <div class="">
-                        <h5 class="card-title">Blocked Users</h5>
-                        <p class="card-text fs-4">@Model.UserStats.BlockedUsers</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-2">
-                <div class="content-wrapper p-3 border-info">
-                    <div class="">
-                        <h5 class="card-title">New This Month</h5>
-                        <p class="card-text fs-4">@Model.UserStats.NewUsersThisMonth</p>
-                    </div>
-                </div>
+
             </div>
         </div>
+        <!--/End Left Column-->
+
+        <!--Start Right Column-->
+        <div class="col-lg-4">
+            <div class="chart-container container-content mb-4">
+                <h4>User Roles Distribution</h4>
+                <canvas id="userRoleChart" height="150"></canvas>
+            </div>
+        </div>
+       
     </div>
+
+   
 
     <!-- Trip Stats -->
     <div class="container-content mb-4">
@@ -147,4 +195,38 @@ else
     <script>
         setupDataTable('#recentActivity');
     </script>
+   
+    <script>
+        const roleCtx = document.getElementById('userRoleChart').getContext('2d');
+        const roleData = @Html.Raw(Model.UserRolesChartJson);
+
+        new Chart(roleCtx, {
+            type: 'pie',
+            data: {
+                labels: roleData.labels,
+                datasets: [{
+                    label: 'Users by Role',
+                    data: roleData.data,
+                    backgroundColor: [
+                        '#4e73df', '#1cc88a', '#36b9cc'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="~/js/admin-dashboard-charts.js"></script>
 }
+
