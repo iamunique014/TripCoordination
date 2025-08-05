@@ -237,14 +237,15 @@ table.dataTable th {
         }
 
 
-@media (max-width: 767.98px) {
+@media (max-width: 1198px) {
     .collapse-horizontal {
         position: fixed;
         top: 56px;
         left: 0;
         height: 100vh;
         width: 250px;
-        background-color: #f8f9fa;
+        /* background-color: #f8f9fa;*/
+        background-color: #fff;
         z-index: 1030;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         opacity: 0;
@@ -428,16 +429,6 @@ table.dataTable th {
         border-color: var(--battleship-gray);
     }
 
-@media (max-width: 1199px) {
-    .menu {
-        z-index: 99;
-       /* display: none;
-        left: -250px;*/
-        color: var(--flame);
-        Background: blue;
-    }
-
-}
 
 .layout-main {
     box-sizing: border-box;

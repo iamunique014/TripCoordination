@@ -20,13 +20,13 @@
 </head>
 <body class="d-flex flex-column min-vh-100 body">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-xl navbar-dark">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 @if (SignInManager.IsSignedIn(User) && (ViewData["HideSidebarToggle"] as bool? != true))
                 {
                     <!-- Sidebar Toggle -->
-                    <button class="btn btn-sm btn-flame d-md-none p-0 me-1 fs-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+                    <button class="btn btn-sm btn-flame d-xl-none p-0 me-1 fs-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                         aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle sidebar">
                         <i class="navbar-toggler-icon"></i>
                     </button>
@@ -56,7 +56,7 @@
     {
         <div class="d-flex flex-row min-vh-100">
          
-             <div class="collapse collapse-horizontal sidebar-wrapper d-md-block sidebar" id="sidebarMenu">
+             <div class="collapse collapse-horizontal sidebar-wrapper d-xl-block sidebar" id="sidebarMenu">
                <div>
                    @await Html.PartialAsync("_Sidebar")
                </div>
