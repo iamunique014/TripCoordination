@@ -8,22 +8,22 @@
 
     <!-- Quick Action Buttons -->
     <div class="row mt-4">
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/User/ViewUsers" class="btn btn-outline-primary w-100">
                 <i class="bi bi-search"></i> Manage Users
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/Admin/ManageTrips" class="btn btn-outline-primary w-100">
                 <i class="bi bi-list-check"></i> View All Trips
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/TripRequest/ViewRequest" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Trip Requests
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/RouteRequest/ViewRouteRequests" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Route Requests
             </a>
@@ -44,12 +44,12 @@ else
     <div class="row">
 
         <!--Left Column-->
-        <div class="col-xl-8">
+        <div class="col-lg-8">
 
             @* User Stats *@
             <div class="row">
 
-                <div class="col-xl-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
 
                     <div class="container-content mb-4">
                         <div class="content-wrapper p-3 border-primary">
@@ -62,7 +62,7 @@ else
                     
                 </div>
 
-                <div class="col-xl-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
 
                     <div class="container-content mb-4">
                         <div class="content-wrapper p-3 border-success">
@@ -76,7 +76,7 @@ else
                 </div>
 
 
-                <div class="col-xl-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
 
                     <div class="container-content mb-4">
                         <div class="content-wrapper p-3 border-danger">
@@ -89,7 +89,7 @@ else
                    
                 </div>
 
-                <div class="col-xl-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
 
                     <div class="container-content mb-4">
                         <div class="content-wrapper p-3 border-info">
@@ -101,18 +101,7 @@ else
                     </div>
                    
                 </div>
-                <!--Trips Created Bargraph-->
-
-                <div class="col-xl-12">
-                    <div class="container-content mb-4">
-                        <div class="container-header mb-2">
-                            Trips Created This Year
-                        </div>
-                        <div class="card-body">
-                            @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart")
-                        </div>
-                    </div>
-                </div>
+                
 
                 @* Recent Activity summary *@
                 <div class="col-xl-12">
@@ -153,7 +142,7 @@ else
         </div>
 
         <!--Start Right Column-->
-        <div class="col-xl-4">
+        <div class="col-lg-4">
 
             <!--User Role Chart Distribution-->
             <div class="chart-container container-content mb-4">
@@ -185,6 +174,17 @@ else
                 }
 
             </div>
+
+            <!--Trips Created Bargraph-->
+             <div class="container-content mb-4">
+                 <div class="container-header mb-2">
+                      Trips Created This Year
+                 </div>
+                 <div class="card-body">
+                      @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart")
+                 </div>
+             </div>
+
         </div>
        
     </div>
