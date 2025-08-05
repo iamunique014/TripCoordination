@@ -67,5 +67,20 @@ namespace TripCoordination.Data.Repository
                 return new UserStatsViewModel();
             }
         }
+        public async Task<Dictionary<string, int>> GetUserRoleDistribution()
+        {
+
+            var data = await _db.GetData<dynamic, dynamic>("sp_GetUserRoleDistribution", new { });
+
+            return data.ToDictionary(
+                d => (string)d.Name,
+                d => (int)d.Count
+            );
+        }
+        public async Task<IEnumerable<ChartDataPoint>> GetTripsCreatedByMonthAsync()
+        {
+            return await _db.GetData<ChartDataPoint, dynamic>("sp_Admin_GetTripsCreatedByMonth", new { });
+        }
+
     }
 }
