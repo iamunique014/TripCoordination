@@ -12,5 +12,7 @@ namespace TripCoordination.Data.Repository
         Task<TripStatsViewModel> GetTripStats();
         Task<UserStatsViewModel> GetUserStats();
         Task<IEnumerable<RecentActivityViewModel>> GetRecentActivityViewModels();
+        Task<Dictionary<string, int>> GetUserRoleDistribution();
+        Task<IEnumerable<ChartDataPoint>> GetTripsCreatedByMonthAsync();
     }
 }
