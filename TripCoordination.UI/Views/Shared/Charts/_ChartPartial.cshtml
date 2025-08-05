@@ -1,0 +1,43 @@
+﻿@model string
+<div>
+    <canvas id="@Model"></canvas>
+</div>
+
+@* @section Scripts {
+    <script>
+        console.log('Chart script loaded');
+             const ctx = document.getElementById('tripsCreatedChart');
+        if (!ctx) {
+            console.log('Chart canvas not found');
+            return;
+        }
+
+        console.log('Chart canvas found, loading chart...');
+
+        fetch('/Admin/GetTripsCreatedChartData')
+            .then(res => res.json())
+            .then(data => {
+                const ctx = document.getElementById('@Model').getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.label),
+                        datasets: [{
+                            label: 'Trips Created',
+                            data: data.map(d => d.value),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }).catch(error => console.error('Error loading chart data:', error));
+    </script>
+} *@
+
