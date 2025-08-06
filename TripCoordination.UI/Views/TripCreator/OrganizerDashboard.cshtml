@@ -68,33 +68,38 @@ else
         <div class="col-lg-8">
 
             <!-- Quick Stats -->
-            <div class="container-content mb-4">
-                <div class="row">
-                    <div class="col-12 col-xl-4 mb-3 ">
-                        <div class="text-center pt-3 content-wrapper">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center content-wrapper pt-3 border-primary">
                             <div class="container-body">
                                 <h5 class="">Total Trips Created</h5>
                                 <p class="display-6">@Model.TripStats.TotalTripsCreated</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4 mb-3 ">
-                        <div class="text-center pt-3 content-wrapper">
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center pt-3 content-wrapper border-warning">
                             <div class="container-body">
                                 <h5>Total Pending Requests</h5>
                                 <p class="display-6">@Model.TripStats.PendingTripRequests</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4 mb-3 ">
-                        <div class="text-center pt-3 content-wrapper">
+                </div>
+                @* <div class="col-lg-12 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center pt-3 content-wrapper border-info">
                             <div class="container-body">
                                 <h5 class="">This Month's Trips</h5>
                                 <p class="display-6">@Model.TripStats.TripsThisMonth</p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *@
+
             </div>
 
         </div>
@@ -108,7 +113,7 @@ else
                 <div class="container-body px-3 pt-3">
                     @if (Model.UpcomingTrip != null)
                     {
-                        <p><strong>Departure Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                        <p><strong>Departure:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
                         <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation to @Model.UpcomingTrip.ToLocation</p>
                         <p><strong>Trip Status:</strong> @(Model.UpcomingTrip.IsFull ? "Fully Booked" : "Available")</p>
                         <p><strong>Available Seats:</strong> @Model.UpcomingTrip.Seats</p>
