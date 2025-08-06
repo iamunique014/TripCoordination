@@ -105,6 +105,17 @@ else
             <!--Trips Created Monthly Bargraph-->
             <div class="container-content mb-4">
                 <div class="container-header mb-2">
+                    Seat Utilization Per Trip
+                </div>
+                <div class="card-body">
+                    <canvas id="seatUtilizationChart"></canvas>
+                    @* @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart") *@
+                </div>
+            </div>
+
+            <!--Trips Created Monthly Bargraph-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
                     Trips Created This Year
                 </div>
                 <div class="card-body">
@@ -204,6 +215,62 @@ else
                         }
                     });
                 });
+
+
+
+            const dualBarCtx = document.getElementById('seatUtilizationChart');
+            if (!dualBarCtx) {
+                console.log('Canvas for chart not found');
+                return;
+            }
+
+            fetch('/TripCreator/GetSeatUtilizationChartData')
+                .then(res => res.json())
+                .then(data => {
+                    const labels = data.map(d => d.label);
+                    const filled = data.map(d => d.filled);
+                    const available = data.map(d => d.available);
+
+                    new Chart(dualBarCtx.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Seats Filled',
+                                    data: filled,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                    stack: 'Stack 0',
+                                },
+                                {
+                                    label: 'Seats Available',
+                                    data: available,
+                                    backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                                    stack: 'Stack 0',
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Seats Filled vs Available Per Trip'
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    stacked: true
+                                },
+                                y: {
+                                    stacked: true,
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+            })
+            .catch(error => console.error('Error loading chart data:', error));
         });
     </script>
 }
