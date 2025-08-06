@@ -63,6 +63,17 @@ namespace TripCoordination.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Organizer")]
+        public async Task<IActionResult> GetTripsCreatedChartData()
+        {
+            string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+
+            var data = await _organizerDashboardRepository.GetMonthlyTripCountByOrganizer(userID);            
+
+            return Json(data);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> MyTrips()
         {
             ViewData["ShowSidebar"] = true;

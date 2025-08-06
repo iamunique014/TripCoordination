@@ -102,6 +102,15 @@ else
 
             </div>
 
+            <!--Trips Created Monthly Bargraph-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
+                    Trips Created This Year
+                </div>
+                <div class="card-body">
+                    @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart")
+                </div>
+            </div>
         </div>
         <div class="col-lg-4">
             
@@ -161,4 +170,40 @@ else
         </div>
     </div>
     
+}
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const canvas = document.getElementById('tripsCreatedChart');
+            if (!canvas) {
+                console.log('Chart canvas not found');
+                return;
+            }
+
+            fetch('/TripCreator/GetTripsCreatedChartData')
+                .then(res => res.json())
+                .then(data => {
+                    const ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.map(d => d.label),
+                            datasets: [{
+                                label: 'Trips Created',
+                                data: data.map(d => d.value),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
 }
