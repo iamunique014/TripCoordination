@@ -8,22 +8,22 @@
 
     <!-- Quick Action Buttons -->
     <div class="row mt-4">
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/Trip/CreateTrip" class="btn btn-outline-primary w-100">
                 <i class="bi bi-search"></i> Create a Trip
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/TripCreator/MyTrips" class="btn btn-outline-primary w-100">
                 <i class="bi bi-list-check"></i> My Trips
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/TripRequest/ViewRequest" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Trip Requests
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/RouteRequest/CreateRouteRequest" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Request a Route
             </a>
@@ -64,88 +64,96 @@ else if (TempData["Error"] != null)
 }
 else
 {
-    <!-- Upcoming Trip -->
-    <div class="container-content mb-4">
-        <div class="container-header">
-            <i class="bi bi-calendar-event"></i> Upcoming Trip
-        </div>
-        <div class="container-body px-3 pt-3">
-            @if (Model.UpcomingTrip != null)
-            {
-                <p><strong>Departure Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
-                <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation to @Model.UpcomingTrip.ToLocation</p>
-                <p><strong>Trip Status:</strong> @(Model.UpcomingTrip.IsFull ? "Fully Booked" : "Available")</p>
-                <p><strong>Available Seats:</strong> @Model.UpcomingTrip.Seats</p>
-            }
-            else
-            {
-                <div class="text-muted">You haven't created any upcoming trips. <a asp-action="CreateTrip" asp-controller="Trip">Create one now</a>.</div>
-            }
-        </div>
+    <div class="row">
+        <div class="col-lg-8">
 
-    </div>
-
-
-    <!-- Quick Stats -->
-    <div class="container-content mb-4">
-        <div class="row">
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5 class="">Total Trips Created</h5>
-                        <p class="display-6">@Model.TripStats.TotalTripsCreated</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5>Total Pending Requests</h5>
-                        <p class="display-6">@Model.TripStats.PendingTripRequests</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5 class="">This Month's Trips</h5>
-                        <p class="display-6">@Model.TripStats.TripsThisMonth</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Recent Trip Requests -->
-    <div class="container-content mb-4">
-        <div class="container-header">
-            <i class="bi bi-clock-history"></i> Recent Trip Requests
-        </div>
-        <div class="container-body p-3">
-            @if (Model.RecentTripRequests?.Any() == true)
-            {
-                <ul class="list-group bg-container">
-                    @foreach (var request in Model.RecentTripRequests)
-                    {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>@request.FromLocation → @request.ToLocation</strong><br />
-                                <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+            <!-- Quick Stats -->
+            <div class="container-content mb-4">
+                <div class="row">
+                    <div class="col-12 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5 class="">Total Trips Created</h5>
+                                <p class="display-6">@Model.TripStats.TotalTripsCreated</p>
                             </div>
-                            <span class="badge rounded-pill
-                                @(request.IsApproved == true ? "bg-success" :
-                                    request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
-                                @(request.IsApproved == true ? "Approved" :
-                                    request.IsApproved == false ? "Declined" : "Pending")
-                            </span>
-                        </li>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5>Total Pending Requests</h5>
+                                <p class="display-6">@Model.TripStats.PendingTripRequests</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5 class="">This Month's Trips</h5>
+                                <p class="display-6">@Model.TripStats.TripsThisMonth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            
+            <!-- Upcoming Trip -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-calendar-event"></i> Upcoming Trip
+                </div>
+                <div class="container-body px-3 pt-3">
+                    @if (Model.UpcomingTrip != null)
+                    {
+                        <p><strong>Departure Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                        <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation to @Model.UpcomingTrip.ToLocation</p>
+                        <p><strong>Trip Status:</strong> @(Model.UpcomingTrip.IsFull ? "Fully Booked" : "Available")</p>
+                        <p><strong>Available Seats:</strong> @Model.UpcomingTrip.Seats</p>
                     }
-                </ul>
-            }
-            else
-            {
-                <p class="text-muted">No pending trip requests.</p>
-            }
+                    else
+                    {
+                        <div class="text-muted">You haven't created any upcoming trips. <a asp-action="CreateTrip" asp-controller="Trip">Create one now</a>.</div>
+                    }
+                </div>
+            </div>
+
+            <!-- Recent Trip Requests -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-clock-history"></i> Recent Trip Requests
+                </div>
+                <div class="container-body p-3">
+                    @if (Model.RecentTripRequests?.Any() == true)
+                    {
+                        <ul class="list-group bg-container">
+                            @foreach (var request in Model.RecentTripRequests)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@request.FromLocation → @request.ToLocation</strong><br />
+                                        <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+                                    </div>
+                                    <span class="badge rounded-pill
+                                            @(request.IsApproved == true ? "bg-success" :
+                                                                              request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                        @(request.IsApproved == true ? "Approved" :
+                                                                    request.IsApproved == false ? "Declined" : "Pending")
+                                    </span>
+                                </li>
+                             }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No pending trip requests.</p>
+                    }
+                </div>
+            </div>
+
         </div>
     </div>
+    
 }
