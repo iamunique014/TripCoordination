@@ -74,6 +74,38 @@ namespace TripCoordination.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Organizer")]
+        public async Task<IActionResult> GetSeatUtilizationChartData()
+        {
+            try
+            {
+                string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+
+                if (string.IsNullOrEmpty(userID))
+                {
+                    return Unauthorized();
+                }
+
+                var data = await _organizerDashboardRepository.GetTripSeatUtilizationChartData(userID);
+
+                var chartData = data.Select(d => new
+                {
+                    label = d.TripTitle,
+                    filled = d.SeatsFilled,
+                    available = d.SeatsAvailable
+                });
+
+                return Json(chartData);
+            }
+            catch (Exception ex)
+            {
+                // log exception here
+                return StatusCode(500, "Failed to load chart data.");
+            }
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> MyTrips()
         {
             ViewData["ShowSidebar"] = true;
