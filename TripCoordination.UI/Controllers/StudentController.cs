@@ -93,5 +93,15 @@ namespace TripCoordination.Controllers
            
    
         }
+        [HttpGet]
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> GetTripsJoinedChartData()
+        {
+            string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+
+            var data = await _studentDashboardRepository.GetStudentMonthlyTripsJoinedCount(userID);
+
+            return Json(data);
+        }
     }
 }
