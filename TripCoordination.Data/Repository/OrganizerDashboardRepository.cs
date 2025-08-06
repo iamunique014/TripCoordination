@@ -81,5 +81,13 @@ namespace TripCoordination.Data.Repository
 
             }
         }
+
+        public async Task<IEnumerable<TripSeatUtilizationChartViewModel>> GetTripSeatUtilizationChartData(string userID)
+        {
+            return await _db.GetData<TripSeatUtilizationChartViewModel, dynamic>(
+                "sp_Organizer_GetSeatUtilizationByTrip", 
+                new { userID }
+            );
+        }
     }
 }
