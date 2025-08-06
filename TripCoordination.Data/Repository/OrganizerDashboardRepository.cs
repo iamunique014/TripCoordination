@@ -68,5 +68,18 @@ namespace TripCoordination.Data.Repository
                 return null;
             }
         }
+
+        public async Task<IEnumerable<ChartDataPoint>> GetMonthlyTripCountByOrganizer(string userID)
+        {
+            try
+            {
+                return await _db.GetData<ChartDataPoint, dynamic>("sp_Organizer_GetMonthlyTripCount", new { userID });
+            }
+            catch
+            {
+                return null;
+
+            }
+        }
     }
 }
