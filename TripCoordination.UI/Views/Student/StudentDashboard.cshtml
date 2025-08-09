@@ -67,7 +67,7 @@ else
             <!-- Quick Stats -->
             <div class="container-content mb-4">
                 <div class="row">
-                    <div class="col-12 col-xl-4 mb-3 ">
+                    <div class="col-lg-6 col-xl-4 mb-3 ">
                         <div class="text-center pt-3 content-wrapper">
                             <div class="container-body">
                                 <h5 class="">Total Trips Joined</h5>
@@ -75,7 +75,7 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4 mb-3 ">
+                    <div class="col-lg-6 col-xl-4 mb-3 ">
                         <div class="text-center pt-3 content-wrapper">
                             <div class="container-body">
                                 <h5>Total Requests Made</h5>
@@ -83,7 +83,7 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4 mb-3 ">
+                    <div class="col-lg-12 col-xl-4 mb-3 ">
                         <div class="text-center pt-3 content-wrapper">
                             <div class="container-body">
                                 <h5 class="">This Month's Trips</h5>
@@ -97,12 +97,14 @@ else
             <!--Trips Created Monthly Bargraph-->
             <div class="container-content mb-4">
                 <div class="container-header mb-2">
-                    Trips Created This Year
+                    Trips Joined This Year
                 </div>
                 <div class="card-body">
                     @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsJoinedChart")
                 </div>
             </div>
+
+            
         </div>
         <div class="col-lg-4">
             <!-- Upcoming Trip -->
@@ -126,6 +128,16 @@ else
                 </div>
             </div>
 
+            <!--Trip Request Status Distribution Chart-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
+                    Trip Requests Summary This Year
+                </div>
+                <div class="card-body">
+                    @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripRequestStatusDistributionChart")
+                </div>
+            </div>
+
             <!-- Recent Trip Requests -->
             <div class="container-content mb-4">
                 <div class="container-header">
@@ -142,14 +154,16 @@ else
                                         <strong>@request.FromLocation → @request.ToLocation</strong><br />
                                         <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
                                     </div>
-                                    <span class="badge rounded-pill
-                                                                                    @(request.IsApproved == true ? "bg-success" :
-                                                                                                                                                                        request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                    <span class="badge rounded-pill  
+                                        @(request.IsApproved == true ? "bg-success" :
+                                                                    request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
                                         @(request.IsApproved == true ? "Approved" :
                                                                     request.IsApproved == false ? "Declined" : "Pending")
-                        </span>
-                    </li>
-                                        }
+
+                                                                   
+                                    </span>
+                                </li>
+                             }
                         </ul>
                     }
                     else
@@ -158,6 +172,7 @@ else
                     }
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -198,61 +213,39 @@ else
                     });
                 });
 
+            const roleCtx = document.getElementById('tripRequestStatusDistributionChart').getContext('2d');
+            // const roleData = //@Html.//Raw(Model.UserRolesChartJson);
 
-
-            // const dualBarCtx = document.getElementById('seatUtilizationChart');
-            // if (!dualBarCtx) {
-            //     console.log('Canvas for chart not found');
-            //     return;
-            // }
-
-            // fetch('/TripCreator/GetSeatUtilizationChartData')
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         const labels = data.map(d => d.label);
-            //         const filled = data.map(d => d.filled);
-            //         const available = data.map(d => d.available);
-
-            //         new Chart(dualBarCtx.getContext('2d'), {
-            //             type: 'bar',
-            //             data: {
-            //                 labels: labels,
-            //                 datasets: [
-            //                     {
-            //                         label: 'Seats Filled',
-            //                         data: filled,
-            //                         backgroundColor: 'rgba(54, 162, 235, 0.7)',
-            //                         stack: 'Stack 0',
-            //                     },
-            //                     {
-            //                         label: 'Seats Available',
-            //                         data: available,
-            //                         backgroundColor: 'rgba(255, 206, 86, 0.7)',
-            //                         stack: 'Stack 0',
-            //                     }
-            //                 ]
-            //             },
-            //             options: {
-            //                 responsive: true,
-            //                 plugins: {
-            //                     title: {
-            //                         display: true,
-            //                         text: 'Seats Filled vs Available Per Trip'
-            //                     }
-            //                 },
-            //                 scales: {
-            //                     x: {
-            //                         stacked: true
-            //                     },
-            //                     y: {
-            //                         stacked: true,
-            //                         beginAtZero: true
-            //                     }
-            //                 }
-            //             }
-            //         });
-            // })
-            // .catch(error => console.error('Error loading chart data:', error));
+            fetch('/Student/GetTripRequestStatusDistributionChartData')
+                .then(res => res.json())
+                .then(data => {
+                    new Chart(roleCtx, {
+                        type: 'doughnut',
+                        data: {
+                                labels: data.map(d => d.label),
+                                datasets: [{
+                                    label: 'Trip Requests by status',
+                                    data: data.map(d => d.value),
+                                    backgroundColor: [
+                                    '#4e73df', '#1cc88a', '#36b9cc'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    });
+                });
+            
         });
     </script>
 }
