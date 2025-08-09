@@ -103,5 +103,16 @@ namespace TripCoordination.Controllers
 
             return Json(data);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> GetTripRequestStatusDistributionChartData()
+        {
+            string userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+
+            var data = await _studentDashboardRepository.GetStudentTripRequestStatusDistribution(userID);
+
+            return Json(data);
+        }
     }
 }
