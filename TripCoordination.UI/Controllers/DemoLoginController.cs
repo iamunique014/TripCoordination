@@ -48,10 +48,10 @@ namespace TripCoordination.Controllers
                         return RedirectToAction("AdminDashboard", "Admin");
 
                     if (await _userManager.IsInRoleAsync(user, "Organizer"))
-                        return RedirectToAction("MyTrips", "TripCreator");
+                        return RedirectToAction("OrganizerDashboard", "TripCreator");
 
                     if (await _userManager.IsInRoleAsync(user, "Student"))
-                        return RedirectToAction("MyTrips", "Student");
+                        return RedirectToAction("StudentDashboard", "Student");
 
                     // Default fallback
                     return RedirectToAction("Index", "Home");

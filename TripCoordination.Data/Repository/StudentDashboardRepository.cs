@@ -42,5 +42,40 @@ namespace TripCoordination.Data.Repository
 
             return result.FirstOrDefault();
         }
+
+        public async Task<IEnumerable<ChartDataPoint>> GetStudentMonthlyTripsJoinedCount(string userID)
+        {
+            try
+            {
+                var result = await _db.GetData<ChartDataPoint, dynamic>(
+                    "sp_Student_GetTripsJoinedByMonth",
+                    new { userID }
+                );
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
+
+        public async Task<IEnumerable<ChartDataPoint>> GetStudentTripRequestStatusDistribution(string userID)
+        {
+            try
+            {
+                var result = await _db.GetData<ChartDataPoint, dynamic>(
+                    "sp_Student_GetTripRequestatusDestripution",
+                    new { userID }
+                );
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

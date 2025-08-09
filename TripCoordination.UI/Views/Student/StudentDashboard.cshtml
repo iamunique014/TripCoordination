@@ -31,90 +31,221 @@
     </div>
 </div>
 
-<!-- Upcoming Trip -->
-<div class="container-content mb-4">
-    <div class="container-header">
-        <i class="bi bi-calendar-event"></i> Upcoming Trip
-    </div>
-    <div class="container-body px-3 pt-3">
-        @if (Model.UpcomingTrip != null)
-        {
-            <p class="color-test"><strong >Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
-            <p class="testing"><strong>Route:</strong> @Model.UpcomingTrip.FromLocation → @Model.UpcomingTrip.ToLocation</p>
-            <p><strong>Pickup Point:</strong> @Model.UpcomingTrip.PickupPoint</p>
-            <p><strong>Destination:</strong> @Model.UpcomingTrip.DestinationName</p>
-            <p><strong>Organizer:</strong> @Model.UpcomingTrip.OrganizerName @Model.UpcomingTrip.OrganizerSurname</p>
-        }
-        else
-        {
-            <div class="text-muted">You haven't joined any upcoming trips. <a href="/Home/Index">Find one now</a>.</div>
-        }
-    </div>
-</div>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success  d-flex alert-container-win alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-container-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
-<!-- Quick Stats -->
-<div class="container-content mb-4">
+@if (TempData["Info"] != null)
+{
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle me-2"></i>
+        @TempData["Info"]
+    </div>
+}
+else
+{
     <div class="row">
-        <div class="col-12 col-xl-4 mb-3 ">
-            <div class="text-center pt-3 content-wrapper">
-                <div class="container-body">
-                    <h5 class="">Total Trips Joined</h5>
-                    <p class="display-6">@Model.TripStats.TotalTripsJoined</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-xl-4 mb-3 ">
-            <div class="text-center pt-3 content-wrapper">
-                <div class="container-body">
-                    <h5>Total Requests Made</h5>
-                    <p class="display-6">@Model.TripStats.TotalRequestsMade</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-xl-4 mb-3 ">
-            <div class="text-center pt-3 content-wrapper">
-                <div class="container-body">
-                    <h5 class="">This Month's Trips</h5>
-                    <p class="display-6">@Model.TripStats.TripsJoinedThisMonth</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Trip Requests -->
-<div class="container-content mb-4">
-    <div class="container-header">
-        <i class="bi bi-clock-history"></i> Recent Trip Requests
-    </div>
-    <div class="container-body p-3">
-        @if (Model.RecentTripRequests?.Any() == true)
-        {
-            <ul class="list-group bg-container">
-                @foreach (var request in Model.RecentTripRequests)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@request.FromLocation → @request.ToLocation</strong><br />
-                            <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+        <div class="col-lg-8">
+            <!-- Quick Stats -->
+            <div class="container-content mb-4">
+                <div class="row">
+                    <div class="col-lg-6 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5 class="">Total Trips Joined</h5>
+                                <p class="display-6">@Model.TripStats.TotalTripsJoined</p>
+                            </div>
                         </div>
-                        <span class="badge rounded-pill
-                                                        @(request.IsApproved == true ? "bg-success" :
-                                                                                request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
-                            @(request.IsApproved == true ? "Approved" :
-                                                request.IsApproved == false ? "Declined" : "Pending")
-                </span>
-            </li>
-                        }
-            </ul>
-        }
-        else
-        {
-            <p class="text-muted">You haven’t made any trip requests yet.</p>
-        }
+                    </div>
+                    <div class="col-lg-6 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5>Total Requests Made</h5>
+                                <p class="display-6">@Model.TripStats.TotalRequestsMade</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-4 mb-3 ">
+                        <div class="text-center pt-3 content-wrapper">
+                            <div class="container-body">
+                                <h5 class="">This Month's Trips</h5>
+                                <p class="display-6">@Model.TripStats.TripsJoinedThisMonth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Trips Created Monthly Bargraph-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
+                    Trips Joined This Year
+                </div>
+                <div class="card-body">
+                    @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsJoinedChart")
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="col-lg-4">
+            <!-- Upcoming Trip -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-calendar-event"></i> Upcoming Trip
+                </div>
+                <div class="container-body px-3 pt-3">
+                    @if (Model.UpcomingTrip != null)
+                    {
+                        <p class="color-test"><strong>Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                        <p class="testing"><strong>Route:</strong> @Model.UpcomingTrip.FromLocation → @Model.UpcomingTrip.ToLocation</p>
+                        <p><strong>Pickup Point:</strong> @Model.UpcomingTrip.PickupPoint</p>
+                        <p><strong>Destination:</strong> @Model.UpcomingTrip.DestinationName</p>
+                        <p><strong>Organizer:</strong> @Model.UpcomingTrip.OrganizerName @Model.UpcomingTrip.OrganizerSurname</p>
+                    }
+                    else
+                    {
+                        <div class="text-muted">You haven't joined any upcoming trips. <a href="/Home/Index">Find one now</a>.</div>
+                    }
+                </div>
+            </div>
+
+            <!--Trip Request Status Distribution Chart-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
+                    Trip Requests Summary This Year
+                </div>
+                <div class="card-body">
+                    @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripRequestStatusDistributionChart")
+                </div>
+            </div>
+
+            <!-- Recent Trip Requests -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-clock-history"></i> Recent Trip Requests
+                </div>
+                <div class="container-body p-3">
+                    @if (Model.RecentTripRequests?.Any() == true)
+                    {
+                        <ul class="list-group bg-container">
+                            @foreach (var request in Model.RecentTripRequests)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@request.FromLocation → @request.ToLocation</strong><br />
+                                        <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+                                    </div>
+                                    <span class="badge rounded-pill  
+                                        @(request.IsApproved == true ? "bg-success" :
+                                                                    request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                        @(request.IsApproved == true ? "Approved" :
+                                                                    request.IsApproved == false ? "Declined" : "Pending")
+
+                                                                   
+                                    </span>
+                                </li>
+                             }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">You haven’t made any trip requests yet.</p>
+                    }
+                </div>
+            </div>
+
+        </div>
+
     </div>
-</div>
 
+}
 
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const canvas = document.getElementById('tripsJoinedChart');
+            if (!canvas) {
+                console.log('Chart canvas not found');
+                return;
+            }
 
+            fetch('/Student/GetTripsJoinedChartData')
+                .then(res => res.json())
+                .then(data => {
+                    const ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.map(d => d.label),
+                            datasets: [{
+                                label: 'Trips Joined',
+                                data: data.map(d => d.value),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+
+            const roleCtx = document.getElementById('tripRequestStatusDistributionChart').getContext('2d');
+            // const roleData = //@Html.//Raw(Model.UserRolesChartJson);
+
+            fetch('/Student/GetTripRequestStatusDistributionChartData')
+                .then(res => res.json())
+                .then(data => {
+                    new Chart(roleCtx, {
+                        type: 'doughnut',
+                        data: {
+                                labels: data.map(d => d.label),
+                                datasets: [{
+                                    label: 'Trip Requests by status',
+                                    data: data.map(d => d.value),
+                                    backgroundColor: [
+                                    '#4e73df', '#1cc88a', '#36b9cc'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    });
+                });
+            
+        });
+    </script>
+}
