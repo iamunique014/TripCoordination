@@ -12,5 +12,7 @@ namespace TripCoordination.Data.Repository
         Task<UpcomingTripViewModel?> GetNextUpcomingTrip(string userID);
         Task<IEnumerable<TripRequestSummaryViewModel>> GetRecentTripRequests(string userID);
         Task<StudentTripStatsViewModel?> GetStudentTripStats(string userID);
+        Task<IEnumerable<ChartDataPoint>> GetStudentMonthlyTripsJoinedCount(string userID);
+        Task<IEnumerable<ChartDataPoint>> GetStudentTripRequestStatusDistribution(string userID);
     }
 }

@@ -8,22 +8,22 @@
 
     <!-- Quick Action Buttons -->
     <div class="row mt-4">
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/Trip/CreateTrip" class="btn btn-outline-primary w-100">
                 <i class="bi bi-search"></i> Create a Trip
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/TripCreator/MyTrips" class="btn btn-outline-primary w-100">
                 <i class="bi bi-list-check"></i> My Trips
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/TripRequest/ViewRequest" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Trip Requests
             </a>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-2">
+        <div class="col-md-3 col-sm-6 mb-2">
             <a href="/RouteRequest/CreateRouteRequest" class="btn btn-outline-primary w-100">
                 <i class="bi bi-plus-circle"></i> Request a Route
             </a>
@@ -31,6 +31,28 @@
     </div>
 </div>
 
+
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success  d-flex alert-container-win alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-container-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
 
 @if (TempData["Info"] != null)
@@ -42,88 +64,213 @@
 }
 else
 {
-    <!-- Upcoming Trip -->
-    <div class="container-content mb-4">
-        <div class="container-header">
-            <i class="bi bi-calendar-event"></i> Upcoming Trip
-        </div>
-        <div class="container-body px-3 pt-3">
-            @if (Model.UpcomingTrip != null)
-            {
-                <p><strong>Departure Date & Time:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
-                <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation to @Model.UpcomingTrip.ToLocation</p>
-                <p><strong>Trip Status:</strong> @(Model.UpcomingTrip.IsFull ? "Fully Booked" : "Available")</p>
-                <p><strong>Available Seats:</strong> @Model.UpcomingTrip.Seats</p>
-            }
-            else
-            {
-                <div class="text-muted">You haven't created any upcoming trips. <a asp-action="CreateTrip" asp-controller="Trip">Create one now</a>.</div>
-            }
-        </div>
+    <div class="row">
+        <div class="col-lg-8">
 
-    </div>
-
-
-    <!-- Quick Stats -->
-    <div class="container-content mb-4">
-        <div class="row">
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5 class="">Total Trips Created</h5>
-                        <p class="display-6">@Model.TripStats.TotalTripsCreated</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5>Total Pending Requests</h5>
-                        <p class="display-6">@Model.TripStats.PendingTripRequests</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-4 mb-3 ">
-                <div class="text-center pt-3 content-wrapper">
-                    <div class="container-body">
-                        <h5 class="">This Month's Trips</h5>
-                        <p class="display-6">@Model.TripStats.TripsThisMonth</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Recent Trip Requests -->
-    <div class="container-content mb-4">
-        <div class="container-header">
-            <i class="bi bi-clock-history"></i> Recent Trip Requests
-        </div>
-        <div class="container-body p-3">
-            @if (Model.RecentTripRequests?.Any() == true)
-            {
-                <ul class="list-group bg-container">
-                    @foreach (var request in Model.RecentTripRequests)
-                    {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>@request.FromLocation → @request.ToLocation</strong><br />
-                                <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+            <!-- Quick Stats -->
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center content-wrapper pt-3 border-primary">
+                            <div class="container-body">
+                                <h5 class="">Total Trips Created</h5>
+                                <p class="display-6">@Model.TripStats.TotalTripsCreated</p>
                             </div>
-                            <span class="badge rounded-pill
-                                @(request.IsApproved == true ? "bg-success" :
-                                    request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
-                                @(request.IsApproved == true ? "Approved" :
-                                    request.IsApproved == false ? "Declined" : "Pending")
-                            </span>
-                        </li>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center pt-3 content-wrapper border-warning">
+                            <div class="container-body">
+                                <h5>Total Pending Requests</h5>
+                                <p class="display-6">@Model.TripStats.PendingTripRequests</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* <div class="col-lg-12 col-sm-6">
+                    <div class="container-content mb-4">
+                        <div class="text-center pt-3 content-wrapper border-info">
+                            <div class="container-body">
+                                <h5 class="">This Month's Trips</h5>
+                                <p class="display-6">@Model.TripStats.TripsThisMonth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> *@
+
+            </div>
+
+            <!--Seat Utilization Chart-->
+            <div class="container-content mb-4 d-none d-sm-block">
+                <div class="container-header mb-2">
+                    Seat Utilization Per Trip
+                </div>
+                <div class="card-body">
+                    <canvas id="seatUtilizationChart"></canvas>
+                    @* @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart") *@
+                </div>
+            </div>
+
+            <!--Trips Created Monthly Bargraph-->
+            <div class="container-content mb-4">
+                <div class="container-header mb-2">
+                    Trips Created This Year
+                </div>
+                <div class="card-body">
+                    @await Html.PartialAsync("~/Views/Shared/Charts/_ChartPartial.cshtml", "tripsCreatedChart")
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            
+            <!-- Upcoming Trip -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-calendar-event"></i> Upcoming Trip
+                </div>
+                <div class="container-body px-3 pt-3">
+                    @if (Model.UpcomingTrip != null)
+                    {
+                        <p><strong>Departure:</strong> @Model.UpcomingTrip.DepartureDate.ToString("f")</p>
+                        <p><strong>Route:</strong> @Model.UpcomingTrip.FromLocation to @Model.UpcomingTrip.ToLocation</p>
+                        <p><strong>Trip Status:</strong> @(Model.UpcomingTrip.IsFull ? "Fully Booked" : "Available")</p>
+                        <p><strong>Available Seats:</strong> @Model.UpcomingTrip.Seats</p>
                     }
-                </ul>
-            }
-            else
-            {
-                <p class="text-muted">No pending trip requests.</p>
-            }
+                    else
+                    {
+                        <div class="text-muted">You haven't created any upcoming trips. <a asp-action="CreateTrip" asp-controller="Trip">Create one now</a>.</div>
+                    }
+                </div>
+            </div>
+
+            <!-- Recent Trip Requests -->
+            <div class="container-content mb-4">
+                <div class="container-header">
+                    <i class="bi bi-clock-history"></i> Recent Trip Requests
+                </div>
+                <div class="container-body p-3">
+                    @if (Model.RecentTripRequests?.Any() == true)
+                    {
+                        <ul class="list-group bg-container">
+                            @foreach (var request in Model.RecentTripRequests)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@request.FromLocation → @request.ToLocation</strong><br />
+                                        <small class="text-muted">Requested on @request.RequestedAt.ToShortDateString()</small>
+                                    </div>
+                                    <span class="badge rounded-pill
+                                            @(request.IsApproved == true ? "bg-success" :
+                                                                              request.IsApproved == false ? "bg-danger" : "bg-warning text-dark")">
+                                        @(request.IsApproved == true ? "Approved" :
+                                                                    request.IsApproved == false ? "Declined" : "Pending")
+                                    </span>
+                                </li>
+                             }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No pending trip requests.</p>
+                    }
+                </div>
+            </div>
+
         </div>
     </div>
+    
+}
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const canvas = document.getElementById('tripsCreatedChart');
+            if (!canvas) {
+                console.log('Chart canvas not found');
+                return;
+            }
+
+            fetch('/TripCreator/GetTripsCreatedChartData')
+                .then(res => res.json())
+                .then(data => {
+                    const ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.map(d => d.label),
+                            datasets: [{
+                                label: 'Trips Created',
+                                data: data.map(d => d.value),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+
+
+
+            const dualBarCtx = document.getElementById('seatUtilizationChart');
+            if (!dualBarCtx) {
+                console.log('Canvas for chart not found');
+                return;
+            }
+
+            fetch('/TripCreator/GetSeatUtilizationChartData')
+                .then(res => res.json())
+                .then(data => {
+                    const labels = data.map(d => d.label);
+                    const filled = data.map(d => d.filled);
+                    const available = data.map(d => d.available);
+
+                    new Chart(dualBarCtx.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Seats Filled',
+                                    data: filled,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                    stack: 'Stack 0',
+                                },
+                                {
+                                    label: 'Seats Available',
+                                    data: available,
+                                    backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                                    stack: 'Stack 0',
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Seats Filled vs Available Per Trip'
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    stacked: true
+                                },
+                                y: {
+                                    stacked: true,
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+            })
+            .catch(error => console.error('Error loading chart data:', error));
+        });
+    </script>
 }

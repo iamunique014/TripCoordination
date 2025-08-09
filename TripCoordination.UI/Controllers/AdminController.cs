@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
@@ -44,11 +45,19 @@ namespace TripCoordination.Controllers
             {
                 ViewData["ShowSidebar"] = true;
 
+                var roles = await _adminDashboardRepository.GetUserRoleDistribution();
+
                 var viewModel = new AdminDashboardViewModel
                 {
                     UserStats = await _adminDashboardRepository.GetUserStats(),
                     TripStats = await _adminDashboardRepository.GetTripStats(),
-                    RecentActivities = await _adminDashboardRepository.GetRecentActivityViewModels()
+                    RecentActivities = await _adminDashboardRepository.GetRecentActivityViewModels(),
+
+                     UserRolesChartJson = JsonConvert.SerializeObject(new
+                     {
+                         labels = roles.Keys,
+                         data = roles.Values
+                     })
                 };
 
                 return View(viewModel);
@@ -60,6 +69,14 @@ namespace TripCoordination.Controllers
                 var model = new AdminDashboardViewModel();
                 return View(model);
             }         
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetTripsCreatedChartData()
+        {
+            var data = await _adminDashboardRepository.GetTripsCreatedByMonthAsync();
+            return Json(data);
         }
 
         //---------------RESIDENCE MANAGEMENT-------------------//
