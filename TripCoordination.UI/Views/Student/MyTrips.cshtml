@@ -27,7 +27,7 @@
         var isPastTrip = trip.DepartureDate < DateTime.Now;
 
         <div class="form-container mb-3 p-3 label-control">
-            <p><strong>Date:</strong> @trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+            <p><strong>Date:</strong> @trip.DepartureDate.ToString("f")</p>
             <p><strong>Organizer:</strong> @trip.OrganizerName @trip.OrganizerSurname</p>
             <p><strong>PickUp:</strong> @trip.PickUpPoint</p>
             <p><strong>Seat:</strong> @trip.SeatNumber</p>

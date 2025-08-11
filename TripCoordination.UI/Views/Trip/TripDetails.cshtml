@@ -18,8 +18,8 @@
     </div>
 }
 
-<div class="trip-details form-container">
-    <p><strong>Date:</strong> @Model.DepartureDate</p>
+<div class="trip-details form-container mb-3">
+    <p><strong>Date:</strong> @Model.DepartureDate.ToString("f")</p>
     <p><strong>Destination:</strong> @Model.DestinationName</p>
     <p><strong>Available Seats:</strong> @Model.Seats</p>
     <p><strong>Organizer:</strong> @Model.CreatorFirstName @Model.CreatorLastName</p>
