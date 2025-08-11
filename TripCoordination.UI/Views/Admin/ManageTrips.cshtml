@@ -47,7 +47,7 @@ else if(TempData["Error"] != null)
                     {
                         <tr>
                             <td>@trip.CreatorName @trip.CreatorSurname</td>
-                            <td>@trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</td>
+                            <td>@trip.DepartureDate.ToString("f")</td>
                             <td>@trip.Seats</td>
                             <td>@(trip.IsFull ? "Yes" : "No")</td>
                             <td>

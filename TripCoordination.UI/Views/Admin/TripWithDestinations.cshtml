@@ -7,7 +7,7 @@
 @foreach (var trip in Model)
 {
     <div class="form-container p-3 label-control">
-        <p><strong>Departure: </strong> @trip.DepartureDate.ToString("dd MMM yyyy HH:mm")</p>
+        <p><strong>Departure: </strong> @trip.DepartureDate.ToString("f")</p>
         <p><strong>Organizer: </strong> @trip.CreatorSurname @trip.CreatorName</p>
         <p><strong>Available Seats: </strong> @trip.Seats</p>
     </div>
