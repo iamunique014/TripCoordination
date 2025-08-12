@@ -30,6 +30,7 @@ else if (TempData["Succes"] != null)
 @if (Model.Any())
 {
     <div class="form-container p-3 label-control">
+        <p><strong>Route: </strong> @Model.First().FromLocation → @Model.First().ToLocation</p>
         <p><strong>Departure:</strong> @Model.First().DepartureDate.ToString("f")</p>
         <p><strong>Seats:</strong> @Model.First().Seats</p>
         <p><strong>Trip Full:</strong> @(Model.First().IsFull ? "Yes" : "No")</p>

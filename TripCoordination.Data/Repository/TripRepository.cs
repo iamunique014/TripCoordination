@@ -113,6 +113,8 @@ namespace TripCoordination.Data.Repository
                     TripID = g.Key,
                     DepartureDate = g.First().DepartureDate,
                     CreatorName = $"{g.First().CreatorName} {g.First().CreatorSurname}",
+                    FromLocation = g.First().FromLocation,
+                    ToLocation = g.First().ToLocation,
                     IsFull = g.First().IsFull,
                     Seats = g.First().Seats,
                     Destinations = g
