@@ -65,7 +65,7 @@ else if (TempData["Succes"] != null)
                             <form method="post" asp-action="DeleteTripParticipant" asp-controller="TripParticipant">
                                 <input type="hidden" name="tripParticipantID" value="@participant.TripParticipantID" />
                                 <input type="hidden" name="tripID" value="@participant.TripID" />
-                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to Delete the Participant @participant.ParticipantName @participant.ParticipantSurname?');" >Remove</button>
                             </form>
                         </td>
                     </tr>
