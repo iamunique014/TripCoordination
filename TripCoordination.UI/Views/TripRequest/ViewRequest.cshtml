@@ -17,6 +17,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+else if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger  d-flex alert-container-lose alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <div>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
  <div class="form-container p-3">
             <div class="mb-3 text-end">
             <a asp-action="CreateRequest" class="btn btn-primary w-auto">Create New Request</a>
