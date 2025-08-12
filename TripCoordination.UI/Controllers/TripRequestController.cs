@@ -84,7 +84,16 @@ namespace TripCoordination.Controllers
         {
             ViewData["ShowSideBar"] = true;
             var result = await _tripRequestRepository.DeleteAsync(id);
-            return RedirectToAction("Index");
+
+            if (result)
+            {
+                TempData["Success"] = "Request Deleted Successfully!";
+                return RedirectToAction("ViewRequest");
+            }
+
+            ModelState.AddModelError("", "Something went wrong while deleting the request.");
+            TempData["Error"] = "Something went wrong while deleting the request.";
+            return RedirectToAction("ViewRequest");
         }
 
         // POST: /TripRequest/Approve/5
@@ -94,7 +103,7 @@ namespace TripCoordination.Controllers
         {
             ViewData["ShowSideBar"] = true;
             var result = await _tripRequestRepository.ApproveAsync(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewRequest");
         }
     }
 }
