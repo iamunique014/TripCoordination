@@ -12,6 +12,8 @@ namespace TripCoordination.Common.ViewModel
         public DateTime DepartureDate { get; set; }
         public string CreatorName { get; set; }
         public string CreatorSurname { get; set; }
+        public string FromLocation { get; set; }
+        public string ToLocation { get; set; }
         public bool IsFull { get; set; }
         public int Seats { get; set; }
 
