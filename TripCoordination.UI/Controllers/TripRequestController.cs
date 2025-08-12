@@ -84,7 +84,7 @@ namespace TripCoordination.Controllers
         {
             ViewData["ShowSideBar"] = true;
             var result = await _tripRequestRepository.DeleteAsync(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewRequest");
         }
 
         // POST: /TripRequest/Approve/5
