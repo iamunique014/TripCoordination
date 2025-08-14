@@ -48,7 +48,8 @@ else if (TempData["Succes"] != null)
                     <th>Seat</th>
                     <th>Pickup Point</th>
                     <th>Destination</th>
-                    <th></th>
+                    <th>Date Joined</th>
+                    <th class="noExport">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +63,7 @@ else if (TempData["Succes"] != null)
                         <td>@participant.SeatNumber</td>
                         <td>@participant.PickUpPoint</td>
                         <td>@participant.DestinationName</td>
+                        <td>@participant.CreatedAt</td>
                         <td>
                             <form method="post" asp-action="DeleteTripParticipant" asp-controller="TripParticipant">
                                 <input type="hidden" name="tripParticipantID" value="@participant.TripParticipantID" />
