@@ -13,6 +13,7 @@ namespace TripCoordination.Common.ViewModel
         public string UserID { get; set; }
         public string PickUpPoint { get; set; }
         public int SeatNumber { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         // Destination
         public string DestinationName { get; set; }
