@@ -521,3 +521,45 @@ table.dataTable th {
 .list-group-item {
     background: #d6d6b1c5;
 }
+
+
+/*============================================================*/
+/*                 STUDENT MY TRIPS TAB STYLE                 */
+/*============================================================*/
+
+/* Default state */
+.nav-tabs .nav-link {
+    --flame: #de541e;
+    color: var(--flame);
+    font-weight: 500;
+}
+
+    /* Hover */
+    .nav-tabs .nav-link:hover {
+        border-color: transparent;
+        color: #a83c14; /* darker shade of flame */
+    }
+
+    /* Active tab */
+    .nav-tabs .nav-link.active {
+        --flame: #de541e;
+        background-color: var(--flame);
+        color: #fff;
+        border-color: var(--flame) var(--flame) transparent;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+    }
+
+/* Badge inside tab */
+.nav-tabs .badge {
+    --flame: #de541e;
+    background-color: #fff;
+    color: var(--flame);
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link.active .badge {
+    --flame: #de541e;
+    background-color: #fff;
+    color: var(--flame);
+}
