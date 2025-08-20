@@ -1,0 +1,60 @@
+﻿@model TripCoordination.Common.ViewModel.MyTripGroupedViewModel
+@{
+    bool isPastTrip = Model.DepartureDate < DateTime.Now;
+    string accordionId = (isPastTrip ? "past" : "upcoming") + "-" + Model.TripID;
+}
+
+<div class="form-container mb-3 p-3 label-control">
+    <p><strong>Date:</strong> @Model.DepartureDate.ToString("f")</p>
+    <p><strong>Organizer:</strong> @Model.OrganizerName @Model.OrganizerSurname</p>
+    <p><strong>PickUp:</strong> @Model.PickUpPoint</p>
+    <p><strong>Seat:</strong> @Model.SeatNumber</p>
+
+    <div class="accordion accordion-system" id="accordion-@accordionId">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accordion-body-@accordionId"
+                        aria-expanded="false"
+                        aria-controls="accordion-body-@accordionId">
+                    View Destinations
+                </button>
+            </h2>
+            <div id="accordion-body-@accordionId" class="accordion-collapse collapse" data-bs-parent="#accordion-@accordionId">
+                <div class="accordion-body">
+                    <ul>
+                        @foreach (var dest in Model.Destinations)
+                        {
+                            <li>@dest.DestinationName</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3 text-end">
+        @if (isPastTrip)
+        {
+            <span data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="You cannot leave a trip that has already departed.">
+                <button type="button" class="btn btn-secondary" disabled>
+                    Leave Trip
+                </button>
+            </span>
+        }
+        else
+        {
+            <form asp-action="LeaveTrip" asp-controller="TripParticipant" method="post" class="d-inline">
+                <input type="hidden" name="tripParticipantId" value="@Model.TripParticipantID" />
+                <button type="submit"
+                        class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to leave this trip?');">
+                    Leave Trip
+                </button>
+            </form>
+        }
+    </div>
+</div>
