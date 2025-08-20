@@ -2,6 +2,16 @@
 
 @{
     ViewData["Title"] = "My Trips";
+
+    var upcomingTrips = Model
+        .Where(t => t.DepartureDate >= DateTime.Now)
+        .OrderBy(t => t.DepartureDate)
+        .ToList();
+
+    var pastTrips = Model
+        .Where(t => t.DepartureDate < DateTime.Now)
+        .OrderByDescending(t => t.DepartureDate)
+        .ToList();
 }
 
 <div class="page-title p-3 label-control">
@@ -12,75 +22,61 @@
 {
     <div class="alert alert-success alert-container-win d-flex align-items-center alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i>
-        <div>
-            @TempData["Success"]
-        </div>
+        <div>@TempData["Success"]</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-
 @if (Model.Any())
 {
-    @foreach (var trip in Model)
-    {
-        var isPastTrip = trip.DepartureDate < DateTime.Now;
+    <!-- Tabs navigation -->
+    <ul class="nav nav-tabs form-container p-3" id="tripTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="true">
+                Upcoming Trips
+                <span class="badge ms-1">@upcomingTrips.Count</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">
+                Past Trips
+                <span class="badge ms-1">@pastTrips.Count</span>
+            </button>
+        </li>
+    </ul>
 
-        <div class="form-container mb-3 p-3 label-control">
-            <p><strong>Date:</strong> @trip.DepartureDate.ToString("f")</p>
-            <p><strong>Organizer:</strong> @trip.OrganizerName @trip.OrganizerSurname</p>
-            <p><strong>PickUp:</strong> @trip.PickUpPoint</p>
-            <p><strong>Seat:</strong> @trip.SeatNumber</p>
-
-            <div class="accordion accordion-system" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-@trip.TripID" aria-expanded="false" aria-controls="accordion-@trip.TripID">
-                            View Destinations
-                        </button>
-                    </h2>
-                    <div id="accordion-@trip.TripID" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul>
-                                @foreach (var dest in trip.Destinations)
-                                {
-                                    <li>@dest.DestinationName</li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @* Leave Trip Button *@
-            <div class="mt-3 text-end">
-                <form asp-action="LeaveTrip" asp-controller="TripParticipant" method="post" class="d-inline">
-                    <input type="hidden" name="tripParticipantId" value="@trip.TripParticipantID" />
-                    @if (isPastTrip)
-                    {
-                        <span data-bs-toggle="tooltip"
-                              data-bs-placement="top"
-                              title="You cannot leave a trip that has already departed.">
-                            <button type="button"
-                                    class="btn btn-secondary"
-                                    disabled>
-                                Leave Trip
-                            </button>
-                        </span>
-                    }
-                    else
-                    {
-                        <button type="submit"
-                                class="btn btn-danger"
-                                onclick="return confirm('Are you sure you want to leave this trip?');">
-                            Leave Trip
-                        </button>
-                    }
-                </form>
-            </div>
+    <!-- Tabs content -->
+    <div class="tab-content mt-3 px-3" id="tripTabsContent">
+        <!-- Upcoming -->
+        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+            @if (upcomingTrips.Any())
+            {
+                @foreach (var trip in upcomingTrips)
+                {
+                    @Html.Partial("_UserTripCard", trip)
+                }
+            }
+            else
+            {
+                <div class="alert alert-info">You have no upcoming trips.</div>
+            }
         </div>
-    }
 
+        <!-- Past -->
+        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+            @if (pastTrips.Any())
+            {
+                @foreach (var trip in pastTrips)
+                {
+                    @Html.Partial("_UserTripCard", trip)
+                }
+            }
+            else
+            {
+                <div class="alert alert-light">No past trips yet.</div>
+            }
+        </div>
+    </div>
 }
 else
 {
