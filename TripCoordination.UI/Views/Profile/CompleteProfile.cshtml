@@ -1,5 +1,6 @@
 ﻿@model TripCoordination.Common.ViewModel.CreateProfileViewModel
 
+
 <div class="page-title p-3 label-control">
     <h3>Add Profile Information</h3>
 </div>
@@ -39,6 +40,8 @@ else if (TempData["Success"] != null)
 
 <div class="form-container p-3">
     <form class="row" action="CompleteProfile" method="post">
+
+        <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
         <div class="col-8 mb-3">
             <label asp-for="Title" class="label-control">Title</label>
