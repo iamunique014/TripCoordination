@@ -56,10 +56,11 @@ namespace TripCoordination.Controllers
         } 
 
 
-        public async Task<IActionResult> CompleteProfile()
+        public async Task<IActionResult> CompleteProfile(string? returnUrl = null)
         {
             ViewData["ShowSidebar"] = true;
- 
+            ViewData["ReturnUrl"] = returnUrl;
+
             var residence = await _residenceRepository.GetAllAsync();
 
             var model = new CreateProfileViewModel
@@ -77,7 +78,7 @@ namespace TripCoordination.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteProfile(CreateProfileViewModel profile)
+        public async Task<IActionResult> CompleteProfile(CreateProfileViewModel profile, string? returnUrl = null)
         {
             ViewData["ShowSidebar"] = true;
 
@@ -90,6 +91,7 @@ namespace TripCoordination.Controllers
                     Text = r.Name
                 }).ToList();
 
+                ViewData["ReturnUrl"] = returnUrl;
                 return View(profile); // Return the same model with validation errors
             }
 
@@ -101,6 +103,12 @@ namespace TripCoordination.Controllers
 
                 if (addProfile)
                 {
+                    // Security check: only allow local redirects
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     TempData["Success"] = "Profile created successfully";
                     return RedirectToAction(nameof(ViewProfile));
                 }
