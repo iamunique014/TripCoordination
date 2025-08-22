@@ -127,7 +127,16 @@ namespace TripCoordination.Controllers
             if (!await _profileService.HasProfileAsync(userData.UserID))
             {
                 TempData["Info"] = "Please complete your profile before joining a trip.";
-                return RedirectToAction("CompleteProfile", "Profile");
+
+                return RedirectToAction( 
+                    "CompleteProfile", 
+                    "Profile", 
+                    new { returnUrl = Url.Action(
+                        "TripDetails", 
+                        "Trip", 
+                        new {tripID, townID}) 
+                    } 
+                );
             }
 
             // Find the Trip using repository pattern
@@ -183,7 +192,10 @@ namespace TripCoordination.Controllers
             if (!await _profileService.HasProfileAsync(userId))
             {
                 TempData["Info"] = "Please complete your profile before creating a trip.";
-                return RedirectToAction("CompleteProfile", "Profile");
+                return RedirectToAction(
+                    "CompleteProfile", 
+                    "Profile", 
+                    new { returnUrl = Url.Action("CreateTrip", "Trip") } );
             }
 
             var model = new CreateTripViewModelUI
