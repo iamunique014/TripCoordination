@@ -51,6 +51,8 @@ builder.Services.AddTransient<IRouteRepository, RouteRepository>();
 builder.Services.AddTransient<IStudentDashboardRepository, StudentDashboardRepository>();
 builder.Services.AddTransient<IOrganizerDashboardRepository, OrganizerDashboardRepository>();
 builder.Services.AddTransient<IAdminDashboardRepository, AdminDashboardRepository>();
+builder.Services.AddHttpClient<ITownSyncService, TownSyncService>();
+
 
 builder.Services.AddRazorPages();
 
