@@ -46,8 +46,10 @@ else if (TempData["Error"] != null)
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Region</th>
-                        <th>Price</th>
+                        @* <th>Region</th>
+                        <th>Price</th> *@
+                        <th>Country</th>
+                        <th>Date</th>
                         <th class="noExport">Actions</th>
                     </tr>
                 </thead>
@@ -56,8 +58,10 @@ else if (TempData["Error"] != null)
                     {
                         <tr>
                             <td>@town.Name</td>
-                            <td>@town.Region</td>
-                            <td>@town.Price</td>
+                            @* <td>@town.Region</td>
+                            <td>@town.Price</td> *@
+                            <td>@town.Country</td>
+                            <td>@town.CreatedAt</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-primary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
