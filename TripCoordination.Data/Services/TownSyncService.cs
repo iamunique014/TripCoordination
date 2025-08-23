@@ -57,7 +57,7 @@ namespace TripCoordination.Data.Services
                     await _townRepository.AddAsync(new Town
                     {
                         Name = apiTown.Name,
-                        Region = apiTown.Country
+                        Country = apiTown.Country
                     });
                 }
             }
