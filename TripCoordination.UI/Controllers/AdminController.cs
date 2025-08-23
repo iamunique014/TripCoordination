@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.Data.Repository;
+using TripCoordination.Data.Services;
 
 namespace TripCoordination.Controllers
 {
@@ -21,11 +22,13 @@ namespace TripCoordination.Controllers
         //private readonly ITripParticipantRepository _tripParticipantRepository;
         //private readonly ITripDestinationTownRepository _tripDestinationTownRepository;
         private readonly IAdminDashboardRepository _adminDashboardRepository;
-        
+        private readonly ITownSyncService _townSyncService;
 
-        public AdminController(ITownRepository townRepository, IResidenceRepository residenceRepository, ITripRepository tripRepository, IAdminDashboardRepository adminDashboardRepository)
+
+        public AdminController(ITownSyncService townSyncService,ITownRepository townRepository, IResidenceRepository residenceRepository, ITripRepository tripRepository, IAdminDashboardRepository adminDashboardRepository)
         {
             //_logger = logger;
+            _townSyncService = townSyncService;
             _townRepository = townRepository;
             _residenceRepository = residenceRepository;
             //_userRepository = userRepository;
@@ -299,6 +302,15 @@ namespace TripCoordination.Controllers
         {
             ViewData["ShowSidebar"] = true;
             return View();
+        }
+
+        //[HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Sync()
+        {
+            await _townSyncService.SyncTownsAsync();
+            TempData["Success"] = "Towns synced successfully!";
+            return RedirectToAction("ManageTowns");
         }
     }
 }

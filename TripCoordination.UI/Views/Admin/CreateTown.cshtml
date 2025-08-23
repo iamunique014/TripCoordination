@@ -20,6 +20,8 @@
 
     <form asp-action="CreateTown" method="post">
 
+        <input type="hidden" name="Country" value="South Africa" />
+
         <div class="mb-3">
             <label asp-for="Name" class="label-control">Name</label>
             <input asp-for="Name" type="text" class="input-control">
