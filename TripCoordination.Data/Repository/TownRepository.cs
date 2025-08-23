@@ -22,7 +22,7 @@ namespace TripCoordination.Data.Repository
             try
             {
 
-                await _db.SaveData("sp_Create_Town", new { town.Region, town.Name, town.Price });
+                await _db.SaveData("sp_Create_Town", new { town.Region, town.Name, town.Price, town.Country });
                 return true;
             }
 
