@@ -11,5 +11,9 @@ namespace TripCoordination.ViewModel
         public IEnumerable<SelectListItem> AvailableTowns { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> AvailableRoutes { get; set; }
+
+        // instead of only IDs, we track town+price
+        [ValidateNever]
+        public List<TripTownPriceViewModel> SelectedTowns { get; set; } = new();
     }
 }
