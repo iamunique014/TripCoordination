@@ -7,6 +7,7 @@ using TripCoordination.Common.ViewModel;
 using TripCoordination.Data.DataAccess;
 using TripCoordination.Data.Models.Domain;
 using TripCoordination.ViewModel;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace TripCoordination.Data.Repository
@@ -19,7 +20,32 @@ namespace TripCoordination.Data.Repository
         {
             _db = db;
         }
+        public int CreateTripAsync(CreateTripViewModel createTripViewModel)
+        {
+            try
+            {
+                var parameters = new 
+                {
+                    createTripViewModel.CreatorUserID,
+                    createTripViewModel.RouteID,
+                    createTripViewModel.DepartureDate,
+                    createTripViewModel.IsFull,
+                    createTripViewModel.Seats,
+                };
 
+
+                //return await _db.GetData<TripViewModel, dynamic>(query, new { });
+                return _db.GetData<int, dynamic>("sp_Create_Trip", parameters
+                ).Result.First();
+              
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return 0;
+            }
+        }
         public async Task<bool> AddAsync(Trip trip)
         {
             try
@@ -229,6 +255,26 @@ namespace TripCoordination.Data.Repository
             }
 
             catch (Exception ex)
+            {
+                Console.WriteLine("Entered Exception \n");
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public async Task<bool> AddTripStop(TripStop tripStop)
+        {
+            try
+            {
+                await _db.SaveData("sp_AddTripStop", new
+                {
+                    tripStop.TripID,
+                    tripStop.TownID,
+                    tripStop.Price
+                });
+                return true;
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine("Entered Exception \n");
                 Console.WriteLine(ex.ToString());
