@@ -11,7 +11,8 @@ namespace TripCoordination.Data.Repository
     public interface ITripRepository
     {
         Task<bool> AddAsync(Trip trip);
-        //Task<bool> CreateAsync(CreateTripViewModel createTripViewModel);
+        int CreateTripAsync(CreateTripViewModel createTripViewModel);
+        Task<bool> AddTripStop(TripStop tripStop);
         Task<bool> UpdateAsync(Trip trip);
         Task<bool> DeleteAsync(int id);
         Task<bool> SoftDeleteTripAsync(int tripID);
