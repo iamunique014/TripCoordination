@@ -4,6 +4,7 @@ namespace TripCoordination.Common.ViewModel
 {
     public class CreateTripViewModel
     {
+        public string? CreatorUserID { get; set; }
         [Required]
         [Display(Name = "Departure Date and Time")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
@@ -16,8 +17,8 @@ namespace TripCoordination.Common.ViewModel
         public bool IsFull { get; set; }
 
         // Multi-select value: list of selected town IDs
-        [MinSelectedItems(ErrorMessage = "Please select at least one drop-off location.")]
-        public List<int>? SelectedTownIds { get; set; } = new List<int>();
+        //[MinSelectedItems(ErrorMessage = "Please select at least one drop-off location.")]
+        //public List<int>? SelectedTownIds { get; set; } = new List<int>();
     }
 }
 

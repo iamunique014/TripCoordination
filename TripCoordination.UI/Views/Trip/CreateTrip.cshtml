@@ -36,15 +36,27 @@
 
         <!-- Select2 Multi-select for Towns  -->
         <div class="mb-3">
-            <label for="SelectedTownIds" class="label-control">Select Drop-Off Locations</label>
-            <select asp-for="SelectedTownIds" id="SelectedTownIds" name="SelectedTownIds" class="input-control" multiple>
-                @foreach (var town in Model.AvailableTowns)
-                {
-                    <option value="@town.Value">@town.Text</option>
-                }
-            </select>
-            <span asp-validation-for="SelectedTownIds" class="text-danger"></span>
+            <label class="label-control">Drop-Off Locations & Prices</label>
+
+            <div id="towns-container">
+                <div class="town-price-row d-flex mb-2">
+                    <select name="SelectedTowns[0].TownId" class="form-select me-2">
+                        <option disabled selected value="">Select Town</option>
+                        @foreach (var town in Model.AvailableTowns)
+                        {
+                            <option value="@town.Value">@town.Text</option>
+                        }
+                    </select>
+
+                    <input type="number" name="SelectedTowns[0].Price" placeholder="Price" step="0.01" class="form-control me-2" />
+
+                    <button type="button" class="btn btn-danger btn-sm remove-town">X</button>
+                </div>
+            </div>
+
+            <button type="button" id="add-town" class="btn btn-secondary btn-sm mt-2">+ Add Town</button>
         </div>
+
 
         <div class="mb-3">
             <label asp-for="Seats" class="label-control">Seats</label>
@@ -60,16 +72,39 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            // Initialize Select2 on the multi-select element
-             $('#SelectedTownIds').select2({
-                placeholder: "Select drop-off locations",
-                allowClear: true,
-                width: '100%'
-            });
-        });
+        // $(document).ready(function () {
+        //     // Initialize Select2 on the multi-select element
+        //      $('#SelectedTownIds').select2({
+        //         placeholder: "Select drop-off locations",
+        //         allowClear: true,
+        //         width: '100%'
+        //     });
+        // });
 
-       
+        $(document).ready(function () {
+             let index = 1;
+
+             $("#add-town").click(function () {
+                 let newRow = `
+                 <div class="town-price-row d-flex mb-2">
+                     <select name="SelectedTowns[${index}].TownId" class="form-select me-2">
+                         <option disabled selected value="">Select Town</option>
+                         @foreach (var town in Model.AvailableTowns)
+                         {
+                                 <option value="@town.Value">@town.Text</option>
+                         }
+                     </select>
+                     <input type="number" name="SelectedTowns[${index}].Price" placeholder="Price" step="0.01" class="form-control me-2" />
+                     <button type="button" class="btn btn-danger btn-sm remove-town">X</button>
+                 </div>`;
+                 $("#towns-container").append(newRow);
+                 index++;
+             });
+
+             $(document).on("click", ".remove-town", function () {
+                 $(this).closest(".town-price-row").remove();
+             });
+         });
 
     </script>
     @{
