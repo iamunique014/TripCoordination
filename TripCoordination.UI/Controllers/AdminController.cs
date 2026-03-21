@@ -49,7 +49,7 @@ namespace TripCoordination.Controllers
                 ViewData["ShowSidebar"] = true;
 
                 var roles = await _adminDashboardRepository.GetUserRoleDistribution();
-
+                //TODO: Create BuildViewModel method.
                 var viewModel = new AdminDashboardViewModel
                 {
                     UserStats = await _adminDashboardRepository.GetUserStats(),
