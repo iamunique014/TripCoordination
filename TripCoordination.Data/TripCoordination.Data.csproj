@@ -23,4 +23,8 @@
     <ProjectReference Include="..\TripCoordination.Common\TripCoordination.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interface\" />
+  </ItemGroup>
+
 </Project>
