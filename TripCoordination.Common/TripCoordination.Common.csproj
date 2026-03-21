@@ -12,4 +12,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\Admin\" />
+    <Folder Include="ViewModel\Profile\" />
+    <Folder Include="ViewModel\Organizer\" />
+    <Folder Include="ViewModel\Trip\" />
+  </ItemGroup>
+
 </Project>
