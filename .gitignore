@@ -4,8 +4,9 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #Settings
-*development.json
-*production.json
+appsettings.development.json
+appsettings.production.json
+appsettings.test.json
 
 # User-specific files
 *.rsuser
